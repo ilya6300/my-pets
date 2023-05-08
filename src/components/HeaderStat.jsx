@@ -15,7 +15,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
       consumptionFood();
       // Расчёт здоровья
       pet.hp = Math.round((pet.satiety + pet.mood) / 2);
-    }, 1500000);
+    }, 15000);
     return () => clearInterval(intervalUpdateLocalStorageHunger);
   }, [pet]);
   // Настроение
@@ -23,7 +23,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
     intervalUpdateLocalStorageMood = null;
     intervalUpdateLocalStorageMood = setInterval(() => {
       consumptionMood();
-    }, 2100000);
+    }, 21000);
     return () => clearInterval(intervalUpdateLocalStorageMood);
   }, [pet]);
 
@@ -32,7 +32,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
     const newTime = new Date();
     const oldTime = new Date(pet.end_food);
     // Расчёт голода начало
-    const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 1500000);
+    const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 15000);
     pet.satiety = Math.round(pet.satiety - diff * 1);
     pet.end_food = newTime;
     // Расчёт голода конец
@@ -41,7 +41,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
   const consumptionMood = () => {
     const newTime = new Date();
     const oldTime = new Date(pet.time_game);
-    const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 2100000);
+    const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 21000);
     pet.mood = Math.round(pet.mood - diff * 1);
     pet.time_game = newTime;
     setMyPets([...myPets], pet.time_game);

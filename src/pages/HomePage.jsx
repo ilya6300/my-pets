@@ -61,7 +61,7 @@ const HomePage = () => {
     intervalUpdateLocalStorageHunger = null;
     intervalUpdateLocalStorageHunger = setInterval(() => {
       consumptionFood();
-    }, 1500000);
+    }, 15000);
     return () => clearInterval(intervalUpdateLocalStorageHunger);
   }, []);
   // Настроение
@@ -74,7 +74,7 @@ const HomePage = () => {
     intervalUpdateLocalStorageMood = setInterval(() => {
       consumptionMood();
 
-    }, 2100000);
+    }, 21000);
     return () => clearInterval(intervalUpdateLocalStorageMood);
   }, []);
   // Расходы
@@ -84,7 +84,7 @@ const HomePage = () => {
       if (p.create === true) {
         const newTime = new Date();
         const oldTime = new Date(p.time_game);
-        const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 2100000);
+        const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 21000);
         p.mood = Math.round(p.mood - diff * 1);        
         p.time_game = newTime;
         // Расчёт голода конец
@@ -98,7 +98,7 @@ const HomePage = () => {
       if (p.create === true) {
         const newTime = new Date();
         const oldTime = new Date(p.end_food);
-        const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 1500000);
+        const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 15000);
         p.satiety = Math.round(p.satiety - diff * 1);
         p.end_food = newTime;
         p.hp = Math.round((p.satiety + p.mood) / 2);

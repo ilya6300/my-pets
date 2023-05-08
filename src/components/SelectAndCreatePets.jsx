@@ -103,14 +103,13 @@ const SelectAndCreatePets = memo(
                 </div>
               ))}
             </div>
-            <p className="create-new-name">Имя: {createPetName}</p>
             {createPet
             ? <img className="preview-pet" src={createPet.img[0]} alt="" />
             : <></>
             }
            
             <label className="preview-new-name">
-              Введите имя питомца: <input onChange={handlerOnChangeName} />
+              <input onChange={handlerOnChangeName} placeholder="Введите имя питомца"/>
               <button onClick={createNewPet}>Создать</button>
             </label>
             <h1 className="homePageLogError">{logError}</h1>
