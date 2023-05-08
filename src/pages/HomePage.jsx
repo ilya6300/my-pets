@@ -61,7 +61,7 @@ const HomePage = () => {
     intervalUpdateLocalStorageHunger = null;
     intervalUpdateLocalStorageHunger = setInterval(() => {
       consumptionFood();
-    }, 15000);
+    }, 1500000);
     return () => clearInterval(intervalUpdateLocalStorageHunger);
   }, []);
   // Настроение
@@ -74,7 +74,7 @@ const HomePage = () => {
     intervalUpdateLocalStorageMood = setInterval(() => {
       consumptionMood();
 
-    }, 21000);
+    }, 2100000);
     return () => clearInterval(intervalUpdateLocalStorageMood);
   }, []);
   // Расходы
@@ -84,7 +84,7 @@ const HomePage = () => {
       if (p.create === true) {
         const newTime = new Date();
         const oldTime = new Date(p.time_game);
-        const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 21000);
+        const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 2100000);
         p.mood = Math.round(p.mood - diff * 1);        
         p.time_game = newTime;
         // Расчёт голода конец
@@ -98,7 +98,7 @@ const HomePage = () => {
       if (p.create === true) {
         const newTime = new Date();
         const oldTime = new Date(p.end_food);
-        const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 15000);
+        const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 1500000);
         p.satiety = Math.round(p.satiety - diff * 1);
         p.end_food = newTime;
         p.hp = Math.round((p.satiety + p.mood) / 2);
@@ -107,6 +107,12 @@ const HomePage = () => {
       }
     });
   };
+  // Удалить питомца
+
+  const removePet = () => {
+    targetCard.create = false
+    setMyPets([...myPets])
+  }
 
   return (
     <div className={backgroundPages}>
@@ -122,7 +128,7 @@ const HomePage = () => {
               setMyPets={setMyPets}
             />
             {targetCard.create ?
-            <Link className="link-secect-pet" to={`/homelocation/${targetCard.id}`}>Выбрать питомца</Link>
+            <div className="link-secect-pet-container"><Link className="link-secect-pet" to={`/homelocation/${targetCard.id}`}>Выбрать питомца</Link><span className="remove-pet" onClick={removePet}>Удалить</span></div>
             : <></>
             }
 

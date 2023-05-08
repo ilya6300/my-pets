@@ -146,6 +146,14 @@
   white-space: nowrap;
   color: rgba(87, 87, 87, 0.541);
 }
+.link-secect-pet-container {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: 5%;
+  transform: translate(-50%, 0%);
+  white-space: nowrap;
+}
 .link-secect-pet {
   cursor: pointer;
   background: rgb(19, 18, 18);
@@ -155,11 +163,18 @@
   color: azure;
   font-weight: 600;
   transition: background 0.4s ease;
-  position: absolute;
-  z-index: 5;
-  left: 50%;
-  bottom: 5%;
-  transform: translate(-50%, 0%);
+  margin: 0 5px;
+}
+.remove-pet {
+  cursor: pointer;
+  background: rgb(185, 31, 31);
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 18px;
+  color: azure;
+  font-weight: 600;
+  transition: background 0.4s ease;
+  margin: 0 5px;
 }
 .link-secect-pet:hover {
   background: rgb(41, 40, 40);
