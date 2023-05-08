@@ -16,6 +16,7 @@
   }
   .container-preview {
     width: 100vw;
+    height: 50vh;
   }
   .container-select-pets {
     width: 100vw;
@@ -43,6 +44,8 @@
   /* Мобильная версия */
   @media screen and (max-width: 500px) {
     .container-select-pets {
+      padding: 0;
+      height: 50vh;
       display: block;
       overflow-x: auto;
     }
@@ -55,6 +58,13 @@
     }
     .card-pets {
       width: 185px;
+      display: flex;
+      width: 50%;
+      height: 25vh;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     .preview_select_pets-avatar-conteiner {
       width: 100px;
