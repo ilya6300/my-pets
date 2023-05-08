@@ -76,6 +76,8 @@
 }
 .comand-title {
   cursor: pointer;
+  position: relative;
+  z-index: 10;
 }
 .container-comand-dinamic {
   display: flex;
