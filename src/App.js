@@ -6,12 +6,14 @@ import { HomePage } from "./pages/HomePage";
 import { HomeLocationPage } from "./pages/HomeLocationPage";
 
 function App() {
-  const scrollInto = useRef(0, 1)
-  useEffect(() => {
-    scrollInto.current.scrollIntoView()
-  })
+  const appHeight = () => {
+    const doc = document.documentElement
+    doc.style.setProperty('--app-height', '${window.innerHeight}px')
+}
+window.addEventListener('resize', appHeight)
+appHeight()
   return (
-    <div className="App" ref={scrollInto}>
+    <div className="App">
       <HashRouter>
         <Routes>
           <Route index element={<HomePage />}></Route>
