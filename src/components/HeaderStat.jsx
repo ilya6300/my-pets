@@ -23,6 +23,8 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
     intervalUpdateLocalStorageMood = null;
     intervalUpdateLocalStorageMood = setInterval(() => {
       consumptionMood();
+      // Расчёт здоровья
+      pet.hp = Math.round((pet.satiety + pet.mood) / 2);
     }, 21000);
     return () => clearInterval(intervalUpdateLocalStorageMood);
   }, [pet]);
@@ -72,7 +74,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
     console.log(pet.comsndSitStudied);
     if (pet.delicacy >= 1) {
       pet.delicacy--;
-       pet.satiety = pet.satiety + 3;
+      pet.satiety = pet.satiety + 3;
       if (pet.satiety > 100) {
         pet.satiety = 100;
       }
@@ -88,7 +90,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
         console.log("resultObedience", resultObedience);
         if (pet.comsndSitProgress >= resultObedience) {
           if (pet.comsndSitProgress >= 100) {
-            pet.comsndSitProgress = 100
+            pet.comsndSitProgress = 100;
           } else {
             pet.comsndSitProgress = pet.comsndSitProgress + 10;
           }
@@ -125,7 +127,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
         console.log("resultObedience", resultObedience);
         if (pet.comsndLietProgress >= resultObedience) {
           if (pet.comsndLietProgress >= 100) {
-            pet.comsndLietProgress = 100
+            pet.comsndLietProgress = 100;
           } else {
             pet.comsndLietProgress = pet.comsndLietProgress + 10;
           }
@@ -163,13 +165,59 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
           <span> {pet.type}</span>
         </span>
         <div className="containerStat">
-          <p className="statPanel-stat">Здоровье <div style={{
-            width: '100px', background: '#958e8e',
-          }}><div style={{textAlign: 'center', color: "azure", width: pet.hp + 'px', background: 'rgb(167 37 37)', borderRadius: '4px'}}>{pet.hp}</div></div></p>
-          <p className="statPanel-stat">Сытость <div style={{width: '100px', background: '#958e8e',}}><div style={{textAlign: 'center', color: "azure", width: pet.satiety + 'px', background: '#67a52e', borderRadius: '4px'
-          }}>{pet.satiety}</div></div></p>
-          <p className="statPanel-stat">Настроение <div style={{width: '100px', background: '#958e8e',}}><div style={{textAlign: 'center', color: "azure", width: pet.mood + 'px', background: '#67a52e', borderRadius: '4px'
-          }}>{pet.mood}</div></div></p>
+          <p className="statPanel-stat">
+            Здоровье{" "}
+            <div
+              style={{
+                width: "100px",
+                background: "#958e8e",
+              }}
+            >
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "azure",
+                  width: pet.hp + "px",
+                  background: "rgb(167 37 37)",
+                  borderRadius: "4px",
+                }}
+              >
+                {pet.hp}
+              </div>
+            </div>
+          </p>
+          <p className="statPanel-stat">
+            Сытость{" "}
+            <div style={{ width: "100px", background: "#958e8e" }}>
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "azure",
+                  width: pet.satiety + "px",
+                  background: "#67a52e",
+                  borderRadius: "4px",
+                }}
+              >
+                {pet.satiety}
+              </div>
+            </div>
+          </p>
+          <p className="statPanel-stat">
+            Настроение{" "}
+            <div style={{ width: "100px", background: "#958e8e" }}>
+              <div
+                style={{
+                  textAlign: "center",
+                  color: "azure",
+                  width: pet.mood + "px",
+                  background: "#67a52e",
+                  borderRadius: "4px",
+                }}
+              >
+                {pet.mood}
+              </div>
+            </div>
+          </p>
         </div>
         <div className="money-container">
           <img className="money-container-img" src="./img/icon/money.png" />

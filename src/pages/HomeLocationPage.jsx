@@ -30,12 +30,12 @@ const HomeLocationPage = () => {
       if (pet.satiety > 100) {
         pet.satiety = 100;
       }
-      setMyPets([...myPets], pet.satiety);
+      pet.hp = Math.round((pet.satiety + pet.mood) / 2);
+      setMyPets([...myPets], pet.satiety, pet.hp);
     }
   };
   // Игра
   const gameGreenBall = () => {
-    
     setClassGameBall("btn-game-green-ball-active");
     setTimeout(() => {
       setImgPet(pet.img_pet[3]);
@@ -44,18 +44,19 @@ const HomeLocationPage = () => {
         setTimeout(() => {
           setClassGameBall("btn-game-green-ball");
           pet.money = pet.money + 1;
-
         }, 1300);
       }, 2600);
     }, 900);
+
     pet.mood = pet.mood + 30;
+
     if (pet.mood > 100) {
       pet.mood = 100;
     }
-    setMyPets([...myPets], pet.mood);
+    pet.hp = Math.round((pet.satiety + pet.mood) / 2);
+    setMyPets([...myPets], pet.mood, pet.hp);
   };
   const gameCanat = () => {
-    
     setClassGameCanat("btn-game-canat-active");
     setTimeout(() => {
       setImgPet(pet.img_pet[3]);
@@ -95,7 +96,12 @@ const HomeLocationPage = () => {
     <div className="location-home-body">
       {pet ? (
         <>
-          <HeaderStat pet={pet} setMyPets={setMyPets} myPets={myPets} setImgPet={setImgPet}/>
+          <HeaderStat
+            pet={pet}
+            setMyPets={setMyPets}
+            myPets={myPets}
+            setImgPet={setImgPet}
+          />
 
           <img
             className="pet-img"
@@ -125,6 +131,5 @@ const HomeLocationPage = () => {
     </div>
   );
 };
-
 
 export { HomeLocationPage };
