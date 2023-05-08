@@ -8,6 +8,7 @@ import { HomeLocationPage } from "./pages/HomeLocationPage";
 function App() {
   return (
     <div className="App">
+      <meta name="apple-mobile-web-app-capable" content="yes" />
       <HashRouter>
         <Routes>
           <Route index element={<HomePage />}></Route>

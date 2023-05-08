@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import CardPetList from "../components/CardPetList";
 import SelectAndCreatePets from "../components/SelectAndCreatePets";
@@ -6,21 +6,6 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const HomePage = () => {
 
-  function hideAddressBar() {
-    setTimeout(function () {
-        document.body.style.height = window.outerHeight + 'px';
-        setTimeout(function () {
-            window.scrollTo(0, 1);
-        }, 600);
-    }, 500);
-    return false;
-}
-window.onload = function () {
-  hideAddressBar();
-  window.addEventListener("orientationchange", function () {
-      hideAddressBar();
-  }, false);
-}
   // стиль страницы
   const [backgroundPages, setBackgroundPages] = useState(
     "background-home-page"
