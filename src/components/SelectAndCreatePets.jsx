@@ -105,7 +105,7 @@ const SelectAndCreatePets = memo(
             </div>
             {createPet
             ? <img className="preview-pet" src={createPet.img[0]} alt="" />
-            : <img className="preview-pet" src={previewSelectPets[0].img[0]} alt="" />
+            : <></>
             }
            
             <label className="preview-new-name">
