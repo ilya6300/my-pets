@@ -38,8 +38,8 @@
     transform: translate(-50%, -20%);
   }
   .pet-img {
-    width: auto;
-    max-height: 280px;
+    /* width: auto; */
+    /* max-height: auto; */
   }
   .btn-game-canat {
     width: 30vw;
