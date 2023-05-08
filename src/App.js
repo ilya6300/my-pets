@@ -6,10 +6,10 @@ import { HomePage } from "./pages/HomePage";
 import { HomeLocationPage } from "./pages/HomeLocationPage";
 
 function App() {
-  const scrollInto = useRef(null)
+  const scrollInto = useRef(0, 1)
   useEffect(() => {
     scrollInto.current.scrollIntoView()
-  }, [])
+  })
   return (
     <div className="App" ref={scrollInto}>
       <HashRouter>
