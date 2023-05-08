@@ -16,7 +16,7 @@
   }
   .container-preview {
     width: 100vw;
-    height: 50vh;
+    height: 40%;
   }
   .container-select-pets {
     width: 100vw;
@@ -43,13 +43,26 @@
   }
   /* Мобильная версия */
   @media screen and (max-width: 500px) {
+    .link-secect-pet-container {
+      bottom: 15%;
+    }
+    .home-title {
+      position: absolute;
+      left: 50%;
+      top: 30%;
+      transform: translate(-50%, -50%);
+      font-size: calc(20px + 4vw);
+      white-space: nowrap;
+      color: rgb(87 87 87 / 79%);
+  }
     .container-select-pets {
       padding: 0;
-      height: 50vh;
+      height: 40%;
       display: block;
       overflow-x: auto;
     }
     .card-pets-list-container {
+      height: auto;
       width: 580px;
       flex-direction: row;
       overflow-x: scroll;
@@ -60,7 +73,7 @@
       width: 185px;
       display: flex;
       width: 50%;
-      height: 25vh;
+      /* height: 25vh; */
       flex-wrap: wrap;
       flex-direction: column;
       justify-content: center;
@@ -79,7 +92,7 @@
       margin: 0;
     }
     .preview-podium {
-      bottom: 15%;
+      bottom: 25%;
     }
     .btn-game-canat {
       width: 30vw;
@@ -91,6 +104,13 @@
     }
     .preview-pet {
       bottom: 28%;
+    }
+    .new-card {
+      height: 25vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
     }
   }
 
