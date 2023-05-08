@@ -17,7 +17,7 @@ const CardPetItem = (props) => {
       ) : (
         <div className="new-card">
         <h1 className="create-title">Создать нового</h1>
-        <img className="create-img" src="../img/icon/icon-create-new.png" />
+        <img className="create-img" src="./img/icon/icon-create-new.png" />
         </div>
       )}
     </div>
