@@ -10,20 +10,20 @@ const SelectAndCreatePets = memo(
       {
         id: 1,
         img: [
-          "../img/pets/husky/husky_puppy_stoit_black.png",
-          "../img/pets/husky/husky_puppy_sidit_black.png",
-          "../img/pets/husky/husky_puppy_lezit_black.png",
-          "../img/pets/husky/husky_puppy_up_black.png",
+          "./img/pets/husky/husky_puppy_stoit_black.png",
+          "./img/pets/husky/husky_puppy_sidit_black.png",
+          "./img/pets/husky/husky_puppy_lezit_black.png",
+          "./img/pets/husky/husky_puppy_up_black.png",
         ],
         type: "хаски"
       },
       {
         id: 2,
         img: [
-          "../img/pets/husky/husky_puppy_stoit_bronz.png",
-          "../img/pets/husky/husky_puppy_sidit_bronz.png",
-          "../img/pets/husky/husky_puppy_lezit_bronz.png",
-          "../img/pets/husky/husky_puppy_up_bronz.png",
+          "./img/pets/husky/husky_puppy_stoit_bronz.png",
+          "./img/pets/husky/husky_puppy_sidit_bronz.png",
+          "./img/pets/husky/husky_puppy_lezit_bronz.png",
+          "./img/pets/husky/husky_puppy_up_bronz.png",
         ],
         type: "хаски"
       },

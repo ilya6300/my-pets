@@ -136,7 +136,7 @@ const HomePage = () => {
 
         <img
           className="preview-podium"
-          src="../img/background/podium.png"
+          src="./img/background/podium.png"
           alt=""
         />
       </div>

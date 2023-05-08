@@ -172,7 +172,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
           }}>{pet.mood}</div></div></p>
         </div>
         <div className="money-container">
-          <img className="money-container-img" src="../img/icon/money.png" />
+          <img className="money-container-img" src="./img/icon/money.png" />
           <span>{pet.money}</span>
         </div>
         <Link to="/">Выход</Link>
@@ -207,7 +207,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
               <li className="container-delicacy">
                 <img
                   className="delicacy-img"
-                  src="../img/icon/delicacy.png"
+                  src="./img/icon/delicacy.png"
                   onClick={feedDelicacy}
                 />
                 <span className="delicacy-stat">{pet.delicacy} </span>

@@ -106,17 +106,17 @@ const HomeLocationPage = () => {
           <img
             className="btn-feed"
             onClick={feed}
-            src="../img/items/food_v2.png"
+            src="./img/items/food_v2.png"
           />
           <img
             className={classGameBall}
             onClick={gameGreenBall}
-            src="../img/items/ball_v1.png"
+            src="./img/items/ball_v1.png"
           />
           <img
             className={classGameCanat}
             onClick={gameCanat}
-            src="../img/items/canat.png"
+            src="./img/items/canat.png"
           />
         </>
       ) : (
