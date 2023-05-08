@@ -8,7 +8,7 @@
 }
 .pet-img {
   z-index: 2;
-  position: absolute;
+  position: fixed;
   left: 62vw;
   bottom: 17%;
   transform: translate(-50%, 0%);
