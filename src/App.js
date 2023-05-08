@@ -1,14 +1,17 @@
 import "./style/App.css";
 import { Routes, Route, HashRouter } from "react-router-dom";
-
+import React, { useEffect, useRef } from "react";
 import { Page404 } from "./pages/Page404";
 import { HomePage } from "./pages/HomePage";
 import { HomeLocationPage } from "./pages/HomeLocationPage";
 
 function App() {
+  const scrollInto = useRef(null)
+  useEffect(() => {
+    scrollInto.current.scrollIntoView()
+  }, [])
   return (
-    <div className="App">
-      <meta name="apple-mobile-web-app-capable" content="yes" />
+    <div className="App" ref={scrollInto}>
       <HashRouter>
         <Routes>
           <Route index element={<HomePage />}></Route>
