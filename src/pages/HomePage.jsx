@@ -5,7 +5,9 @@ import SelectAndCreatePets from "../components/SelectAndCreatePets";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const HomePage = () => {
-
+useEffect(() => {
+  window.scrollBy(0, 0)
+})
   // стиль страницы
   const [backgroundPages, setBackgroundPages] = useState(
     "background-home-page"
