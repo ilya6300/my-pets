@@ -38,8 +38,7 @@
     transform: translate(-50%, -20%);
   }
   .pet-img {
-    /* width: auto; */
-    /* max-height: auto; */
+    width: 75%;
   }
   .btn-game-canat {
     width: 30vw;
@@ -86,7 +85,6 @@
     .preview-pet {
       bottom: 28%;
     }
-
   }
 
   /* Анимации */
