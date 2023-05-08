@@ -1,0 +1,23 @@
+* {
+  list-style: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+}
+@import url("./header.css");
+@import url("./footer.css");
+@import url("./main.css");
+@import url("./page.css");
+@import url("./homePages.css");
+@import url("./item.css");
+@import url("./locationHomePage.css");
+@import url("./headerStat.css");
+@import url("./media.css");
+
+.App {
+  text-align: center;
+}
+
+

@@ -1,0 +1,125 @@
+.location-home-body {
+  background-image: url("../img/background/locationHome.png");
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: bottom;
+}
+.pet-img {
+  z-index: 2;
+  position: absolute;
+  left: 62vw;
+  bottom: 17%;
+  transform: translate(-50%, 0%);
+  cursor: pointer;
+}
+.btn-feed {
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100px;
+  position: absolute;
+  left: 20%;
+  bottom: 30%;
+  transform: translate(-50%, -20%);
+}
+.btn-game-green-ball {
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 60px;
+  position: absolute;
+  left: 15%;
+  bottom: 10%;
+  transform: translate(-50%, -20%);
+}
+.btn-game-green-ball:hover {
+  animation: ball_green_rotation 2s infinite;
+}
+.btn-game-canat {
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 220px;
+  position: absolute;
+  left: 90%;
+  bottom: 8%;
+  transform: translate(-50%, -20%);
+}
+.btn-game-canat-active {
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 220px;
+  position: absolute;
+  left: 90%;
+  bottom: 8%;
+  transform: translate(0%, 0%);
+  animation: canat_game_active 5s;
+}
+.btn-game-green-ball-active {
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 60px;
+  position: absolute;
+  left: 15%;
+  bottom: 10%;
+  transform: translate(-50%, -20%);
+  animation: ball_green_active 4.7s;
+}
+
+@keyframes ball_green_active {
+  0% {
+    z-index: 3;
+    left: 15%;
+    bottom: 10%;
+    transform: translate(-50%, -20%);
+  }
+  30% {
+    z-index: 3;
+    left: 80vw;
+    bottom: 41vh;
+    transform: translate(0%, 0%);
+  }
+  70% {
+    z-index: 3;
+    left: 80vw;
+    bottom: 41vh;
+    transform: translate(0%, 0%);
+  }
+  100% {
+    z-index: 3;
+    left: 15%;
+    bottom: 10%;
+    transform: translate(-50%, -20%);
+  }
+}
+@keyframes ball_green_rotation {
+  0% {
+    rotate: 0deg;
+  }
+  50% {
+    rotate: 90deg;
+  }
+  100% {
+    rotate: 0deg;
+  }
+}
+@keyframes canat_game_active {
+  30% {
+    z-index: 3;
+    left: 75vw;
+    bottom: 35vh;
+  }
+  80% {
+    z-index: 3;
+    left: 75vw;
+    bottom: 35vh;
+  }
+  100% {
+    left: 90%;
+    bottom: 8%;
+  }
+}
