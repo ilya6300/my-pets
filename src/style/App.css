@@ -17,6 +17,7 @@
 @import url("./media.css");
 
 .App {
+  overflow: hidden;
   height: 100%;
   text-align: center;
 }
