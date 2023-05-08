@@ -138,7 +138,7 @@ useEffect(() => {
           </>
         ) : (
           <>
-          {/* <p>Обновилось</p> */}
+          <p>Обновилось</p>
             <h1 className="home-title">Выберите питомца</h1>
             <button onClick={clearLocal}>Очистить хранилище</button>
           </>

@@ -102,13 +102,13 @@ const HomeLocationPage = () => {
             myPets={myPets}
             setImgPet={setImgPet}
           />
-
+<div>
           <img
             className="pet-img"
             onMouseMove={() => setHover(true)}
             onMouseOut={() => setHover(false)}
             src={imgPet}
-          />
+          /></div>
           <img
             className="btn-feed"
             onClick={feed}
