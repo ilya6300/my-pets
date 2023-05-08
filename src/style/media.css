@@ -16,7 +16,7 @@
   }
   .container-preview {
     width: 100vw;
-    height: 50vh;
+    height: 50%;
   }
   .container-select-pets {
     width: 100vw;
@@ -45,7 +45,7 @@
   @media screen and (max-width: 500px) {
     .container-select-pets {
       padding: 0;
-      height: 50vh;
+      height: 50%;
       display: block;
       overflow-x: auto;
     }
