@@ -5,6 +5,22 @@ import SelectAndCreatePets from "../components/SelectAndCreatePets";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const HomePage = () => {
+
+  function hideAddressBar() {
+    setTimeout(function () {
+        document.body.style.height = window.outerHeight + 'px';
+        setTimeout(function () {
+            window.scrollTo(0, 1);
+        }, 600);
+    }, 500);
+    return false;
+}
+window.onload = function () {
+  hideAddressBar();
+  window.addEventListener("orientationchange", function () {
+      hideAddressBar();
+  }, false);
+}
   // стиль страницы
   const [backgroundPages, setBackgroundPages] = useState(
     "background-home-page"
