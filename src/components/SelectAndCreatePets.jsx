@@ -76,7 +76,7 @@ const SelectAndCreatePets = memo(
             <div className="preview-info">
               <ul className="preview-info-list">
                 <li>Имя: {targetCard.name}</li>
-                <li>Возраст: </li>
+                {/* <li>Возраст: </li> */}
                 <li>Здоровье: {targetCard.hp}</li>
                 <li>Настроение: {targetCard.mood}</li>
                 <li>Сытость: {targetCard.satiety}</li>
