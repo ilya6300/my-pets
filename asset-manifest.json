@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/my-pets/static/css/main.7c4e00d6.css",
+    "main.css": "/my-pets/static/css/main.3bccc39e.css",
     "main.js": "/my-pets/static/js/main.9fecf8c2.js",
     "static/media/text.png": "/my-pets/static/media/text.9f5fb5d8486626c1a3da.png",
     "static/media/begin.jpg": "/my-pets/static/media/begin.d39fa878b1feae002254.jpg",
     "static/media/locationHome.png": "/my-pets/static/media/locationHome.d169cf041125f055b9de.png",
     "static/media/street.jpg": "/my-pets/static/media/street.5cd26a78fd5b004f7da8.jpg",
     "index.html": "/my-pets/index.html",
-    "main.7c4e00d6.css.map": "/my-pets/static/css/main.7c4e00d6.css.map",
+    "main.3bccc39e.css.map": "/my-pets/static/css/main.3bccc39e.css.map",
     "main.9fecf8c2.js.map": "/my-pets/static/js/main.9fecf8c2.js.map"
   },
   "entrypoints": [
-    "static/css/main.7c4e00d6.css",
+    "static/css/main.3bccc39e.css",
     "static/js/main.9fecf8c2.js"
   ]
 }
