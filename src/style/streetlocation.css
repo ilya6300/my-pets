@@ -1,0 +1,32 @@
+.location-street {
+    background-image: url("../img/background/street.jpg");
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: bottom, left;
+}
+.move-shit {
+    z-index: 2;
+    position: fixed;
+    left: 50%;
+    bottom: 17%;
+    transform: translate(-50%, 0%);
+    cursor: pointer;
+    animation: animation_toilet 7s forwards;
+}
+@keyframes animation_toilet {
+    15% {
+        bottom: 18%;
+        left: 15%;
+        transform: scale(0.6);
+    }
+    85% {
+        left: 15%;
+        bottom: 18%;  
+        transform: scale(0.6);
+    }
+    100% {
+        left: 62vw;
+        bottom: 17%;
+    }
+}

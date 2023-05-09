@@ -40,11 +40,16 @@ const SelectAndCreatePets = memo(
         freeID.age =  "";
         freeID.money = 0;
         freeID.delicacy = 0;
+        freeID.toilet = 100;
+        freeID.shit = false;
+        freeID.energy = 100;
         freeID.create = true;
         const birthday = new Date();
         freeID.data_create = birthday;
         freeID.end_food = birthday;
+        freeID.end_energy = birthday;
         freeID.time_game = birthday;
+        freeID.end_toilet = birthday;
         freeID.type = createPet.type;
         // Команды
         freeID.comsndSitStudied = false;

@@ -14,6 +14,9 @@
 @import url("./item.css");
 @import url("./locationHomePage.css");
 @import url("./headerStat.css");
+@import url("./streetlocation.css");
+@import url("./modallog.css");
+/*  */
 @import url("./media.css");
 
 .App {

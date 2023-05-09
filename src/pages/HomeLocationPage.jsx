@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 import HeaderStat from "../components/HeaderStat";
+import ModalLog from "../components/ModalLog";
 
 const HomeLocationPage = () => {
   const { id } = useParams();
@@ -12,6 +13,9 @@ const HomeLocationPage = () => {
   const [classGameCanat, setClassGameCanat] = useState("btn-game-canat");
   const [myPets, setMyPets] = useLocalStorage([], "myPets");
   const [hover, setHover] = useState(false);
+  const [flagAction, setFlagAction] = useState(true);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [message, setMessage] = useState("");
 
   // Получение питомца по id
   useEffect(() => {
@@ -25,55 +29,88 @@ const HomeLocationPage = () => {
 
   // Кормление
   const feed = () => {
-    if (pet.satiety <= 80) {
-      pet.satiety = pet.satiety + 50;
-      if (pet.satiety > 100) {
-        pet.satiety = 100;
+    setMessage((m) => (m = "Я не голодный"));
+    if (flagAction) {
+      setFlagAction(false);
+      if (pet.satiety <= 80) {
+        let intervalFeed;
+        intervalFeed = setInterval(() => {
+          console.log(pet.satiety);
+          if (pet.satiety < 100) {
+            pet.satiety = pet.satiety + 1;
+            pet.toilet = pet.toilet - 0.3;
+            console.log(pet.toilet);
+            setMyPets([...myPets], pet.satiety, pet.toilet);
+          } else {
+            return clearInterval(intervalFeed);
+          }
+        }, 100);
+        setTimeout(() => {
+          clearInterval(intervalFeed);
+          console.log("clearInterval");
+        }, 6000);
+      } else {
+        setVisibleModal(true);
+        console.log("visibleModal", visibleModal);
+
+        setTimeout(() => {
+          setVisibleModal(false);
+        }, 3000);
       }
-      pet.hp = Math.round((pet.satiety + pet.mood) / 2);
-      setMyPets([...myPets], pet.satiety, pet.hp);
+      setFlagAction(true);
+    } else {
     }
   };
   // Игра
   const gameGreenBall = () => {
-    setClassGameBall("btn-game-green-ball-active");
-    setTimeout(() => {
-      setImgPet(pet.img_pet[3]);
+    if (flagAction) {
+      setFlagAction(false);
+      setClassGameBall("btn-game-green-ball-active");
       setTimeout(() => {
-        setImgPet(pet.img_pet[0]);
+        setImgPet(pet.img_pet[3]);
         setTimeout(() => {
-          setClassGameBall("btn-game-green-ball");
-          pet.money = pet.money + 1;
-        }, 1300);
-      }, 2600);
-    }, 900);
-
-    pet.mood = pet.mood + 30;
-
-    if (pet.mood > 100) {
-      pet.mood = 100;
+          setImgPet(pet.img_pet[0]);
+          setTimeout(() => {
+            setClassGameBall("btn-game-green-ball");
+            pet.money = pet.money + 1;
+            pet.energy = pet.energy - 10;
+            pet.mood = pet.mood + 20;
+            if (pet.mood > 100) {
+              pet.mood = 100;
+            }
+            setMyPets([...myPets], pet.mood, pet.energy);
+            setFlagAction(true);
+          }, 1300);
+        }, 2600);
+      }, 900);
+    } else {
+      return;
     }
-    pet.hp = Math.round((pet.satiety + pet.mood) / 2);
-    setMyPets([...myPets], pet.mood, pet.hp);
   };
   const gameCanat = () => {
-    setClassGameCanat("btn-game-canat-active");
-    setTimeout(() => {
-      setImgPet(pet.img_pet[3]);
+    if (flagAction) {
+      setFlagAction(false);
+      setClassGameCanat("btn-game-canat-active");
       setTimeout(() => {
-        setImgPet(pet.img_pet[0]);
+        setImgPet(pet.img_pet[3]);
         setTimeout(() => {
-          setClassGameCanat("btn-game-canat");
-
-          pet.money = pet.money + 1;
-        }, 1300);
-      }, 3100);
-    }, 900);
-    pet.mood = pet.mood + 30;
-    if (pet.mood > 100) {
-      pet.mood = 100;
+          setImgPet(pet.img_pet[0]);
+          setTimeout(() => {
+            setClassGameCanat("btn-game-canat");
+            pet.money = pet.money + 1;
+            pet.energy = pet.energy - 10;
+            pet.mood = pet.mood + 30;
+            if (pet.mood > 100) {
+              pet.mood = 100;
+            }
+            setMyPets([...myPets], pet.mood, pet.energy);
+          }, 1300);
+        }, 3100);
+      }, 900);
+      setFlagAction(true);
+    } else {
+      return;
     }
-    setMyPets([...myPets], pet.mood);
   };
 
   // Наведение на питомца
@@ -83,7 +120,7 @@ const HomeLocationPage = () => {
     if (hover) {
       console.log("Поглаживание");
       hoverTaimer = setInterval(() => {
-        pet.mood = Math.round(pet.mood + 1);
+        pet.mood = pet.mood + 1;
         if (pet.mood > 100) {
           pet.mood = 100;
         }
@@ -91,6 +128,14 @@ const HomeLocationPage = () => {
       }, 1000);
     }
   }, [hover]);
+
+  // Убрать какашку
+
+  const clearShit = () => {
+    pet.shit = false;
+    const newTime = new Date();
+    pet.end_toilet = newTime;
+  };
 
   return (
     <div className="location-home-body">
@@ -102,13 +147,23 @@ const HomeLocationPage = () => {
             myPets={myPets}
             setImgPet={setImgPet}
           />
-<div>
-          <img
-            className="pet-img"
-            onMouseMove={() => setHover(true)}
-            onMouseOut={() => setHover(false)}
-            src={imgPet}
-          /></div>
+          <div>
+            <Link className="link-secect-pet" to={`/streetlocation/${pet.id}`}>
+              Гулять
+            </Link>
+            <ModalLog
+              visibleModal={visibleModal}
+              setVisibleModal={setVisibleModal}
+            >
+              <p>{message}</p>
+            </ModalLog>
+            <img
+              className="pet-img"
+              onMouseMove={() => setHover(true)}
+              onMouseOut={() => setHover(false)}
+              src={imgPet}
+            />
+          </div>
           <img
             className="btn-feed"
             onClick={feed}
@@ -124,6 +179,15 @@ const HomeLocationPage = () => {
             onClick={gameCanat}
             src="./img/items/canat.png"
           />
+          {pet.shit ? (
+            <img
+              className="shit"
+              src="./img/object/shit.png"
+              onClick={clearShit}
+            />
+          ) : (
+            <></>
+          )}
         </>
       ) : (
         <></>

@@ -1,0 +1,18 @@
+.modal-log-container {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 2.5vw;
+    background: url(../img//items/text.png);
+    width: calc(20vw + 20vh);
+    height: calc(15vw + 15vh);
+    background-size: cover;
+    z-index: 5;
+    position: absolute;
+    left: 65%;
+    bottom: 45%;
+    transform: translate(-50%, 0%);
+}
+.hidden {
+    display: none;
+}

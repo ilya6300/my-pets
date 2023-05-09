@@ -4,6 +4,8 @@ import React from "react";
 import { Page404 } from "./pages/Page404";
 import { HomePage } from "./pages/HomePage";
 import { HomeLocationPage } from "./pages/HomeLocationPage";
+import { StreetLocation } from "./pages/StreetLocation";
+
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
           <Route index element={<HomePage />}></Route>
           <Route path="homelocation" element={<HomeLocationPage />}></Route>
           <Route path="homelocation/:id" element={<HomeLocationPage />}></Route>
+          <Route path="streetlocation" element={<StreetLocation />}></Route>
+          <Route path="streetlocation/:id" element={<StreetLocation />}></Route>
           <Route path="*" element={<Page404 />}></Route>
         </Routes>
       </HashRouter>
