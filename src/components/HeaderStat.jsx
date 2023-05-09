@@ -44,7 +44,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
 useEffect(() => {
   intervalUpdateLocalStorageEnergy = null;
   intervalUpdateLocalStorageEnergy = setInterval(() => {
-    recoveryEnergy();
+    // recoveryEnergy();
     // Расчёт здоровья
   }, 15000);
   return () => clearInterval(intervalUpdateLocalStorageEnergy);
