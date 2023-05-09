@@ -128,4 +128,7 @@
     justify-content: space-evenly;
     align-items: center;
   }
+  .preview-new-name {
+    bottom: 17%;
+  }
 }
