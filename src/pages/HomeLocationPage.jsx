@@ -36,7 +36,7 @@ const HomeLocationPage = () => {
 
   // Кормление
   const feed = () => {
-    setMessage((m) => (m = "Я не голодный"));
+    setMessage((m) => (m = "Я не хочу есть"));
     if (flagAction) {
       setFlagAction(false);
       if (pet.satiety <= 80) {
@@ -46,6 +46,9 @@ const HomeLocationPage = () => {
           if (pet.satiety < 100) {
             pet.satiety = pet.satiety + 1;
             pet.toilet = pet.toilet - 0.3;
+            if (pet.toilet <= 0) {
+              pet.toilet = 0;
+            }
             console.log(pet.toilet);
             setMyPets([...myPets], pet.satiety, pet.toilet);
           } else {
@@ -65,58 +68,76 @@ const HomeLocationPage = () => {
         }, 3000);
       }
       setFlagAction(true);
-    } else {
     }
   };
   // Игра
   const gameGreenBall = () => {
+    setMessage((m) => (m = "У меня нет сил играть"));
     if (flagAction) {
       setFlagAction(false);
-      setClassGameBall("btn-game-green-ball-active");
-      setTimeout(() => {
-        setImgPet(pet.img_pet[3]);
+      if (pet.energy >= 10) {
+        console.log("Я хочу играть");
+        setClassGameBall("btn-game-green-ball-active");
         setTimeout(() => {
-          setImgPet(pet.img_pet[0]);
+          setImgPet(pet.img_pet[3]);
           setTimeout(() => {
-            setClassGameBall("btn-game-green-ball");
-            pet.money = pet.money + 1;
-            pet.energy = pet.energy - 10;
-            pet.mood = pet.mood + 20;
-            if (pet.mood > 100) {
-              pet.mood = 100;
-            }
-            setMyPets([...myPets], pet.mood, pet.energy);
-            setFlagAction(true);
-          }, 1300);
-        }, 2600);
-      }, 900);
-    } else {
-      return;
+            setImgPet(pet.img_pet[0]);
+            setTimeout(() => {
+              setClassGameBall("btn-game-green-ball");
+              pet.money = pet.money + 1;
+              pet.energy = pet.energy - 10;
+              pet.mood = pet.mood + 20;
+              if (pet.mood > 100) {
+                pet.mood = 100;
+              }
+              setMyPets([...myPets], pet.mood, pet.energy);
+            }, 1300);
+          }, 2600);
+        }, 900);
+      } else {
+        console.log("Я НЕ хочу играть");
+        setVisibleModal(true);
+        console.log("visibleModal", visibleModal);
+        setTimeout(() => {
+          setVisibleModal(false);
+        }, 3000);
+      }
+
+      setFlagAction(true);
     }
   };
   const gameCanat = () => {
+    setMessage((m) => (m = "У меня нет сил играть"));
     if (flagAction) {
       setFlagAction(false);
-      setClassGameCanat("btn-game-canat-active");
-      setTimeout(() => {
-        setImgPet(pet.img_pet[3]);
+      if (pet.energy >= 10) {
+        setClassGameCanat("btn-game-canat-active");
         setTimeout(() => {
-          setImgPet(pet.img_pet[0]);
+          setImgPet(pet.img_pet[3]);
           setTimeout(() => {
-            setClassGameCanat("btn-game-canat");
-            pet.money = pet.money + 1;
-            pet.energy = pet.energy - 10;
-            pet.mood = pet.mood + 30;
-            if (pet.mood > 100) {
-              pet.mood = 100;
-            }
-            setMyPets([...myPets], pet.mood, pet.energy);
-          }, 1300);
-        }, 3100);
-      }, 900);
+            setImgPet(pet.img_pet[0]);
+            setTimeout(() => {
+              setClassGameCanat("btn-game-canat");
+              pet.money = pet.money + 1;
+              pet.energy = pet.energy - 10;
+              pet.mood = pet.mood + 30;
+              if (pet.mood > 100) {
+                pet.mood = 100;
+              }
+              setMyPets([...myPets], pet.mood, pet.energy);
+            }, 1300);
+          }, 3100);
+        }, 900);
+      } else {
+        console.log("Я НЕ хочу играть");
+        setVisibleModal(true);
+        console.log("visibleModal", visibleModal);
+        setTimeout(() => {
+          setVisibleModal(false);
+        }, 3000);
+      }
+
       setFlagAction(true);
-    } else {
-      return;
     }
   };
 
@@ -142,6 +163,7 @@ const HomeLocationPage = () => {
     pet.shit = false;
     const newTime = new Date();
     pet.end_toilet = newTime;
+    setMyPets([...myPets], pet.shit);
   };
 
   return (
@@ -163,7 +185,7 @@ const HomeLocationPage = () => {
               visibleModal={visibleModal}
               setVisibleModal={setVisibleModal}
             >
-              <p>{message}</p>
+              {visibleModal ? <p>{message}</p> : <></>}
             </ModalLog>
             <img
               className="pet-img"

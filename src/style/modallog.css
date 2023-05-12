@@ -9,9 +9,11 @@
     background-size: cover;
     z-index: 5;
     position: absolute;
-    left: 65%;
-    bottom: 45%;
+    left: 68% !important;
+    bottom: 45% !important;
     transform: translate(-50%, 0%);
+    font-size: calc(3vw - 15px);
+    font-weight: 600;
 }
 .hidden {
     display: none;

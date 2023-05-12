@@ -69,7 +69,7 @@ const StreetLocation = () => {
             myPets={myPets}
             setImgPet={setImgPet}
           />
-          <Link className="link-secect-pet" to={`/homelocation/${pet.id}`}>
+          <Link className="link-to-street" style={{color: "green"}} to={`/homelocation/${pet.id}`}>
             Домой
           </Link>
           <img

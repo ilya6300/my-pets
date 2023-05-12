@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import ItesstatInfo from "./ItesstatInfo";
 
 import imgMoney from "../img/icon/money.png"
 import imgDelicacy from "../img/icon/delicacy.png"
 
-const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
+const HeaderStat = memo(({ pet, myPets, setMyPets, setImgPet }) => {
   // Цветовая индикация стат бара
 
   // Команды
@@ -22,7 +22,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
     intervalUpdateLocalStorageHunger = setInterval(() => {
       consumptionFood();
       // Расчёт здоровья
-    }, 150000);
+    }, 1500);
     return () => clearInterval(intervalUpdateLocalStorageHunger);
   }, [pet]);
   // Настроение
@@ -31,7 +31,7 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
     intervalUpdateLocalStorageMood = setInterval(() => {
       consumptionMood();
       // Расчёт здоровья
-    }, 210000);
+    }, 2100);
     return () => clearInterval(intervalUpdateLocalStorageMood);
   }, [pet]);
   // Туалет
@@ -40,14 +40,14 @@ const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
     intervalUpdateLocalStorageToilet = setInterval(() => {
       consumptionToilet();
       // Расчёт здоровья
-    }, 190000);
+    }, 1900);
     return () => clearInterval(intervalUpdateLocalStorageToilet);
   }, [pet]);
 // Восстановление усталости 
 useEffect(() => {
   intervalUpdateLocalStorageEnergy = null;
   intervalUpdateLocalStorageEnergy = setInterval(() => {
-    // recoveryEnergy();
+    recoveryEnergy();
     // Расчёт здоровья
   }, 15000);
   return () => clearInterval(intervalUpdateLocalStorageEnergy);
@@ -58,8 +58,11 @@ useEffect(() => {
     if (pet.satiety > 0) {
       const newTime = new Date();
       const oldTime = new Date(pet.end_food);
-      const diff = (newTime.getTime() - oldTime.getTime()) / 150000;
+      const diff = (newTime.getTime() - oldTime.getTime()) / 1500;
       pet.satiety = pet.satiety - diff * 1;
+      if (pet.satiety <= 0) {
+        pet.satiety = 0
+      }
       pet.end_food = newTime;
     }
     // Расчёт голода конец
@@ -70,8 +73,11 @@ useEffect(() => {
     if (pet.mood > 0) {
       const newTime = new Date();
       const oldTime = new Date(pet.time_game);
-      const diff = (newTime.getTime() - oldTime.getTime()) / 210000;
+      const diff = (newTime.getTime() - oldTime.getTime()) / 2100;
       pet.mood = pet.mood - diff * 1;
+      if (pet.mood <= 0) {
+        pet.mood = 0
+      }
       pet.time_game = newTime;
     }
     // pet.mood = Math.round(pet.mood - diff * 1);
@@ -84,8 +90,11 @@ useEffect(() => {
     if (pet.toilet > 0 && !pet.shit) {
       // newTime = new Date();
       const oldTime = new Date(pet.end_toilet);
-      const diff = (newTime.getTime() - oldTime.getTime()) / 190000;
+      const diff = (newTime.getTime() - oldTime.getTime()) / 1900;
       pet.toilet = pet.toilet - diff * 1;
+      if (pet.toilet <= 0) {
+        pet.toilet = 0
+      }
       pet.end_toilet = newTime;
     } else if (!pet.shit) {
       pet.shit = true;
@@ -96,18 +105,20 @@ useEffect(() => {
     }
     // pet.toilet = Math.round(pet.toilet - diff * 1);
     // pet.end_toilet = newTime;
-    setMyPets([...myPets], pet.end_toilet);
+    setMyPets([...myPets], pet.end_toilet, pet.shit);
   };
     // Восстановленние усталости
     const recoveryEnergy = () => {
-
       // if (pet.energy <= 100) {
         const newTime = new Date();
         const oldTime = new Date(pet.end_energy);
         const diff = (newTime.getTime() - oldTime.getTime()) / 15000;
-        console.log('diff', diff)
+        console.log('diff', diff  * 1)
         console.log('pet.energy', pet.energy)
-        pet.energy = pet.energy + diff * 1;
+        pet.energy = pet.energy + diff * 1
+        if (pet.energy >= 100) {
+          pet.energy = 100
+        }
         pet.end_energy = newTime;
       // }
       // Расчёт голода конец
@@ -175,7 +186,7 @@ useEffect(() => {
   // Команда "Лежать"
   const comandLie = () => {
     console.log(pet.comsndLietStudied);
-    if (pet.delicacy >= 1) {
+    if (pet.delicacy >= 1 || pet.energy >= 5) {
       pet.delicacy--;
       pet.satiety = pet.satiety + 3;
       if (pet.satiety > 100) {
@@ -192,6 +203,7 @@ useEffect(() => {
         getObedience(100);
         console.log("resultObedience", resultObedience);
         if (pet.comsndLietProgress >= resultObedience) {
+          pet.energy = pet.energy - 5
           if (pet.comsndLietProgress >= 100) {
             pet.comsndLietProgress = 100;
           } else {
@@ -207,7 +219,7 @@ useEffect(() => {
     } else {
       return;
     }
-    setMyPets([...myPets], pet.comsndLietStudied);
+    setMyPets([...myPets], pet.comsndLietStudied, pet.energy);
   };
 
   // Съесть вкусняшку
@@ -215,11 +227,12 @@ useEffect(() => {
     if (pet.delicacy > 0) {
       pet.delicacy--;
       pet.satiety = pet.satiety + 3;
+      pet.energy = pet.energy + 3
       if (pet.satiety > 100) {
         pet.satiety = 100;
       }
     }
-    setMyPets([...myPets], pet.delicacy);
+    setMyPets([...myPets], pet.delicacy, pet.energy, pet.satiety);
   };
 
   return (
@@ -275,7 +288,7 @@ useEffect(() => {
             }}
           /> */}
           <div className="statPanel-stat">
-            Усталость{" "}
+            Энергия{" "}
             <div
               style={{
                 width: "100px",
@@ -397,6 +410,6 @@ useEffect(() => {
       </div>
     </>
   );
-};
+});
 
 export default HeaderStat;

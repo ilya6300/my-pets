@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { memo } from 'react'
 
-const ModalLog = ({children, visibleModal, setVisibleModal}) => {
+const ModalLog = memo(({children, visibleModal, setVisibleModal}) => {
     
-    const classModal = ['hidden']
+    const classModal = ['hidden ']
 // useEffect (() => {
     if (visibleModal) {
         console.log('класс')
@@ -13,6 +13,6 @@ const ModalLog = ({children, visibleModal, setVisibleModal}) => {
   return (
     <div className={classModal.join(' ')}>{children}</div>
   )
-}
+})
 
 export default ModalLog

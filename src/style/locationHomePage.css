@@ -79,6 +79,10 @@
   animation: shit_anim 5s infinite;
 }
 .link-to-street {
+  width: 90px;
+  color: azure;
+  font-size: 17px;
+  font-weight: 600;
   text-align: start;
   margin: 5px 20px;
   display: flex;
