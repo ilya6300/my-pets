@@ -76,7 +76,14 @@
   right: 23%;
   bottom: 37%;
   transform: translate(50%, 50%);
-animation: shit_anim 5s infinite;
+  animation: shit_anim 5s infinite;
+}
+.link-to-street {
+  text-align: start;
+  margin: 5px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 @keyframes ball_green_active {
@@ -117,7 +124,7 @@ animation: shit_anim 5s infinite;
   }
 }
 @keyframes canat_game_active {
-  0%{
+  0% {
     z-index: 11;
   }
   30% {
@@ -149,5 +156,5 @@ animation: shit_anim 5s infinite;
   80% {
     -webkit-filter: drop-shadow(3px 5px 5px #4eca36);
     filter: drop-shadow(-3px -5px 10px #4eca36);
-  } 
+  }
 }

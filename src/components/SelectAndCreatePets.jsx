@@ -1,4 +1,13 @@
 import React, { memo, useMemo, useState } from "react";
+import huskyPuppyStoitBlack from "../img/pets/husky/husky_puppy_stoit_black.png"
+import puppySitBlack from "../img/pets/husky/husky_puppy_sidit_black.png"
+import huskyPuppyLieBlack from "../img/pets/husky/husky_puppy_lezit_black.png"
+import huskyPuppyUpBlack from "../img/pets/husky/husky_puppy_up_black.png"
+
+import huskyPuppyStoitBronz from "../img/pets/husky/husky_puppy_stoit_bronz.png"
+import puppySitBronz from "../img/pets/husky/husky_puppy_sidit_bronz.png"
+import huskyPuppyLieBronz from "../img/pets/husky/husky_puppy_lezit_bronz.png"
+import huskyPuppyUpBronz from "../img/pets/husky/husky_puppy_up_bronz.png"
 
 const SelectAndCreatePets = memo(
   ({ targetCard, flagCreate, setFlagCreate, myPets, setMyPets }) => {
@@ -10,20 +19,21 @@ const SelectAndCreatePets = memo(
       {
         id: 1,
         img: [
-          "./img/pets/husky/husky_puppy_stoit_black.png",
-          "./img/pets/husky/husky_puppy_sidit_black.png",
-          "./img/pets/husky/husky_puppy_lezit_black.png",
-          "./img/pets/husky/husky_puppy_up_black.png",
+          huskyPuppyStoitBlack, puppySitBlack, huskyPuppyLieBlack, huskyPuppyUpBlack
+          // "./img/pets/husky/husky_puppy_stoit_black.png",
+          // "./img/pets/husky/husky_puppy_sidit_black.png",
+          // "./img/pets/husky/husky_puppy_lezit_black.png",
+          // "./img/pets/husky/husky_puppy_up_black.png",
         ],
         type: "хаски"
       },
       {
         id: 2,
-        img: [
-          "./img/pets/husky/husky_puppy_stoit_bronz.png",
-          "./img/pets/husky/husky_puppy_sidit_bronz.png",
-          "./img/pets/husky/husky_puppy_lezit_bronz.png",
-          "./img/pets/husky/husky_puppy_up_bronz.png",
+        img: [huskyPuppyStoitBronz, puppySitBronz, huskyPuppyLieBronz,huskyPuppyUpBronz
+          // "./img/pets/husky/husky_puppy_stoit_bronz.png",
+          // "./img/pets/husky/husky_puppy_sidit_bronz.png",
+          // "./img/pets/husky/husky_puppy_lezit_bronz.png",
+          // "./img/pets/husky/husky_puppy_up_bronz.png",
         ],
         type: "хаски"
       },

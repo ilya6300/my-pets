@@ -5,6 +5,13 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import HeaderStat from "../components/HeaderStat";
 import ModalLog from "../components/ModalLog";
 
+// Импорт изображений
+import imgFood from "../img/items/food_v2.png";
+import imgBallGreen from "../img/items/ball_v1.png";
+import imgCanat from "../img/items/canat.png";
+import imgShit from "../img/object/shit.png";
+import imgExitStreet from "../img/icon/icon-door.png";
+
 const HomeLocationPage = () => {
   const { id } = useParams();
   const [pet, setPet] = useState(null);
@@ -148,7 +155,8 @@ const HomeLocationPage = () => {
             setImgPet={setImgPet}
           />
           <div>
-            <Link className="link-secect-pet" to={`/streetlocation/${pet.id}`}>
+            <Link className="link-to-street" to={`/streetlocation/${pet.id}`}>
+              <img src={imgExitStreet} alt="" />
               Гулять
             </Link>
             <ModalLog
@@ -164,27 +172,15 @@ const HomeLocationPage = () => {
               src={imgPet}
             />
           </div>
-          <img
-            className="btn-feed"
-            onClick={feed}
-            src="./img/items/food_v2.png"
-          />
+          <img className="btn-feed" onClick={feed} src={imgFood} />
           <img
             className={classGameBall}
             onClick={gameGreenBall}
-            src="./img/items/ball_v1.png"
+            src={imgBallGreen}
           />
-          <img
-            className={classGameCanat}
-            onClick={gameCanat}
-            src="./img/items/canat.png"
-          />
+          <img className={classGameCanat} onClick={gameCanat} src={imgCanat} />
           {pet.shit ? (
-            <img
-              className="shit"
-              src="./img/object/shit.png"
-              onClick={clearShit}
-            />
+            <img className="shit" src={imgShit} onClick={clearShit} />
           ) : (
             <></>
           )}

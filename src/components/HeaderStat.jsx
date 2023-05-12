@@ -2,6 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import ItesstatInfo from "./ItesstatInfo";
 
+import imgMoney from "../img/icon/money.png"
+import imgDelicacy from "../img/icon/delicacy.png"
+
 const HeaderStat = ({ pet, myPets, setMyPets, setImgPet }) => {
   // Цветовая индикация стат бара
 
@@ -342,7 +345,7 @@ useEffect(() => {
           </div>
         </div>
         <div className="money-container">
-          <img className="money-container-img" src="./img/icon/money.png" />
+          <img className="money-container-img" src={imgMoney} />
           <span>{pet.money}</span>
         </div>
         <Link to="/">Выход</Link>
@@ -377,7 +380,7 @@ useEffect(() => {
               <li className="container-delicacy">
                 <img
                   className="delicacy-img"
-                  src="./img/icon/delicacy.png"
+                  src={imgDelicacy}
                   onClick={feedDelicacy}
                 />
                 <span className="delicacy-stat">{pet.delicacy} </span>

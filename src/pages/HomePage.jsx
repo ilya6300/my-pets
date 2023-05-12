@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CardPetList from "../components/CardPetList";
 import SelectAndCreatePets from "../components/SelectAndCreatePets";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import podium from "../img/background/podium.png"
 
 const HomePage = () => {
 useEffect(() => {
@@ -146,7 +147,8 @@ useEffect(() => {
 
         <img
           className="preview-podium"
-          src="./img/background/podium.png"
+          // src="./img/background/podium.png"
+          src={podium}
           alt=""
         />
       </div>
