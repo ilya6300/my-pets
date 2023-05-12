@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/my-pets/static/css/main.594a6ece.css",
+    "main.css": "/my-pets/static/css/main.6701be98.css",
     "main.js": "/my-pets/static/js/main.3e794bbc.js",
     "static/media/text.png": "/my-pets/static/media/text.9f5fb5d8486626c1a3da.png",
     "static/media/begin.jpg": "/my-pets/static/media/begin.d39fa878b1feae002254.jpg",
@@ -21,11 +21,11 @@
     "static/media/husky_puppy_up_bronz.png": "/my-pets/static/media/husky_puppy_up_bronz.a888809989a828ac3fc1.png",
     "static/media/delicacy.png": "/my-pets/static/media/delicacy.3537749720a29014c8c3.png",
     "index.html": "/my-pets/index.html",
-    "main.594a6ece.css.map": "/my-pets/static/css/main.594a6ece.css.map",
+    "main.6701be98.css.map": "/my-pets/static/css/main.6701be98.css.map",
     "main.3e794bbc.js.map": "/my-pets/static/js/main.3e794bbc.js.map"
   },
   "entrypoints": [
-    "static/css/main.594a6ece.css",
+    "static/css/main.6701be98.css",
     "static/js/main.3e794bbc.js"
   ]
 }
