@@ -9,6 +9,9 @@
   * {
     font-size: 13px;
   }
+  .location-street  {
+    background-position: left;
+  }
   .statPanel-stat,
   .statPanel-title,
   .comand {
@@ -131,4 +134,29 @@
   .preview-new-name {
     bottom: 17%;
   }
+  .move-shit {
+    left: 70%;
+    bottom: 0%;
+  }
+  .shit {
+    bottom: 15%;
+  }
+  @keyframes animation_toilet {
+
+    15% {
+        bottom:13%;
+        left: 10%;
+        transform: scale(0.5);
+    }
+    85% {
+        left: 10%;
+        bottom: 13%;  
+        transform: scale(0.5);
+    }
+    100% {
+        left: 62vw;
+        bottom: 17%;
+    }
+}
+  
 }
