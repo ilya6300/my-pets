@@ -1,5 +1,5 @@
 .location-home-body {
-  background-image: url("../img/background/locationHome.png");
+  /* background-image: url("../img/background/locationHome.png"); */
   width: 100vw;
   height: 100vh;
   background-size: cover;
@@ -9,9 +9,11 @@
   z-index: 2;
   position: fixed;
   left: 62vw;
-  bottom: 17%;
+  bottom: 15.5%;
   transform: translate(-50%, 0%);
   cursor: pointer;
+  max-height: 430px;
+  max-width: 416px;
 }
 .btn-feed {
   cursor: pointer;
@@ -88,6 +90,13 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.object-page-container {
+  width: 90vw;
+  position: relative;
+  top: 35vh;
+  height: 35vh;
+  margin: auto;
 }
 
 @keyframes ball_green_active {

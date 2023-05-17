@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -23,6 +23,8 @@ const HomeLocationPage = () => {
   const [flagAction, setFlagAction] = useState(true);
   const [visibleModal, setVisibleModal] = useState(false);
   const [message, setMessage] = useState("");
+
+  const ref = useRef();
 
   // Получение питомца по id
   useEffect(() => {
@@ -72,6 +74,11 @@ const HomeLocationPage = () => {
   };
   // Игра
   const gameGreenBall = () => {
+    const coords = ref.current.getBoundingClientRect();
+    console.log("coords.left", coords.left);
+    console.log("coords.right", coords.right);
+    console.log("coords.top", coords.top);
+    console.log("coords.bottom", coords.bottom);
     setMessage((m) => (m = "У меня нет сил играть"));
     if (flagAction) {
       setFlagAction(false);
@@ -83,7 +90,8 @@ const HomeLocationPage = () => {
           setTimeout(() => {
             setImgPet(pet.img_pet[0]);
             setTimeout(() => {
-              setClassGameBall("btn-game-green-ball");
+              // setClassGameBall("btn-game-green-ball");
+              setClassGameBall();
               pet.money = pet.money + 1;
               pet.energy = pet.energy - 10;
               pet.mood = pet.mood + 20;
@@ -167,20 +175,27 @@ const HomeLocationPage = () => {
   };
 
   return (
-    <div className="location-home-body">
+    <div>
       {pet ? (
-        <>
+        <div
+          style={{
+            backgroundImage: "url(" + pet.bgHome[0] + ")",
+          }}
+          className="location-home-body"
+        >
           <HeaderStat
             pet={pet}
             setMyPets={setMyPets}
             myPets={myPets}
             setImgPet={setImgPet}
+            page={"streetlocation"}
+            imgNav={imgExitStreet}
           />
-          <div>
-            <Link className="link-to-street" to={`/streetlocation/${pet.id}`}>
-              <img src={imgExitStreet} alt="" />
-              Гулять
-            </Link>
+          {/* <Link className="link-to-street" to={`/streetlocation/${pet.id}`}>
+            <img src={imgExitStreet} alt="" />
+            Гулять
+          </Link> */}
+          <div className="object-page-container">
             <ModalLog
               visibleModal={visibleModal}
               setVisibleModal={setVisibleModal}
@@ -188,25 +203,31 @@ const HomeLocationPage = () => {
               {visibleModal ? <p>{message}</p> : <></>}
             </ModalLog>
             <img
+              ref={ref}
               className="pet-img"
               onMouseMove={() => setHover(true)}
               onMouseOut={() => setHover(false)}
               src={imgPet}
             />
+
+            <img className="btn-feed" onClick={feed} src={imgFood} />
+            <img
+              className={classGameBall}
+              onClick={gameGreenBall}
+              src={imgBallGreen}
+            />
+            <img
+              className={classGameCanat}
+              onClick={gameCanat}
+              src={imgCanat}
+            />
+            {pet.shit ? (
+              <img className="shit" src={imgShit} onClick={clearShit} />
+            ) : (
+              <></>
+            )}
           </div>
-          <img className="btn-feed" onClick={feed} src={imgFood} />
-          <img
-            className={classGameBall}
-            onClick={gameGreenBall}
-            src={imgBallGreen}
-          />
-          <img className={classGameCanat} onClick={gameCanat} src={imgCanat} />
-          {pet.shit ? (
-            <img className="shit" src={imgShit} onClick={clearShit} />
-          ) : (
-            <></>
-          )}
-        </>
+        </div>
       ) : (
         <></>
       )}

@@ -1,13 +1,22 @@
 import React, { memo, useMemo, useState } from "react";
-import huskyPuppyStoitBlack from "../img/pets/husky/husky_puppy_stoit_black.png"
-import puppySitBlack from "../img/pets/husky/husky_puppy_sidit_black.png"
-import huskyPuppyLieBlack from "../img/pets/husky/husky_puppy_lezit_black.png"
-import huskyPuppyUpBlack from "../img/pets/husky/husky_puppy_up_black.png"
-
-import huskyPuppyStoitBronz from "../img/pets/husky/husky_puppy_stoit_bronz.png"
-import puppySitBronz from "../img/pets/husky/husky_puppy_sidit_bronz.png"
-import huskyPuppyLieBronz from "../img/pets/husky/husky_puppy_lezit_bronz.png"
-import huskyPuppyUpBronz from "../img/pets/husky/husky_puppy_up_bronz.png"
+// Импорт img хаски чёрный
+import huskyPuppyStoitBlack from "../img/pets/husky/husky_puppy_stoit_black.png";
+import puppySitBlack from "../img/pets/husky/husky_puppy_sidit_black.png";
+import huskyPuppyLieBlack from "../img/pets/husky/husky_puppy_lezit_black.png";
+import huskyPuppyUpBlack from "../img/pets/husky/husky_puppy_up_black.png";
+// Импорт img хаски бронзовый
+import huskyPuppyStoitBronz from "../img/pets/husky/husky_puppy_stoit_bronz.png";
+import puppySitBronz from "../img/pets/husky/husky_puppy_sidit_bronz.png";
+import huskyPuppyLieBronz from "../img/pets/husky/husky_puppy_lezit_bronz.png";
+import huskyPuppyUpBronz from "../img/pets/husky/husky_puppy_up_bronz.png";
+// Импорт img трансформер Бамбалби
+import bamblbi from "../img/pets/bamblbi/bamblbi.png";
+import bamblbiAuto from "../img/pets/bamblbi/bamblbi_auto.png";
+import bamblbiDance from "../img/pets/bamblbi/bamblbi-dance.png";
+import bamblbiAttack from "../img/pets/bamblbi/bamblbi-attack.png";
+// Фоны
+import imgBackgroundHomeDog from "../img/background/locationHome.png";
+import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.jpg"
 
 const SelectAndCreatePets = memo(
   ({ targetCard, flagCreate, setFlagCreate, myPets, setMyPets }) => {
@@ -19,23 +28,36 @@ const SelectAndCreatePets = memo(
       {
         id: 1,
         img: [
-          huskyPuppyStoitBlack, puppySitBlack, huskyPuppyLieBlack, huskyPuppyUpBlack
-          // "./img/pets/husky/husky_puppy_stoit_black.png",
-          // "./img/pets/husky/husky_puppy_sidit_black.png",
-          // "./img/pets/husky/husky_puppy_lezit_black.png",
-          // "./img/pets/husky/husky_puppy_up_black.png",
+          huskyPuppyStoitBlack,
+          puppySitBlack,
+          huskyPuppyLieBlack,
+          huskyPuppyUpBlack,
         ],
-        type: "хаски"
+        type: "хаски",
+        comsndOneText: "Сидеть!",
+        comsndTwoText: "Лежать!",
+        bgHome: [imgBackgroundHomeDog],
       },
       {
         id: 2,
-        img: [huskyPuppyStoitBronz, puppySitBronz, huskyPuppyLieBronz,huskyPuppyUpBronz
-          // "./img/pets/husky/husky_puppy_stoit_bronz.png",
-          // "./img/pets/husky/husky_puppy_sidit_bronz.png",
-          // "./img/pets/husky/husky_puppy_lezit_bronz.png",
-          // "./img/pets/husky/husky_puppy_up_bronz.png",
+        img: [
+          huskyPuppyStoitBronz,
+          puppySitBronz,
+          huskyPuppyLieBronz,
+          huskyPuppyUpBronz,
         ],
-        type: "хаски"
+        type: "хаски",
+        comsndOneText: "Сидеть!",
+        comsndTwoText: "Лежать!",
+        bgHome: [imgBackgroundHomeDog],
+      },
+      {
+        id: 3,
+        img: [bamblbi, bamblbiAuto, bamblbiDance, bamblbiAttack],
+        type: "Трансформер",
+        comsndOneText: "Превратись в авто!",
+        comsndTwoText: "Танец!",
+        bgHome: [imgBGHomeSpace],
       },
     ];
     // Создание нового питомца
@@ -47,7 +69,7 @@ const SelectAndCreatePets = memo(
         freeID.satiety = 100;
         freeID.mood = 100;
         freeID.img_pet = createPet.img;
-        freeID.age =  "";
+        freeID.age = "";
         freeID.money = 0;
         freeID.delicacy = 0;
         freeID.toilet = 100;
@@ -62,10 +84,17 @@ const SelectAndCreatePets = memo(
         freeID.end_toilet = birthday;
         freeID.type = createPet.type;
         // Команды
-        freeID.comsndSitStudied = false;
-        freeID.comsndSitProgress = 0;
-        freeID.comsndLietStudied = false;
-        freeID.comsndLietProgress = 0;
+        // freeID.comsndSitStudied = false;
+        // freeID.comsndSitProgress = 0;
+        // freeID.comsndLietStudied = false;
+        // freeID.comsndLietProgress = 0;
+        freeID.comsndOneStudied = false;
+        freeID.comsndOneProgress = 0;
+        freeID.comsndOneText = createPet.comsndOneText;
+        freeID.comsndTwoStudied = false;
+        freeID.comsndTwoProgress = 0;
+        freeID.comsndTwoText = createPet.comsndTwoText;
+        freeID.bgHome = createPet.bgHome;
         setFlagCreate(true);
         setMyPets([...myPets]);
         setCreatePet("");
@@ -118,13 +147,17 @@ const SelectAndCreatePets = memo(
                 </div>
               ))}
             </div>
-            {createPet
-            ? <img className="preview-pet" src={createPet.img[0]} alt="" />
-            : <></>
-            }
-           
+            {createPet ? (
+              <img className="preview-pet" src={createPet.img[0]} alt="" />
+            ) : (
+              <></>
+            )}
+
             <label className="preview-new-name">
-              <input onChange={handlerOnChangeName} placeholder="Введите имя питомца"/>
+              <input
+                onChange={handlerOnChangeName}
+                placeholder="Введите имя питомца"
+              />
               <button onClick={createNewPet}>Создать</button>
             </label>
             <h1 className="homePageLogError">{logError}</h1>
