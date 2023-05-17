@@ -9,6 +9,11 @@
   * {
     font-size: 13px;
   }
+  .pet-img {
+    max-height: 330px;
+  }
+
+
   .location-street  {
     background-position: left;
   }
@@ -40,7 +45,16 @@
     height: 30vh;
   }
   .preview-pet {
-    bottom: 22%;
+    bottom: 20%;
+    max-height: 330px;
+  }
+  .preview-pet img {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    max-height: 330px;
+    max-width: 80vw;
   }
   .btn-feed {
     left: 12% !important;
@@ -122,7 +136,7 @@
     left: 63%;
   }
   .preview-pet {
-    bottom: 35%;
+    bottom: 33.8%;
   }
   .new-card {
     height: 25vh;

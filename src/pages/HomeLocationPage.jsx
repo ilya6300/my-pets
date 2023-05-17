@@ -44,14 +44,12 @@ const HomeLocationPage = () => {
       if (pet.satiety <= 80) {
         let intervalFeed;
         intervalFeed = setInterval(() => {
-          console.log(pet.satiety);
           if (pet.satiety < 100) {
             pet.satiety = pet.satiety + 1;
             pet.toilet = pet.toilet - 0.3;
             if (pet.toilet <= 0) {
               pet.toilet = 0;
             }
-            console.log(pet.toilet);
             setMyPets([...myPets], pet.satiety, pet.toilet);
           } else {
             return clearInterval(intervalFeed);
@@ -59,12 +57,9 @@ const HomeLocationPage = () => {
         }, 100);
         setTimeout(() => {
           clearInterval(intervalFeed);
-          console.log("clearInterval");
         }, 6000);
       } else {
         setVisibleModal(true);
-        console.log("visibleModal", visibleModal);
-
         setTimeout(() => {
           setVisibleModal(false);
         }, 3000);
@@ -74,16 +69,11 @@ const HomeLocationPage = () => {
   };
   // Игра
   const gameGreenBall = () => {
-    const coords = ref.current.getBoundingClientRect();
-    console.log("coords.left", coords.left);
-    console.log("coords.right", coords.right);
-    console.log("coords.top", coords.top);
-    console.log("coords.bottom", coords.bottom);
+    // const coords = ref.current.getBoundingClientRect();
     setMessage((m) => (m = "У меня нет сил играть"));
     if (flagAction) {
       setFlagAction(false);
       if (pet.energy >= 10) {
-        console.log("Я хочу играть");
         setClassGameBall("btn-game-green-ball-active");
         setTimeout(() => {
           setImgPet(pet.img_pet[3]);
@@ -103,9 +93,7 @@ const HomeLocationPage = () => {
           }, 2600);
         }, 900);
       } else {
-        console.log("Я НЕ хочу играть");
         setVisibleModal(true);
-        console.log("visibleModal", visibleModal);
         setTimeout(() => {
           setVisibleModal(false);
         }, 3000);
@@ -137,9 +125,7 @@ const HomeLocationPage = () => {
           }, 3100);
         }, 900);
       } else {
-        console.log("Я НЕ хочу играть");
         setVisibleModal(true);
-        console.log("visibleModal", visibleModal);
         setTimeout(() => {
           setVisibleModal(false);
         }, 3000);
@@ -154,7 +140,6 @@ const HomeLocationPage = () => {
   const hoverPet = useMemo(() => {
     let hoverTaimer;
     if (hover) {
-      console.log("Поглаживание");
       hoverTaimer = setInterval(() => {
         pet.mood = pet.mood + 1;
         if (pet.mood > 100) {
@@ -195,7 +180,7 @@ const HomeLocationPage = () => {
             <img src={imgExitStreet} alt="" />
             Гулять
           </Link> */}
-          <div className="object-page-container">
+          <div >
             <ModalLog
               visibleModal={visibleModal}
               setVisibleModal={setVisibleModal}
