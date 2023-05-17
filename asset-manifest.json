@@ -1,10 +1,15 @@
 {
   "files": {
-    "main.css": "/my-pets/static/css/main.f5ad4112.css",
-    "main.js": "/my-pets/static/js/main.3e794bbc.js",
+    "main.css": "/my-pets/static/css/main.c80f5d87.css",
+    "main.js": "/my-pets/static/js/main.763655e0.js",
+    "static/media/bamblbi-dance.png": "/my-pets/static/media/bamblbi-dance.c7ca2a4316ea55688cfe.png",
+    "static/media/kosmicheskii-korabl.jpg": "/my-pets/static/media/kosmicheskii-korabl.374c5acecb8a41dfbc18.jpg",
+    "static/media/bamblbi_auto.png": "/my-pets/static/media/bamblbi_auto.cb70d8bbf61724eecd09.png",
     "static/media/text.png": "/my-pets/static/media/text.9f5fb5d8486626c1a3da.png",
     "static/media/begin.jpg": "/my-pets/static/media/begin.d39fa878b1feae002254.jpg",
+    "static/media/bamblbi.png": "/my-pets/static/media/bamblbi.ef8b4c14ee807b059e7d.png",
     "static/media/food_v2.png": "/my-pets/static/media/food_v2.7a6c0540fa6bf207ec2b.png",
+    "static/media/bamblbi-attack.png": "/my-pets/static/media/bamblbi-attack.2d5af874c2f22211184b.png",
     "static/media/canat.png": "/my-pets/static/media/canat.580fa6436f47d76b3c8a.png",
     "static/media/locationHome.png": "/my-pets/static/media/locationHome.d169cf041125f055b9de.png",
     "static/media/ball_v1.png": "/my-pets/static/media/ball_v1.99bcc38d2f1196ea673c.png",
@@ -21,11 +26,11 @@
     "static/media/husky_puppy_up_bronz.png": "/my-pets/static/media/husky_puppy_up_bronz.a888809989a828ac3fc1.png",
     "static/media/delicacy.png": "/my-pets/static/media/delicacy.3537749720a29014c8c3.png",
     "index.html": "/my-pets/index.html",
-    "main.f5ad4112.css.map": "/my-pets/static/css/main.f5ad4112.css.map",
-    "main.3e794bbc.js.map": "/my-pets/static/js/main.3e794bbc.js.map"
+    "main.c80f5d87.css.map": "/my-pets/static/css/main.c80f5d87.css.map",
+    "main.763655e0.js.map": "/my-pets/static/js/main.763655e0.js.map"
   },
   "entrypoints": [
-    "static/css/main.f5ad4112.css",
-    "static/js/main.3e794bbc.js"
+    "static/css/main.c80f5d87.css",
+    "static/js/main.763655e0.js"
   ]
 }
