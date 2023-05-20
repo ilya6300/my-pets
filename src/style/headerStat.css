@@ -5,10 +5,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 2vw 4vw;
+  padding: 1.3vw 4vw;
 }
 .statPanel-title {
-  width: 30%;
+text-align: start;
   font-size: 17px;
   font-weight: 600;
 }
@@ -20,12 +20,19 @@
   font-weight: 600;
 }
 .containerStat {
-  width: 70%;
+  width: 75vw;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   gap: 5vw;
+}
+.statPanel-name-money {
+  display: flex;
+  width: 15vw;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
 .money-container-img {
   width: 38px;
@@ -126,6 +133,6 @@
   align-items: flex-start;
   cursor: pointer;
 }
-.market-container-btn img{
+.market-container-btn img {
   width: 32px;
 }

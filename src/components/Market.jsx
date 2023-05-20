@@ -2,7 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 
 // Фоны
 import imgBackgroundHomeDog from "../img/background/locationHome.png";
-import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.jpg";
+import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.png";
+import imgBGLitleDragon from "../img/background/bg_dragon.jpg"
 import ListBGMarket from "./ListBGMarket";
 
 const Market = ({
@@ -32,15 +33,27 @@ const Market = ({
     },
     {
       id: 3,
-      title: "Дом",
-      img: imgBackgroundHomeDog,
-      price: 1,
+      title: "Пещера дракона",
+      img: imgBGLitleDragon,
+      price: 4,
     },
     {
       id: 4,
+      title: "Дом",
+      img: imgBackgroundHomeDog,
+      price: 2,
+    },
+    {
+      id: 5,
       title: "Космос",
       img: imgBGHomeSpace,
       price: 3,
+    },
+    {
+      id: 6,
+      title: "Пещера дракона",
+      img: imgBGLitleDragon,
+      price: 4,
     },
   ]);
 

@@ -8,12 +8,21 @@ import market from "../img/icon/market.png";
 import Market from "./Market";
 
 const HeaderStat = memo(
-  ({ pet, myPets, setMyPets, setImgPet, page, imgNav, setBackgroundStyle, backgroundStyle }) => {
+  ({
+    pet,
+    myPets,
+    setMyPets,
+    setImgPet,
+    page,
+    imgNav,
+    setBackgroundStyle,
+    backgroundStyle,
+  }) => {
     // магазин
     const [visibleMarket, setVisibleMarket] = useState(false);
     const showMarket = () => {
-      setVisibleMarket(true)
-    }
+      setVisibleMarket(true);
+    };
 
     // Цветовая индикация стат бара
 
@@ -232,10 +241,6 @@ const HeaderStat = memo(
     return (
       <>
         <div className="statPanel">
-          <span className="statPanel-title">
-            Питомец: <span className="statPanel-name">{pet.name}</span>
-            <span> {pet.type}</span>
-          </span>
           <div className="containerStat">
             <div className="statPanel-stat">
               Энергия{" "}
@@ -307,11 +312,17 @@ const HeaderStat = memo(
               </div>
             </div>
           </div>
-          <div className="money-container">
-            <img className="money-container-img" src={imgMoney} />
-            <span>{pet.money}</span>
+          <div className="statPanel-name-money">
+            <div className="statPanel-title">
+              <span className="statPanel-name">{pet.name}</span>
+              <span className="statPanel-type-pet"> {pet.type}</span>
+            </div>
+            <div className="money-container">
+              <img className="money-container-img" src={imgMoney} />
+              <span>{pet.money}</span>
+            </div>
+            <Link to="/">Выход</Link>
           </div>
-          <Link to="/">Выход</Link>
         </div>
         <div className="conteiner-comands">
           <h3 className="comand-title" onClick={showComandF}>
@@ -363,16 +374,20 @@ const HeaderStat = memo(
             <img src={imgNav} alt="" />
             Гулять
           </Link>
-          <div
-            className="market-container-btn"
-            onClick={showMarket}
-          >
+          <div className="market-container-btn" onClick={showMarket}>
             <img src={market} />
             Магазин
           </div>
         </nav>
         {visibleMarket ? (
-          <Market pet={pet} myPets={myPets} setMyPets={setMyPets} setVisibleMarket={setVisibleMarket} setBackgroundStyle={setBackgroundStyle} backgroundStyle={backgroundStyle}/>
+          <Market
+            pet={pet}
+            myPets={myPets}
+            setMyPets={setMyPets}
+            setVisibleMarket={setVisibleMarket}
+            setBackgroundStyle={setBackgroundStyle}
+            backgroundStyle={backgroundStyle}
+          />
         ) : (
           <></>
         )}

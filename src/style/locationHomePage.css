@@ -22,8 +22,8 @@
   width: 100px;
   position: absolute;
   left: 20%;
-  bottom: 30%;
-  transform: translate(-50%, -20%);
+  bottom: 20%;
+  transform: translate(-50%, 0%);
 }
 .btn-game-green-ball {
   cursor: pointer;

@@ -14,9 +14,15 @@ import bamblbi from "../img/pets/bamblbi/bamblbi.png";
 import bamblbiAuto from "../img/pets/bamblbi/bamblbi_auto.png";
 import bamblbiDance from "../img/pets/bamblbi/bamblbi-dance.png";
 import bamblbiAttack from "../img/pets/bamblbi/bamblbi-attack.png";
+// Импорт img маленького дракончика
+import litleDragon from "../img/pets/litle_dragon/little_dragon_0.png";
+import litleDragonFireVector from "../img/pets/litle_dragon/little_dragon_1.png";
+import litleDragonFireHand from "../img/pets/litle_dragon/little_dragon_2.png";
+import litleDragonGame from "../img/pets/litle_dragon/little_dragon_3.png";
 // Фоны
 import imgBackgroundHomeDog from "../img/background/locationHome.png";
-import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.jpg"
+import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.png"
+import imgBGLitleDragon from "../img/background/bg_dragon.jpg"
 
 const SelectAndCreatePets = memo(
   ({ targetCard, flagCreate, setFlagCreate, myPets, setMyPets }) => {
@@ -58,6 +64,14 @@ const SelectAndCreatePets = memo(
         comsndOneText: "Трансформация!",
         comsndTwoText: "Танец!",
         bgHome: [imgBGHomeSpace],
+      },
+      {
+        id: 4,
+        img: [litleDragon, litleDragonFireVector, litleDragonFireHand, litleDragonGame],
+        type: "Дракон",
+        comsndOneText: "Огонь!",
+        comsndTwoText: "Магия!",
+        bgHome: [imgBGLitleDragon],
       },
     ];
     // Создание нового питомца
