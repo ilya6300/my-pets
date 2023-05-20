@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/my-pets/static/css/main.0d62916e.css",
-    "main.js": "/my-pets/static/js/main.d52573db.js",
+    "main.js": "/my-pets/static/js/main.17d9f77a.js",
     "static/media/kosmicheskii-korabl.png": "/my-pets/static/media/kosmicheskii-korabl.aa54a62f7cb33b9c4534.png",
     "static/media/bamblbi-dance.png": "/my-pets/static/media/bamblbi-dance.c7ca2a4316ea55688cfe.png",
     "static/media/bamblbi_auto.png": "/my-pets/static/media/bamblbi_auto.cb70d8bbf61724eecd09.png",
@@ -32,10 +32,10 @@
     "static/media/delicacy.png": "/my-pets/static/media/delicacy.3537749720a29014c8c3.png",
     "index.html": "/my-pets/index.html",
     "main.0d62916e.css.map": "/my-pets/static/css/main.0d62916e.css.map",
-    "main.d52573db.js.map": "/my-pets/static/js/main.d52573db.js.map"
+    "main.17d9f77a.js.map": "/my-pets/static/js/main.17d9f77a.js.map"
   },
   "entrypoints": [
     "static/css/main.0d62916e.css",
-    "static/js/main.d52573db.js"
+    "static/js/main.17d9f77a.js"
   ]
 }
