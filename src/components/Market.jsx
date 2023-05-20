@@ -1,90 +1,97 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 // Фоны
 import imgBackgroundHomeDog from "../img/background/locationHome.png";
 import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.jpg";
+import ListBGMarket from "./ListBGMarket";
 
-const Market = ({ pet, myPets, setMyPets }) => {
+const Market = ({
+  pet,
+  myPets,
+  setMyPets,
+  setVisibleMarket,
+  setBackgroundStyle,
+  backgroundStyle,
+}) => {
+  const [viewerContent, setViewerContent] = useState(null);
+  const [targetSale, setTargetSale] = useState(null);
+  // const [flagSaleHomeImg, setFlagSaleHomeImg] = useState(false);
 
-const [viewerContent, setViewerContent] = useState(null)
+  const [bg, setBg] = useState([
+    {
+      id: 1,
+      title: "Дом",
+      img: imgBackgroundHomeDog,
+      price: 2,
+    },
+    {
+      id: 2,
+      title: "Космос",
+      img: imgBGHomeSpace,
+      price: 3,
+    },
+    {
+      id: 3,
+      title: "Дом",
+      img: imgBackgroundHomeDog,
+      price: 1,
+    },
+    {
+      id: 4,
+      title: "Космос",
+      img: imgBGHomeSpace,
+      price: 3,
+    },
+  ]);
 
-  // Купить фон тест
-const setHomeImg = () => {
-    setViewerContent(imgBackgroundHomeDog)
-}
-const saleHomeImg = () => {
-    setViewerContent(imgBackgroundHomeDog)
-    pet.bgHome = [viewerContent]
-}
-const setSpaceImg = () => {
-    setViewerContent(imgBGHomeSpace)
-}
-const saleSpaceImg = () => {
-    setViewerContent(imgBGHomeSpace)
-    pet.bgHome = [viewerContent]
-}
+  const hiddenMarket = () => {
+    setVisibleMarket(false);
+  };
+
+  // Выбор карты фона в магазине
+  useEffect(() => {
+    setTargetSale(targetSale);
+    console.log(targetSale);
+    if (targetSale) {
+      setViewerContent(targetSale.img);
+    } else return;
+  }, [targetSale]);
+
+  const thisBG = (bgmarket) => {
+    setTargetSale(bg.find((b) => b.id === bgmarket.id));
+  };
+  // Купить новый фон
+  const saleBG = () => {
+    if (pet.money >= targetSale.price) {
+      pet.bgHome.unshift(viewerContent);
+      setBackgroundStyle(pet.bgHome[0]);
+      pet.money = pet.money - targetSale.price
+      setMyPets([...myPets], pet.bgHome, pet.money);
+    } return
+  };
+
+  useEffect(() => {
+    setBackgroundStyle(backgroundStyle);
+  }, [backgroundStyle]);
 
   return (
     <div className="market-container">
       <h1 className="title-market">Мой магазин</h1>
-      <div className="product-main-container">
-        <div className="product-container">
-          <div className="market-card">
-            <h1 className="market-card-title">Дом</h1>
-            <img className="market-card-img" src={imgBackgroundHomeDog} />
-            <div className="market-container-price">
-              <span className="market-price">Цена</span>
-              <span className="market-price">5</span>
-            </div>
-            <button className="market-card-btn" 
-            onClick={setHomeImg}
-            >
-                Просмотр</button>
-            <button className="market-card-btn" onClick={saleHomeImg}>Купить</button>
-          </div>
-          <div className="market-card">
-            <h1 className="market-card-title">Космос</h1>
-            <img className="market-card-img" src={imgBGHomeSpace} />
-            <div className="market-container-price">
-              <span className="market-price">Цена</span>
-              <span className="market-price">5</span>
-            </div>
-            <button className="market-card-btn" 
-            onClick={setHomeImg}
-            >
-                Просмотр</button>
-            <button className="market-card-btn" onClick={setSpaceImg}>Купить</button>
-          </div>
-          <div className="market-card">
-            <h1 className="market-card-title">Дом</h1>
-            <img className="market-card-img" src={imgBackgroundHomeDog} />
-            <div className="market-container-price">
-              <span className="market-price">Цена</span>
-              <span className="market-price">5</span>
-            </div>
-           <button className="market-card-btn" 
-            onClick={setHomeImg}
-            >
-                Просмотр</button>
-            <button className="market-card-btn" onClick={saleHomeImg}>saleSpaceImg</button>
-          </div>
-          <div className="market-card">
-            <h1 className="market-card-title">Космос</h1>
-            <img className="market-card-img" src={imgBGHomeSpace} />
-            <div className="market-container-price">
-              <span className="market-price">Цена</span>
-              <span className="market-price">5</span>
-            </div>
-           <button className="market-card-btn" 
-            onClick={setSpaceImg}
-            >
-                Просмотр</button>
-            <button className="market-card-btn" onClick={saleSpaceImg}>Купить</button>
+      <h1 className="title-market-closed" onClick={hiddenMarket}>
+        X
+      </h1>
+      <div className="product-container-market">
+        <div className="product-main-container">
+          <div className="product-container">
+            <ListBGMarket bg={bg} thisbg={thisBG} salebg={saleBG} />
           </div>
         </div>
-      </div>
-      <div className="view-container">
-        <img className="view-img" src={viewerContent} />
+        <div className="view-container">
+          <img className="view-img" src={viewerContent} />
+          {viewerContent
+          ? <button onClick={saleBG}>Купить</button> : <></>
+          }
+        </div>
       </div>
     </div>
   );

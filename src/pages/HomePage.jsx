@@ -39,7 +39,6 @@ const HomePage = () => {
   // Таргет item при клике
   const targetID = (card) => {
     setTargetCard(myPets.find((t) => t.id === card.id));
-    console.log(targetCard);
   };
 
   //   Панель моих питоцев

@@ -55,7 +55,7 @@ const SelectAndCreatePets = memo(
         id: 3,
         img: [bamblbi, bamblbiAuto, bamblbiDance, bamblbiAttack],
         type: "Трансформер",
-        comsndOneText: "Превратись в авто!",
+        comsndOneText: "Трансформация!",
         comsndTwoText: "Танец!",
         bgHome: [imgBGHomeSpace],
       },

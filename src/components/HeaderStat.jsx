@@ -8,7 +8,13 @@ import market from "../img/icon/market.png";
 import Market from "./Market";
 
 const HeaderStat = memo(
-  ({ pet, myPets, setMyPets, setImgPet, page, imgNav }) => {
+  ({ pet, myPets, setMyPets, setImgPet, page, imgNav, setBackgroundStyle, backgroundStyle }) => {
+    // магазин
+    const [visibleMarket, setVisibleMarket] = useState(false);
+    const showMarket = () => {
+      setVisibleMarket(true)
+    }
+
     // Цветовая индикация стат бара
 
     // Команды
@@ -225,7 +231,7 @@ const HeaderStat = memo(
 
     return (
       <>
-          <div className="statPanel">
+        <div className="statPanel">
           <span className="statPanel-title">
             Питомец: <span className="statPanel-name">{pet.name}</span>
             <span> {pet.type}</span>
@@ -357,16 +363,19 @@ const HeaderStat = memo(
             <img src={imgNav} alt="" />
             Гулять
           </Link>
-          <div className="market-container-btn">
+          <div
+            className="market-container-btn"
+            onClick={showMarket}
+          >
             <img src={market} />
             Магазин
           </div>
         </nav>
-{/* 
-        <Market 
-        pet={pet} myPets={myPets} setMyPets={setMyPets}
-        /> */}
-
+        {visibleMarket ? (
+          <Market pet={pet} myPets={myPets} setMyPets={setMyPets} setVisibleMarket={setVisibleMarket} setBackgroundStyle={setBackgroundStyle} backgroundStyle={backgroundStyle}/>
+        ) : (
+          <></>
+        )}
       </>
     );
   }

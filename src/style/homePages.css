@@ -109,6 +109,7 @@
   border-radius: 50%;
   border: 10px solid rgba(106, 6, 145, 0.795);
   overflow: hidden;
+  flex-shrink: 0;
 }
 .preview-new-name {
   position: absolute;

@@ -14,6 +14,7 @@ import imgExitStreet from "../img/icon/icon-door.png";
 
 const HomeLocationPage = () => {
   const { id } = useParams();
+  const [backgroundStyle, setBackgroundStyle] =useState(null)
   const [pet, setPet] = useState(null);
   const [imgPet, setImgPet] = useState(null);
   const [classGameBall, setClassGameBall] = useState("btn-game-green-ball");
@@ -32,6 +33,9 @@ const HomeLocationPage = () => {
       if (String(pt.id) === { id }.id) {
         setPet(pt);
         setImgPet(pt.img_pet[0]);
+        // setBackgroundStyle({"background": "url(" + pt.bgHome[0] + ")"})     
+         setBackgroundStyle(pt.bgHome[0])
+        console.log(backgroundStyle)
       }
     });
   }, []);
@@ -80,8 +84,7 @@ const HomeLocationPage = () => {
           setTimeout(() => {
             setImgPet(pet.img_pet[0]);
             setTimeout(() => {
-              // setClassGameBall("btn-game-green-ball");
-              setClassGameBall();
+              setClassGameBall("btn-game-green-ball");
               pet.money = pet.money + 1;
               pet.energy = pet.energy - 10;
               pet.mood = pet.mood + 20;
@@ -163,9 +166,7 @@ const HomeLocationPage = () => {
     <div>
       {pet ? (
         <div
-          style={{
-            backgroundImage: "url(" + pet.bgHome[0] + ")",
-          }}
+          style={{"background": "url(" + backgroundStyle + ")"}}
           className="location-home-body"
         >
           <HeaderStat
@@ -175,7 +176,9 @@ const HomeLocationPage = () => {
             setImgPet={setImgPet}
             page={"streetlocation"}
             imgNav={imgExitStreet}
-          />
+            setBackgroundStyle={setBackgroundStyle}
+            backgroundStyle={backgroundStyle}
+            />
           {/* <Link className="link-to-street" to={`/streetlocation/${pet.id}`}>
             <img src={imgExitStreet} alt="" />
             Гулять
