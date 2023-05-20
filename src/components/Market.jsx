@@ -79,6 +79,7 @@ const Market = ({
       pet.bgHome.unshift(viewerContent);
       setBackgroundStyle(pet.bgHome[0]);
       pet.money = pet.money - targetSale.price
+      setVisibleMarket(false);
       setMyPets([...myPets], pet.bgHome, pet.money);
     } return
   };
