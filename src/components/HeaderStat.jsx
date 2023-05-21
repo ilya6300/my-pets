@@ -6,6 +6,7 @@ import imgMoney from "../img/icon/money.png";
 import imgDelicacy from "../img/icon/delicacy.png";
 import market from "../img/icon/market.png";
 import Market from "./Market";
+import ModalLvlUp from "./ModalLvlUp";
 
 const HeaderStat = memo(
   ({
@@ -148,10 +149,10 @@ const HeaderStat = memo(
     const getObedience = (max) => {
       return (resultObedience = Math.floor(Math.random() * max));
     };
-    // Команда "Сидеть"
+    // Команда 1
     const comandSit = () => {
       console.log(pet.comsndOneStudied);
-      if (pet.delicacy >= 1) {
+      if (pet.delicacy >= 1 && pet.energy >= 5) {
         pet.delicacy--;
         pet.satiety = pet.satiety + 3;
         if (pet.satiety > 100) {
@@ -160,6 +161,7 @@ const HeaderStat = memo(
         if (!pet.comsndOneStudied) {
           pet.comsndOneStudied = true;
           pet.comsndOneProgress = 30;
+          levelUpFunction();
           setImgPet(pet.img_pet[1]);
           setTimeout(() => {
             setImgPet(pet.img_pet[0]);
@@ -172,6 +174,7 @@ const HeaderStat = memo(
               pet.comsndOneProgress = 100;
             } else {
               pet.comsndOneProgress = pet.comsndOneProgress + 10;
+              levelUpFunction();
             }
 
             setImgPet(pet.img_pet[1]);
@@ -186,10 +189,10 @@ const HeaderStat = memo(
 
       setMyPets([...myPets], pet.comsndOneStudied);
     };
-    // Команда "Лежать"
+    // Команда 2
     const comandLie = () => {
       console.log(pet.comsndTwoStudied);
-      if (pet.delicacy >= 1 || pet.energy >= 5) {
+      if (pet.delicacy >= 1 && pet.energy >= 5) {
         pet.delicacy--;
         pet.satiety = pet.satiety + 3;
         if (pet.satiety > 100) {
@@ -198,6 +201,7 @@ const HeaderStat = memo(
         if (!pet.comsndTwoStudied) {
           pet.comsndTwoStudied = true;
           pet.comsndTwoProgress = 30;
+          levelUpFunction();
           setImgPet(pet.img_pet[2]);
           setTimeout(() => {
             setImgPet(pet.img_pet[0]);
@@ -211,6 +215,7 @@ const HeaderStat = memo(
               pet.comsndTwoProgress = 100;
             } else {
               pet.comsndTwoProgress = pet.comsndTwoProgress + 10;
+              levelUpFunction();
             }
 
             setImgPet(pet.img_pet[2]);
@@ -237,6 +242,78 @@ const HeaderStat = memo(
       }
       setMyPets([...myPets], pet.delicacy, pet.energy, pet.satiety);
     };
+
+    // Повышение уровняпитомца
+    const [blockLevelUp, setBlockLevelUp] = useState(false);
+    const [newBonusFlag, setNewBonusFlag] = useState(false);
+    const [newBonus, setNewBonus] = useState("");
+    const [addMoney, setAddMoney] = useState(0);
+    const [quantity, setQuantity] = useState(0);
+    const levelUp = () => {
+      if (pet.progressLevel >= 100) {
+        pet.level++;
+        pet.progressLevel = pet.progressLevel - 100;
+      }
+    };
+    const levelUpFunction = () => {
+      if (pet.level === 1) {
+        pet.progressLevel = pet.progressLevel + 34;
+        levelUp();
+        if (pet.level === 2) {
+          setNewBonus("Монеты");
+          setQuantity(5);
+          setAddMoney(5);
+          setBlockLevelUp(true);
+        }
+      } else if (pet.level === 2) {
+        pet.progressLevel = pet.progressLevel + 18;
+        levelUp();
+        if (pet.level === 3) {
+          setNewBonus("Монеты");
+          setQuantity(7);
+          setAddMoney(7);
+          setBlockLevelUp(true);
+        }
+      } else if (pet.level === 3) {
+        pet.progressLevel = pet.progressLevel + 13;
+        levelUp();
+        if (pet.level === 4) {
+          setNewBonus("Монеты");
+          setQuantity(10);
+          setAddMoney(10);
+          setBlockLevelUp(true);
+        }
+      } else if (pet.level === 4) {
+        pet.progressLevel = pet.progressLevel + 10;
+        levelUp();
+      } else if (pet.level === 5) {
+        pet.progressLevel = pet.progressLevel + 5;
+        levelUp();
+      } else if (pet.level > 5) {
+        pet.progressLevel = pet.progressLevel + 3;
+        levelUp();
+      }
+      setMyPets([...myPets], pet.level, pet.progressLevel);
+    };
+    // Модальное окно бонуса за новый уровень
+
+    const getBonus = () => {
+      setBlockLevelUp(false);
+      setNewBonusFlag(true);
+    };
+
+    useEffect(() => {
+      setNewBonus(() => newBonus);
+      setAddMoney(() => addMoney);
+      setQuantity(() => quantity);
+      pet.money = pet.money + addMoney;
+      setMyPets([...myPets], pet.money);
+      setNewBonusFlag(false);
+      console.log(newBonusFlag);
+      setNewBonus(() => "");
+      setQuantity(() => 0);
+      setAddMoney(() => 0);
+    }, [newBonusFlag]);
 
     return (
       <>
@@ -312,16 +389,33 @@ const HeaderStat = memo(
               </div>
             </div>
           </div>
+          {/* Профиль справа */}
           <div className="statPanel-name-money">
             <div className="statPanel-title">
-              <span className="statPanel-name">{pet.name}</span>
-              <span className="statPanel-type-pet"> {pet.type}</span>
+              <div className="statPanel-name">{pet.name}</div>
+              <div className="statPanel-name">
+                Ур. <span className="statPanel-lvl">{pet.level}</span>
+              </div>
+              <div className="progress-exp">
+                <div
+                  style={{
+                    textAlign: "center",
+                    color: "azure",
+                    width: pet.progressLevel + "px",
+                    background: "blueviolet",
+                    borderRadius: "4px",
+                    height: "24px",
+                  }}
+                ></div>
+                <span className="statPanel-exp-progress-title">Опыт</span>
+              </div>
+              <div className="statPanel-type-pet"> {pet.type}</div>
             </div>
+
             <div className="money-container">
               <img className="money-container-img" src={imgMoney} />
               <span>{pet.money}</span>
             </div>
-            <Link to="/">Выход</Link>
           </div>
         </div>
         <div className="conteiner-comands">
@@ -378,6 +472,13 @@ const HeaderStat = memo(
             <img src={market} />
             Магазин
           </div>
+          {!comandShow ? (
+            <Link className="exit" to="/">
+              Выход
+            </Link>
+          ) : (
+            <></>
+          )}
         </nav>
         {visibleMarket ? (
           <Market
@@ -387,6 +488,19 @@ const HeaderStat = memo(
             setVisibleMarket={setVisibleMarket}
             setBackgroundStyle={setBackgroundStyle}
             backgroundStyle={backgroundStyle}
+          />
+        ) : (
+          <></>
+        )}
+        {blockLevelUp ? (
+          <ModalLvlUp
+            blockLevelUp={blockLevelUp}
+            setBlockLevelUp={setBlockLevelUp}
+            getbonus={getBonus}
+            name_pet={pet.name}
+            level_pet={pet.level}
+            bonus={newBonus}
+            quantity={quantity}
           />
         ) : (
           <></>

@@ -23,6 +23,11 @@ import litleDragonGame from "../img/pets/litle_dragon/little_dragon_3.png";
 import imgBackgroundHomeDog from "../img/background/locationHome.png";
 import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.png"
 import imgBGLitleDragon from "../img/background/bg_dragon.jpg"
+// Объекты
+import imgFood from "../img/items/food_v2.png";
+import imgBallGreen from "../img/items/ball_v1.png";
+import imgCanat from "../img/items/canat.png";
+import imgShit from "../img/object/shit.png";
 
 const SelectAndCreatePets = memo(
   ({ targetCard, flagCreate, setFlagCreate, myPets, setMyPets }) => {
@@ -98,17 +103,22 @@ const SelectAndCreatePets = memo(
         freeID.end_toilet = birthday;
         freeID.type = createPet.type;
         // Команды
-        // freeID.comsndSitStudied = false;
-        // freeID.comsndSitProgress = 0;
-        // freeID.comsndLietStudied = false;
-        // freeID.comsndLietProgress = 0;
         freeID.comsndOneStudied = false;
         freeID.comsndOneProgress = 0;
         freeID.comsndOneText = createPet.comsndOneText;
         freeID.comsndTwoStudied = false;
         freeID.comsndTwoProgress = 0;
         freeID.comsndTwoText = createPet.comsndTwoText;
+        // Объекты
+        freeID.foodObj = imgFood;
+        freeID.toyOneObj = imgBallGreen;
+        freeID.toyTwoObj = imgCanat;
+        freeID.shitObj = imgShit;
+        // Фон
         freeID.bgHome = createPet.bgHome;
+        // Level
+        freeID.level = 1;
+        freeID.progressLevel = 0;
         setFlagCreate(true);
         setMyPets([...myPets]);
         setCreatePet("");

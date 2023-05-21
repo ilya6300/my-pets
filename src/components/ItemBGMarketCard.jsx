@@ -9,16 +9,6 @@ const ItemBGMarketCard = (props) => {
         <span className="market-price">Цена</span>
         <span className="market-price">{props.bgmarket.price}</span>
       </div>
-      {/* <button className="market-card-btn" 
-    onClick={setHomeImg}
-    >
-        Просмотр</button> */}
-      {/* <button
-        className="market-card-btn"
-        onClick={() => props.salebg(props.bgmarket)}
-      >
-        Купить
-      </button> */}
     </div>
   );
 };

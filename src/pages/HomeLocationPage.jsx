@@ -6,10 +6,10 @@ import HeaderStat from "../components/HeaderStat";
 import ModalLog from "../components/ModalLog";
 
 // Импорт изображений
-import imgFood from "../img/items/food_v2.png";
-import imgBallGreen from "../img/items/ball_v1.png";
-import imgCanat from "../img/items/canat.png";
-import imgShit from "../img/object/shit.png";
+// import imgFood from "../img/items/food_v2.png";
+// import imgBallGreen from "../img/items/ball_v1.png";
+// import imgCanat from "../img/items/canat.png";
+// import imgShit from "../img/object/shit.png";
 import imgExitStreet from "../img/icon/icon-door.png";
 
 const HomeLocationPage = () => {
@@ -62,7 +62,7 @@ const HomeLocationPage = () => {
         }, 6000);
       } else {
         coords = ref.current.getBoundingClientRect();
-        setCoordsPet(coords)
+        setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
           setVisibleModal(false);
@@ -96,7 +96,7 @@ const HomeLocationPage = () => {
         }, 900);
       } else {
         coords = ref.current.getBoundingClientRect();
-        setCoordsPet(coords)
+        setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
           setVisibleModal(false);
@@ -130,7 +130,7 @@ const HomeLocationPage = () => {
         }, 900);
       } else {
         coords = ref.current.getBoundingClientRect();
-        setCoordsPet(coords)
+        setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
           setVisibleModal(false);
@@ -165,6 +165,7 @@ const HomeLocationPage = () => {
     setMyPets([...myPets], pet.shit);
   };
 
+
   return (
     <div>
       {pet ? (
@@ -194,9 +195,8 @@ const HomeLocationPage = () => {
             >
               {visibleModal ? <p>{message}</p> : <></>}
             </ModalLog>
-            
+
             <img
-              
               className="pet-img"
               onMouseMove={() => setHover(true)}
               onMouseOut={() => setHover(false)}
@@ -204,19 +204,19 @@ const HomeLocationPage = () => {
               ref={ref}
             />
 
-            <img className="btn-feed" onClick={feed} src={imgFood} />
+            <img className="btn-feed" onClick={feed} src={pet.foodObj} />
             <img
               className={classGameBall}
               onClick={gameGreenBall}
-              src={imgBallGreen}
+              src={pet.toyOneObj}
             />
             <img
               className={classGameCanat}
               onClick={gameCanat}
-              src={imgCanat}
+              src={pet.toyTwoObj}
             />
             {pet.shit ? (
-              <img className="shit" src={imgShit} onClick={clearShit} />
+              <img className="shit" src={pet.shitObj} onClick={clearShit} />
             ) : (
               <></>
             )}

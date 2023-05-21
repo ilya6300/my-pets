@@ -45,7 +45,7 @@
   cursor: pointer;
   display: inline-block;
   width: 150px;
-  height: 210px;
+  height: 195px;
   background: whitesmoke;
   border-radius: 8px;
   margin: 5px 5px;
@@ -57,7 +57,7 @@
   font-size: 18px;
 }
 .market-card-img {
-  width: 98%;
+  max-width: 98%;
   height: 91px;
 }
 .market-container-price {
@@ -80,5 +80,9 @@ flex-direction: column;
   width: 50vw;
 }
 .view-img {
-  width: 100%;
+  width: fit-content;
+    height: fit-content;
+    max-width: 315px;
+    max-height: 185px;
+    margin: auto;
 }
