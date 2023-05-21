@@ -1,8 +1,12 @@
 {
   "files": {
-    "main.css": "/my-pets/static/css/main.0d62916e.css",
-    "main.js": "/my-pets/static/js/main.17d9f77a.js",
+    "main.css": "/my-pets/static/css/main.e68e4ce6.css",
+    "main.js": "/my-pets/static/js/main.7c0ca79b.js",
     "static/media/kosmicheskii-korabl.png": "/my-pets/static/media/kosmicheskii-korabl.aa54a62f7cb33b9c4534.png",
+    "static/media/car.png": "/my-pets/static/media/car.bb681d94c9b5607f55ba.png",
+    "static/media/planet1.png": "/my-pets/static/media/planet1.d7e9c984796bb10b910a.png",
+    "static/media/car2.png": "/my-pets/static/media/car2.ae47f495a68ebbf267ec.png",
+    "static/media/space-planet.png": "/my-pets/static/media/space-planet.d364709c189b4cbbb51f.png",
     "static/media/bamblbi-dance.png": "/my-pets/static/media/bamblbi-dance.c7ca2a4316ea55688cfe.png",
     "static/media/bamblbi_auto.png": "/my-pets/static/media/bamblbi_auto.cb70d8bbf61724eecd09.png",
     "static/media/text.png": "/my-pets/static/media/text.9f5fb5d8486626c1a3da.png",
@@ -13,16 +17,20 @@
     "static/media/canat.png": "/my-pets/static/media/canat.580fa6436f47d76b3c8a.png",
     "static/media/locationHome.png": "/my-pets/static/media/locationHome.d169cf041125f055b9de.png",
     "static/media/little_dragon_1.png": "/my-pets/static/media/little_dragon_1.d9d205895bcea22dc9ad.png",
+    "static/media/sword.png": "/my-pets/static/media/sword.fa75bd6b740420204431.png",
     "static/media/ball_v1.png": "/my-pets/static/media/ball_v1.99bcc38d2f1196ea673c.png",
     "static/media/street.jpg": "/my-pets/static/media/street.5cd26a78fd5b004f7da8.jpg",
     "static/media/bg_dragon.jpg": "/my-pets/static/media/bg_dragon.c582294f04420d2a6ecd.jpg",
+    "static/media/hamster2.png": "/my-pets/static/media/hamster2.50123ed684ca9c403a2f.png",
     "static/media/little_dragon_3.png": "/my-pets/static/media/little_dragon_3.72d8f1bab745d7a65d97.png",
     "static/media/shit.png": "/my-pets/static/media/shit.31ada40f8066c4bf449b.png",
+    "static/media/birthday.png": "/my-pets/static/media/birthday.1c94c4e18d895a0b96ac.png",
     "static/media/podium.png": "/my-pets/static/media/podium.06fbe411c0c88180e6db.png",
     "static/media/little_dragon_0.png": "/my-pets/static/media/little_dragon_0.57c1310eef604ca0bb2d.png",
     "static/media/little_dragon_2.png": "/my-pets/static/media/little_dragon_2.0b313aaa9d4681fd17cc.png",
     "static/media/husky_puppy_stoit_black.png": "/my-pets/static/media/husky_puppy_stoit_black.8bf3b4fe5d033592d8a6.png",
     "static/media/husky_puppy_stoit_bronz.png": "/my-pets/static/media/husky_puppy_stoit_bronz.26e0d074d352c2ced68e.png",
+    "static/media/hamster.png": "/my-pets/static/media/hamster.f6ffb5c5ab417c8cb4ae.png",
     "static/media/husky_puppy_lezit_black.png": "/my-pets/static/media/husky_puppy_lezit_black.f657f2159c19640ed45f.png",
     "static/media/husky_puppy_up_black.png": "/my-pets/static/media/husky_puppy_up_black.3f579301002af481029f.png",
     "static/media/husky_puppy_sidit_black.png": "/my-pets/static/media/husky_puppy_sidit_black.7a23624599f438ff7cae.png",
@@ -31,11 +39,11 @@
     "static/media/husky_puppy_up_bronz.png": "/my-pets/static/media/husky_puppy_up_bronz.a888809989a828ac3fc1.png",
     "static/media/delicacy.png": "/my-pets/static/media/delicacy.3537749720a29014c8c3.png",
     "index.html": "/my-pets/index.html",
-    "main.0d62916e.css.map": "/my-pets/static/css/main.0d62916e.css.map",
-    "main.17d9f77a.js.map": "/my-pets/static/js/main.17d9f77a.js.map"
+    "main.e68e4ce6.css.map": "/my-pets/static/css/main.e68e4ce6.css.map",
+    "main.7c0ca79b.js.map": "/my-pets/static/js/main.7c0ca79b.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d62916e.css",
-    "static/js/main.17d9f77a.js"
+    "static/css/main.e68e4ce6.css",
+    "static/js/main.7c0ca79b.js"
   ]
 }
