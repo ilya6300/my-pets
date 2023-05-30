@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import iconCreateNewPet from "../img/icon/icon-create-new.png"
 
-const CardPetItem = (props) => {
+const CardPetItem = memo((props) => {
   return (
     <div className="card-pets" 
     // onClick={() => console.log(props.card.id)}
@@ -23,6 +23,6 @@ const CardPetItem = (props) => {
       )}
     </div>
   );
-};
+})
 
 export default CardPetItem;

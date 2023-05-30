@@ -88,6 +88,14 @@
   height: 35vh;
   margin: auto;
 }
+.punching-bag {
+  max-width: 200px;
+  width: 45vw;
+  min-width: 100px;
+  position: fixed;
+  right: -90px;
+  bottom: 30%;
+}
 
 @keyframes ball_green_active {
   0% {

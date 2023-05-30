@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState } from "react";
 
 // Фоны
 import imgBackgroundHomeDog from "../img/background/locationHome.png";
@@ -12,12 +12,16 @@ import imgHamsterTwo from "../img/object/toy/hamster2.png";
 import imgPlanetOne from "../img/object/toy/planet1.png";
 import imgPlanetTwo from "../img/object/toy/space-planet.png";
 import imgSword from "../img/object/toy/sword.png";
+// Расходникик
+import imgDelicacy from "../img/icon/delicacy.png";
+import imgEnergy from "../img/icon/energy_icon.png";
 
 //
 import ListBGMarket from "./ListBGMarket";
 import ListToyMarket from "./ListToyMarket";
+import ListConsumablesMark from "./ListConsumablesMark";
 
-const Market = ({
+const Market = memo(({
   pet,
   myPets,
   setMyPets,
@@ -25,9 +29,21 @@ const Market = ({
   setBackgroundStyle,
   backgroundStyle,
 }) => {
+  // Переменные меню
+  const [skinAll, setSkinAll] = useState(false);
+  const [consumablesFlag, setConsumablesFlag] = useState(true); // Расходники
   const [viewerContent, setViewerContent] = useState(null);
   const [targetSale, setTargetSale] = useState(null);
-  // const [flagSaleHomeImg, setFlagSaleHomeImg] = useState(false);
+  let classSkinBtn = ["btn-market"];
+  let classConsumablesBtn = ["btn-market"];
+
+  if (skinAll) {
+    classSkinBtn = ["btn-market btn-market-active"];
+    classConsumablesBtn = ["btn-market"];
+  } else if (consumablesFlag) {
+    classConsumablesBtn = ["btn-market btn-market-active"];
+    classSkinBtn = ["btn-market"];
+  }
 
   const [bg, setBg] = useState([
     {
@@ -124,9 +140,67 @@ const Market = ({
       type: "toy",
     },
   ]);
+  // Расходники
+  const [consumables, setConsumables] = useState([
+    {
+      id: 1,
+      title: "Вкусняшка",
+      img: imgDelicacy,
+      text: "Купить лакомство для тренировок 1 шт.",
+      price: 2,
+      type: "consumables",
+      buy() {
+        if (pet.money >= 2) {
+          pet.money = pet.money - 2;
+          pet.delicacy++;
+          setMyPets([...myPets], pet.delicacy);
+        }
+        console.log("Я купил лакомство");
+      },
+    },
+    {
+      id: 2,
+      title: "Энергетик",
+      img: imgEnergy,
+      text: "Купить 50 энергии",
+      price: 5,
+      type: "consumables",
+      buy() {
+        if (pet.money >= 5) {
+          pet.money = pet.money - 5;
+          pet.energy = pet.energy + 50;
+          if (pet.energy > 100) {
+            pet.energy = 100;
+          }
+          setMyPets([...myPets], pet.energy);
+        }
+        console.log("Я купил энергию");
+      },
+    },
+  ]);
 
   const hiddenMarket = () => {
     setVisibleMarket(false);
+  };
+
+  // маркет навигация
+  const showSkin = () => {
+    setViewerContent(null);
+    setSkinAll((f) => (f = true));
+    setConsumablesFlag((f) => (f = false));
+  };
+  const showConsumables = () => {
+    setViewerContent(null);
+    setSkinAll((f) => (f = false));
+    setConsumablesFlag((f) => (f = true));
+  };
+  // Показать расходник
+  const thisConsumables = (bgmarket) => {
+    setTargetSale(consumables.find((c) => c.id === bgmarket.id));
+  };
+  // Купить расходник
+  const buyConsumables = () => {
+    targetSale.buy();
   };
 
   // Выбор карты фона в магазине
@@ -193,36 +267,88 @@ const Market = ({
         X
       </h1>
       <div className="product-container-market">
+        <div className="nav-market">
+          <button className={classConsumablesBtn} onClick={showConsumables}>
+            Расходники
+          </button>
+          <button className={classSkinBtn} onClick={showSkin}>
+            Скины
+          </button>
+        </div>
         <div className="product-main-container">
-          {/*  */}
-          <div className="product-container">
-            <ListBGMarket bg={bg} thisbg={thisBG} salebg={saleBG} />
-            {/* <ListBGMarket toy={toy} thisbg={thisBG} salebg={saleBG} /> */}
-            <ListToyMarket toy={toy} thistoy={thisToy} />
-          </div>
+          {/* Скины */}
+          {skinAll ? (
+            <div className="product-container">
+              <ul style={{ color: "azure" }}>
+                <li>Монет {pet.money}</li>
+              </ul>
+              <ListBGMarket bg={bg} thisbg={thisBG} salebg={saleBG} />
+              {/* <ListBGMarket toy={toy} thisbg={thisBG} salebg={saleBG} /> */}
+              <ListToyMarket toy={toy} thistoy={thisToy} />
+            </div>
+          ) : (
+            <></>
+          )}
+          {/* Расходники */}
+          {consumablesFlag ? (
+            <div className="product-container">
+              <ul style={{ color: "azure" }}>
+                <li>Монет {pet.money}</li>
+                <li>Энергии {pet.energy}</li>
+                <li>Лакомсва {pet.delicacy}</li>
+              </ul>
+              <ListConsumablesMark
+                thisconsumables={thisConsumables}
+                consumables={consumables}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="view-container">
-          <div className="market-sale-btn-container">
-            {viewerContent && targetSale.type === "bg" ? (
-              <button onClick={saleBG}>Купить</button>
-            ) : (
-              <></>
-            )}
-            {viewerContent && targetSale.type === "toy" ? (
-              <>
-                <button onClick={saleToyOne}>Купить игр. 1</button>
-                <button onClick={saleToyTwo}>Купить игр. 2</button>
-              </>
-            ) : (
-              <></>
-            )}
-          </div>
-          <img className="view-img" src={viewerContent} />
+          {skinAll ? (
+            <div className="market-sale-btn-container">
+              {viewerContent && targetSale.type === "bg" ? (
+                <button className="btn-market" onClick={saleBG}>
+                  Купить
+                </button>
+              ) : (
+                <></>
+              )}
+              {viewerContent && targetSale.type === "toy" ? (
+                <>
+                  <button className="btn-market" onClick={saleToyOne}>
+                    Купить игр. 1
+                  </button>
+                  <button className="btn-market" onClick={saleToyTwo}>
+                    Купить игр. 2
+                  </button>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          ) : (
+            <></>
+          )}
+          {viewerContent && targetSale.type === "consumables" ? (
+            <button className="btn-market" onClick={buyConsumables}>
+              Купить
+            </button>
+          ) : (
+            <></>
+          )}
+          {viewerContent ? (
+            <img className="view-img" src={viewerContent} />
+          ) : (
+            <></>
+          )}
         </div>
         {/*  */}
       </div>
     </div>
   );
-};
+})
 
 export default Market;

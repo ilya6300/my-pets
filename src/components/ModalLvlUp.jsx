@@ -1,8 +1,8 @@
-import React from "react";
+import React, { memo } from "react";
 
 import imgBirtDay from "../img/event/birthday.png";
 
-const ModalLvlUp = (props) => {
+const ModalLvlUp = memo((props) => {
   return (
     <div className="modal-lvl-up">
       <div className="modal-lvl-up-container">
@@ -20,6 +20,6 @@ const ModalLvlUp = (props) => {
       </div>
     </div>
   );
-};
+})
 
 export default ModalLvlUp;

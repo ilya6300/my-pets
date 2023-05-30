@@ -117,18 +117,18 @@
   font-size: 17px;
   font-weight: 600;
   text-align: start;
-  margin: 5px 20px;
+  margin: 5px 0px 5px 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 .market-container-btn {
-  width: 51px;
+  width: fit-content;
   color: azure;
   font-size: 17px;
   font-weight: 600;
   text-align: start;
-  margin: 5px 0px;
+  margin: 5px 0 5px 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

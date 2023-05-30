@@ -7,6 +7,8 @@ import imgDelicacy from "../img/icon/delicacy.png";
 import market from "../img/icon/market.png";
 import Market from "./Market";
 import ModalLvlUp from "./ModalLvlUp";
+import newsImg from "../img/icon/newspaper.png";
+import News from "./News";
 
 const HeaderStat = memo(
   ({
@@ -25,6 +27,12 @@ const HeaderStat = memo(
       setVisibleMarket(true);
     };
 
+    // Новости
+    const [visibleNews, setVisibleNews] = useState(false);
+    const showNews = () => {
+      setVisibleNews(true);
+    };
+
     // Цветовая индикация стат бара
 
     // Команды
@@ -34,7 +42,22 @@ const HeaderStat = memo(
     let intervalUpdateLocalStorageMood;
     let intervalUpdateLocalStorageToilet;
     let intervalUpdateLocalStorageEnergy;
+    //
 
+    // Функция погоды
+    let intervalUpdateMeteo;
+    useEffect(() => {
+      intervalUpdateMeteo = null;
+      intervalUpdateMeteo = setInterval(() => {
+        meteoFuncion();
+        console.log("currentMeteo", pet.currentMeteo);
+      }, 20000);
+      return () => clearInterval(intervalUpdateMeteo);
+    }, [pet]);
+
+    // Погода
+
+     // Функция погоды
     // Голод
     useEffect(() => {
       intervalUpdateLocalStorageHunger = null;
@@ -127,15 +150,6 @@ const HeaderStat = memo(
       }
       pet.end_energy = newTime;
       setMyPets([...myPets], pet.energy);
-    };
-    //   Купить вкусняшки
-    const buyDelicacy = () => {
-      console.log(comandShow);
-      if (pet.money >= 2) {
-        pet.money = pet.money - 2;
-        pet.delicacy++;
-      }
-      setMyPets([...myPets], pet.delicacy);
     };
     //   Команды
 
@@ -243,7 +257,7 @@ const HeaderStat = memo(
       setMyPets([...myPets], pet.delicacy, pet.energy, pet.satiety);
     };
 
-    // Повышение уровняпитомца
+    // Повышение уровня питомца
     const [blockLevelUp, setBlockLevelUp] = useState(false);
     const [newBonusFlag, setNewBonusFlag] = useState(false);
     const [newBonus, setNewBonus] = useState("");
@@ -314,6 +328,73 @@ const HeaderStat = memo(
       setQuantity(() => 0);
       setAddMoney(() => 0);
     }, [newBonusFlag]);
+
+    // Погода
+
+    
+    // Функция расчёта погоды
+    const meteoFuncion = () => {
+        const newTime = new Date();
+        const oldTime = new Date(pet.meteoVar);
+        const diff = (newTime.getTime() - oldTime.getTime()) / 20000;
+        const upDateMeteo = Math.floor(diff / 50);
+        // const upDateMeteo = diff;
+        console.log("upDateMeteo", upDateMeteo);
+        if (upDateMeteo < 3) {
+          for (let i = 0; i < upDateMeteo; i++) {
+            console.log('pet.currentMeteo', pet.currentMeteo)
+            // pet.currentMeteo.shift();
+            // Рандомно кладё погоду в массив
+            let randomMeteo;
+            const getRandomMeteo = () => {
+              return (randomMeteo = Math.floor(Math.random() * 100));
+            };
+            getRandomMeteo();
+            if (randomMeteo < 20) {
+              // Получить рандомно температуру
+              const getRandomTemperature = () => {
+                return (pet.meteoCollection[1].temperature =
+                  Math.floor(
+                    Math.random() *
+                      (pet.meteoCollection[1].min_temperature -
+                        pet.meteoCollection[1].max_temperature +
+                        1)
+                  ) + pet.meteoCollection[1].min_temperature);
+              };
+              getRandomTemperature();
+              pet.currentMeteo = pet.currentMeteo.push(pet.meteoCollection[1]);
+            } else if (randomMeteo > 20 && randomMeteo < 80) {
+              // Получить рандомно температуру
+              const getRandomTemperature = () => {
+                return (pet.meteoCollection[0].temperature =
+                  Math.floor(
+                    Math.random() *
+                      (pet.meteoCollection[0].min_temperature -
+                        pet.meteoCollection[0].max_temperature +
+                        1)
+                  ) + pet.meteoCollection[0].min_temperature);
+              };
+              getRandomTemperature();
+              pet.currentMeteo = pet.currentMeteo.push(pet.meteoCollection[0]);
+            } else if (randomMeteo > 80) {
+              // Получить рандомно температуру
+              const getRandomTemperature = () => {
+                return (pet.meteoCollection[2].temperature =
+                  Math.floor(
+                    Math.random() *
+                      (pet.meteoCollection[2].min_temperature -
+                        pet.meteoCollection[2].max_temperature +
+                        1)
+                  ) + pet.meteoCollection[2].min_temperature);
+              };
+              getRandomTemperature();
+              pet.currentMeteo = pet.currentMeteo.push(pet.meteoCollection[2]);
+            }
+          }
+        }
+      }
+
+
 
     return (
       <>
@@ -449,13 +530,14 @@ const HeaderStat = memo(
                   <img
                     className="delicacy-img"
                     src={imgDelicacy}
-                    onClick={feedDelicacy}
+                    // onClick={feedDelicacy}
                   />
-                  <span className="delicacy-stat">{pet.delicacy} </span>
-                  <span className="delicacy-buy" onClick={buyDelicacy}>
-                    {" "}
-                    Купить
-                  </span>
+                  {/* <span className="delicacy-stat">{pet.delicacy} </span> */}
+                  {pet.delicacy === 0 ? (
+                    <span> Купите в магазине </span>
+                  ) : (
+                    <span className="delicacy-stat">{pet.delicacy} </span>
+                  )}
                 </li>
               </ul>
             </>
@@ -472,6 +554,10 @@ const HeaderStat = memo(
             <img src={market} />
             Магазин
           </div>
+          <div className="market-container-btn" onClick={showNews}>
+            <img src={newsImg} />
+            Новости
+          </div>
           {!comandShow ? (
             <Link className="exit" to="/">
               Выход
@@ -480,6 +566,7 @@ const HeaderStat = memo(
             <></>
           )}
         </nav>
+        {/* Мгазин */}
         {visibleMarket ? (
           <Market
             pet={pet}
@@ -492,6 +579,16 @@ const HeaderStat = memo(
         ) : (
           <></>
         )}
+        {/* Новости */}
+        {visibleNews ? (
+          <News
+            pet={pet}
+            setVisibleNews={setVisibleNews}
+          />
+        ) : (
+          <></>
+        )}
+        {/* Окно бонуса повышения уровня */}
         {blockLevelUp ? (
           <ModalLvlUp
             blockLevelUp={blockLevelUp}

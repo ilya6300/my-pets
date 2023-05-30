@@ -215,6 +215,7 @@ const HomeLocationPage = () => {
               onClick={gameCanat}
               src={pet.toyTwoObj}
             />
+            <img className="punching-bag" src={pet.punchingBagObj} alt="" />
             {pet.shit ? (
               <img className="shit" src={pet.shitObj} onClick={clearShit} />
             ) : (

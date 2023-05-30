@@ -21,13 +21,18 @@ import litleDragonFireHand from "../img/pets/litle_dragon/little_dragon_2.png";
 import litleDragonGame from "../img/pets/litle_dragon/little_dragon_3.png";
 // Фоны
 import imgBackgroundHomeDog from "../img/background/locationHome.png";
-import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.png"
-import imgBGLitleDragon from "../img/background/bg_dragon.jpg"
+import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.png";
+import imgBGLitleDragon from "../img/background/bg_dragon.jpg";
 // Объекты
 import imgFood from "../img/items/food_v2.png";
 import imgBallGreen from "../img/items/ball_v1.png";
 import imgCanat from "../img/items/canat.png";
 import imgShit from "../img/object/shit.png";
+import imgPunchingBag from "../img/object/punching_bag.png";
+// Погода
+import imgMeteoNorm from "../img/icon/weather_norm.png";
+import imgMeteRain from "../img/icon/icon-rain.png";
+import imgMeteoHot from "../img/icon/hot-weather.png";
 
 const SelectAndCreatePets = memo(
   ({ targetCard, flagCreate, setFlagCreate, myPets, setMyPets }) => {
@@ -72,13 +77,19 @@ const SelectAndCreatePets = memo(
       },
       {
         id: 4,
-        img: [litleDragon, litleDragonFireVector, litleDragonFireHand, litleDragonGame],
+        img: [
+          litleDragon,
+          litleDragonFireVector,
+          litleDragonFireHand,
+          litleDragonGame,
+        ],
         type: "Дракон",
         comsndOneText: "Огонь!",
         comsndTwoText: "Магия!",
         bgHome: [imgBGLitleDragon],
       },
     ];
+
     // Создание нового питомца
     function createNewPet() {
       if (createPetName && createPet) {
@@ -114,11 +125,52 @@ const SelectAndCreatePets = memo(
         freeID.toyOneObj = imgBallGreen;
         freeID.toyTwoObj = imgCanat;
         freeID.shitObj = imgShit;
+        freeID.punchingBagObj = imgPunchingBag;
         // Фон
         freeID.bgHome = createPet.bgHome;
         // Level
         freeID.level = 1;
         freeID.progressLevel = 0;
+        // Погода
+        freeID.meteoVar = birthday;
+        freeID.meteoCollection = [
+          // Массив с погодой всех видов
+          {
+            id: 1,
+            meteo: "Ясная погода",
+            img: imgMeteoNorm,
+            min_temperature: 8,
+            max_temperature: 20,
+            temperature: 14,
+          },
+          {
+            id: 2,
+            meteo: "Дождь",
+            img: imgMeteRain,
+            min_temperature: 1,
+            max_temperature: 7,
+            temperature: 6,
+          },
+          {
+            id: 3,
+            meteo: "Очень жарко",
+            img: imgMeteoHot,
+            min_temperature: 22,
+            max_temperature: 32,
+            temperature: 28,
+          },
+        ];
+        freeID.currentMeteo = []; //Текущая погода
+
+        freeID.currentMeteo.push(
+          freeID.meteoCollection[0],
+          freeID.meteoCollection[1],
+          freeID.meteoCollection[0]
+        );
+
+        // freeID.meteoFuncion  = meteoFuncion;
+        //
+
         setFlagCreate(true);
         setMyPets([...myPets]);
         setCreatePet("");
@@ -126,10 +178,11 @@ const SelectAndCreatePets = memo(
       } else {
         setLogError("Выберите вид питомца и введите имя");
       }
-      console.log(myPets);
 
-      // }
+      console.log(myPets);
     }
+    // Конец создания питомца
+
     // Ввод имени
     const handlerOnChangeName = (e) => {
       setCreatePetName(e.target.value);

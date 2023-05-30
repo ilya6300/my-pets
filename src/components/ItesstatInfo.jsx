@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 
-const ItesstatInfo = (props) => {
+const ItesstatInfo = memo((props) => {
     const [stat] = useState(props.stat)
     const [style] = useState(props.style)
   return (
@@ -18,6 +18,6 @@ const ItesstatInfo = (props) => {
         </div>
     </div>
   );
-};
+})
 
 export default ItesstatInfo;
