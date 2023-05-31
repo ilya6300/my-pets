@@ -8,23 +8,56 @@ const StreetLocation = () => {
   const [pet, setPet] = useState(null);
   const [classPet, setClassPet] = useState("pet-img");
   const [imgPet, setImgPet] = useState(null);
+  const [backgroundStyleStreet, setbackgroundStyleStreet] = useState(null);
   // const [classGameBall, setClassGameBall] = useState("btn-game-green-ball");
   // const [classGameCanat, setClassGameCanat] = useState("btn-game-canat");
   const [myPets, setMyPets] = useLocalStorage([], "myPets");
   const [hover, setHover] = useState(false);
   const [flagAction, setFlagAction] = useState(true);
+  const [flagLoadingPet, setFlagLoadingPet] = useState(false);
+  const streetBtn = false;
+
+  // const backgroundStyleStreetActivation = () => {
+  //   console.log(setbackgroundStyleStreet(backgroundStyleStreet))
+  //   setbackgroundStyleStreet(backgroundStyleStreet)
+  // }
 
   // Получение питомца по id
+
   useEffect(() => {
-    myPets.forEach((pt) => {
-      if (String(pt.id) === { id }.id) {
-        setPet((p) => (p = pt));
-        setImgPet(pt.img_pet[0]);
-        // console.log(pet)
-      }
-    });
-  }, [pet]);
-  //   Сходить  в туалет
+    if (pet === null) {
+      myPets.forEach((pt) => {
+        if (String(pt.id) === { id }.id) {
+          setPet((p) => (p = pt));
+          setImgPet(pt.img_pet[0]);
+          console.log(1);
+          // backgroundStyleStreetActivation();
+          setbackgroundStyleStreet(pt.currentMeteo[0].bg);
+          console.log("<<<<", pt.currentMeteo[0].bg);
+          setFlagLoadingPet(true)
+          // console.log('pt.currentMeteo[0].bg', pt.currentMeteo[0].bg)
+          // console.log('backgroundStyleStreet', backgroundStyleStreet)
+          //  setMyPets([...myPets], pt.currentMeteo);
+        }
+      });
+    }
+    
+  }, []);
+
+  useEffect(() => {
+    console.log("2-1");
+    // console.log('pt.currentMeteo[0].bg', pt.currentMeteo[0].bg)
+    console.log("backgroundStyleStreet", backgroundStyleStreet);
+    setbackgroundStyleStreet(backgroundStyleStreet);
+  }, [backgroundStyleStreet]);
+  useEffect(() => {
+    console.log("2-1");
+    // console.log('pt.currentMeteo[0].bg', pt.currentMeteo[0].bg)
+    console.log("backgroundStyleStreet flagLoadingPet", backgroundStyleStreet);
+    setbackgroundStyleStreet(backgroundStyleStreet);
+  }, [flagLoadingPet]);
+
+  //   Сходить в туалет
   let intervalUpdateLocalStorageMoveToilet;
   useEffect(() => {
     intervalUpdateLocalStorageMoveToilet = null;
@@ -60,7 +93,10 @@ const StreetLocation = () => {
   };
 
   return (
-    <div className="location-street">
+    <div
+      style={{ background: "url(" + backgroundStyleStreet + ")" }}
+      className="location-street"
+    >
       {pet ? (
         <>
           <HeaderStat
@@ -68,8 +104,15 @@ const StreetLocation = () => {
             setMyPets={setMyPets}
             myPets={myPets}
             setImgPet={setImgPet}
+            setbackgroundStyleStreet={setbackgroundStyleStreet}
+            backgroundStyleStreet={backgroundStyleStreet}
+            streetBtn={streetBtn}
           />
-          <Link className="link-to-street" style={{color: "green"}} to={`/homelocation/${pet.id}`}>
+          <Link
+            className="link-to-street"
+            style={{ color: "green" }}
+            to={`/homelocation/${pet.id}`}
+          >
             Домой
           </Link>
           <img
