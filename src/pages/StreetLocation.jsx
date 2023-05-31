@@ -24,7 +24,7 @@ const StreetLocation = () => {
       }
     });
   }, [pet]);
-  //   Сходить в туалет
+  //   Сходить  в туалет
   let intervalUpdateLocalStorageMoveToilet;
   useEffect(() => {
     intervalUpdateLocalStorageMoveToilet = null;
