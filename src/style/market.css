@@ -1,0 +1,109 @@
+.market-container {
+  position: fixed;
+  background-color: #161615eb;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+.product-container-market {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+}
+.title-market {
+  color: rgba(240, 255, 255, 0.884);
+  font-size: 32px;
+  margin: 30px 0;
+}
+.title-market-closed {
+  cursor: pointer;
+  color: rgba(240, 255, 255, 0.884);
+  font-size: 32px;
+  font-weight: 200;
+  position: absolute;
+  right: 5%;
+  top: 4.5%;
+}
+.product-main-container {
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+}
+.product-container {
+  /* display: flex;
+  justify-content: space-evenly; */
+}
+.container-bg {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.market-card {
+  cursor: pointer;
+  display: inline-block;
+  width: 150px;
+  height: 195px;
+  background: whitesmoke;
+  border-radius: 8px;
+  margin: 5px 5px;
+  flex-shrink: 0;
+}
+.market-card-title {
+  margin: 6px 0;
+  font-size: 18px;
+}
+.market-card-img {
+  max-width: 98%;
+  height: 91px;
+}
+.market-container-price {
+  margin: 10px 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+.market-price {
+  font-size: 15px;
+  font-weight: 700;
+}
+.market-card-btn {
+  width: 65px;
+  margin: 0 3px;
+}
+.view-container {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+}
+.view-img {
+  width: fit-content;
+  height: fit-content;
+  max-width: 315px;
+  max-height: 185px;
+  margin: auto;
+}
+.btn-market {
+  cursor: pointer;
+  width: 90px;
+  padding: 2px 3px;
+  margin: 0 5px;
+  border-radius: 3px;
+  border: none;
+  box-shadow: 0 0 5px 1.5px #34b5ad;
+  transition: background 0.4s;
+}
+.btn-market:hover {
+  background: #34b5ad;
+}
+.btn-market-active {
+  background: #34b5ad;
+}
+.market-text {
+  white-space: normal;
+  padding: 0 5px;
+  margin: -5px 0;
+  font-size: smaller;
+}

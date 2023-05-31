@@ -1,0 +1,213 @@
+@media screen and (max-width: 1300px) {
+  .product-container-market {
+    flex-direction: column;
+  }
+  .view-container {
+    width: 60vw;
+    margin: auto;
+}
+.statPanel {
+  padding: 1vw 2vw;
+}
+.containerStat {
+  gap: 3vw;
+}
+}
+
+@media screen and (max-width: 1100px) {
+  .shit {
+  
+    right: 18%;
+    bottom: 35%;
+    transform: translate(50%, 50%);
+  }
+
+}
+@media screen and (max-width: 650px) {
+  * {
+    font-size: 13px;
+  }
+  .pet-img {
+    max-height: 330px;
+  }
+
+  .view-container {
+    width: 90vw;
+    margin: auto;
+}
+  .location-street  {
+    background-position: left;
+  }
+  .statPanel-stat,
+  .statPanel-title,
+  .comand {
+    font-size: 13px;
+  }
+  .background-home-page {
+    height: 100vh;
+    flex-direction: column-reverse;
+  }
+  .money-container-img {
+    width: 28px;
+  }
+  .statPanel-name-money {
+    flex-direction: column;
+  }
+  .statPanel-type-pet {
+    font-size: 9px;
+  }
+  .container-preview {
+    width: 100vw;
+    height: 40%;
+  }
+  .container-select-pets {
+    width: 100vw;
+    padding: 20px 0;
+  }
+  .card-pets-list-container {
+    gap: 20px;
+  }
+  .card-pets {
+    width: 50%;
+    height: 30vh;
+  }
+  .preview-pet {
+    bottom: 20%;
+    max-height: 240px;
+    min-width: fit-content;
+  }
+  .preview-pet img {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%);
+    max-height: 330px;
+    max-width: 80vw;
+  }
+  .btn-feed {
+    left: 12% !important;
+    bottom: 25% !important;
+    transform: translate(-50%, -20%);
+    z-index: 10;
+  }
+  .btn-game-canat {
+    width: 30vw;
+  }
+  .shit {
+    right: 40%;
+    bottom: 9%;
+    transform: translate(50%, 50%);
+  }
+}
+  /* Мобильная версия */
+@media screen and (max-width: 500px) {
+  .link-secect-pet-container {
+    bottom: 15%;
+  }
+  .home-title {
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    font-size: calc(20px + 4vw);
+    white-space: nowrap;
+    color: rgb(87 87 87 / 79%);
+}
+.statPanel-name {
+  font-size: 10px;
+}
+  .container-select-pets {
+    padding: 0;
+    height: 40%;
+    display: block;
+    overflow-x: auto;
+  }
+  .card-pets-list-container {
+    height: auto;
+    width: 580px;
+    flex-direction: row;
+    overflow-x: scroll;
+    margin: 10px;
+    padding: 5px;
+  }
+  .card-pets {
+    width: 185px;
+    display: flex;
+    width: 50%;
+    /* height: 25vh; */
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .preview_select_pets-avatar-conteiner {
+    width: 100px;
+    height: 100px;
+    border: 4px solid rgba(7, 122, 7, 0.623);
+  }
+  .conteiner_preview_select_pets {
+    padding: 0 10px;
+    gap: 5px;
+    flex-wrap: nowrap;
+    overflow: auto;
+  }
+  .preview_select_pets-avatar-img {
+    margin: 0;
+  }
+  .preview-podium {
+    bottom: 25%;
+  }
+  .btn-game-canat {
+    width: 30vw;
+    min-width: 150px;
+    left: 63%;
+  }
+  .btn-game-canat-active {
+    width: 30vw;
+    min-width: 150px;
+    left: 63%;
+  }
+  .preview-pet {
+    bottom: 33.8%;
+  }
+  .new-card {
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  .preview-new-name {
+    bottom: 17%;
+  }
+  .move-shit {
+    left: 60%;
+    bottom: 0%;
+  }
+  .shit {
+    bottom: 13%;
+    right: 35%;
+  }
+  .pet-img {
+    max-width: 250px;
+    bottom: 14%;
+  }
+  @keyframes animation_toilet {
+
+    15% {
+        bottom:13%;
+        left: 10%;
+        transform: scale(0.5);
+    }
+    85% {
+        left: 10%;
+        bottom: 13%;  
+        transform: scale(0.5);
+    }
+    100% {
+        left: 62vw;
+        bottom: 17%;
+    }
+}
+  
+}
