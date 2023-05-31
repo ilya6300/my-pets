@@ -2,9 +2,10 @@
     background-image: url("../img/background/street.jpg");
     width: 100vw;
     height: 100vh;
-    background-size: cover;
-    background-position: bottom, left;
 
+    background-size: cover !important;
+    /* background-position: bottom !important; */
+    background-position:  left !important;
 }
 .move-shit {
     z-index: 2;
