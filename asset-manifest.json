@@ -1,8 +1,10 @@
 {
   "files": {
-    "main.css": "/my-pets/static/css/main.348fd675.css",
-    "main.js": "/my-pets/static/js/main.cde2ca5f.js",
+    "main.css": "/my-pets/static/css/main.05aed094.css",
+    "main.js": "/my-pets/static/js/main.41ee5960.js",
     "static/media/kosmicheskii-korabl.png": "/my-pets/static/media/kosmicheskii-korabl.aa54a62f7cb33b9c4534.png",
+    "static/media/street_sun.png": "/my-pets/static/media/street_sun.a5d94c3e42a243bf45af.png",
+    "static/media/street_rain.png": "/my-pets/static/media/street_rain.d6810f7ef9721b3e8e6e.png",
     "static/media/car.png": "/my-pets/static/media/car.bb681d94c9b5607f55ba.png",
     "static/media/planet1.png": "/my-pets/static/media/planet1.d7e9c984796bb10b910a.png",
     "static/media/car2.png": "/my-pets/static/media/car2.ae47f495a68ebbf267ec.png",
@@ -40,11 +42,11 @@
     "static/media/husky_puppy_up_bronz.png": "/my-pets/static/media/husky_puppy_up_bronz.a888809989a828ac3fc1.png",
     "static/media/delicacy.png": "/my-pets/static/media/delicacy.3537749720a29014c8c3.png",
     "index.html": "/my-pets/index.html",
-    "main.348fd675.css.map": "/my-pets/static/css/main.348fd675.css.map",
-    "main.cde2ca5f.js.map": "/my-pets/static/js/main.cde2ca5f.js.map"
+    "main.05aed094.css.map": "/my-pets/static/css/main.05aed094.css.map",
+    "main.41ee5960.js.map": "/my-pets/static/js/main.41ee5960.js.map"
   },
   "entrypoints": [
-    "static/css/main.348fd675.css",
-    "static/js/main.cde2ca5f.js"
+    "static/css/main.05aed094.css",
+    "static/js/main.41ee5960.js"
   ]
 }
