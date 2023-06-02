@@ -20,6 +20,9 @@ const HeaderStat = memo(
     imgNav,
     setBackgroundStyle,
     backgroundStyle,
+    backgroundStyleStreet,
+    setbackgroundStyleStreet,
+    streetBtn,
   }) => {
     // магазин
     const [visibleMarket, setVisibleMarket] = useState(false);
@@ -51,13 +54,11 @@ const HeaderStat = memo(
       intervalUpdateMeteo = setInterval(() => {
         meteoFuncion();
         console.log("currentMeteo", pet.currentMeteo);
-      }, 20000);
+      }, 10000);
       return () => clearInterval(intervalUpdateMeteo);
     }, [pet]);
 
-    // Погода
-
-     // Функция погоды
+    // Функция погоды
     // Голод
     useEffect(() => {
       intervalUpdateLocalStorageHunger = null;
@@ -330,72 +331,136 @@ const HeaderStat = memo(
     }, [newBonusFlag]);
 
     // Погода
-
-    
+    let upDateMeteo;
     // Функция расчёта погоды
+    let randomMeteo;
+    const getRandomMeteo = () => {
+      return (randomMeteo = Math.floor(Math.random() * 100));
+    };
+    //
+    const pushMeteo = () => {
+      if (randomMeteo < 20) {
+        //   // Получить рандомно температуру
+        const getRandomTemperature = () => {
+          return (pet.meteoCollection[1].temperature =
+            Math.floor(
+              Math.random() *
+                (pet.meteoCollection[1].max_temperature -
+                  pet.meteoCollection[1].min_temperature +
+                  1)
+            ) + pet.meteoCollection[1].min_temperature);
+        };
+        getRandomTemperature();
+        pet.currentMeteo.push(pet.meteoCollection[1]);
+      } else if (randomMeteo > 20 && randomMeteo < 80) {
+        // Получить рандомно температуру
+        const getRandomTemperature = () => {
+          return (pet.meteoCollection[0].temperature =
+            Math.floor(
+              Math.random() *
+                (pet.meteoCollection[0].max_temperature -
+                  pet.meteoCollection[0].min_temperature +
+                  1)
+            ) + pet.meteoCollection[0].min_temperature);
+        };
+        getRandomTemperature();
+        pet.currentMeteo.push(pet.meteoCollection[0]);
+      } else if (randomMeteo > 80) {
+        // Получить рандомно температуру
+        const getRandomTemperature = () => {
+          return (pet.meteoCollection[2].temperature =
+            Math.floor(
+              Math.random() *
+                (pet.meteoCollection[2].max_temperature -
+                  pet.meteoCollection[2].min_temperature +
+                  1)
+            ) + pet.meteoCollection[2].min_temperature);
+        };
+        getRandomTemperature();
+        pet.currentMeteo.push(pet.meteoCollection[2]);
+      }
+    };
+
     const meteoFuncion = () => {
-        const newTime = new Date();
-        const oldTime = new Date(pet.meteoVar);
-        const diff = (newTime.getTime() - oldTime.getTime()) / 20000;
-        const upDateMeteo = Math.floor(diff / 50);
-        // const upDateMeteo = diff;
-        console.log("upDateMeteo", upDateMeteo);
-        if (upDateMeteo < 3) {
-          for (let i = 0; i < upDateMeteo; i++) {
-            console.log('pet.currentMeteo', pet.currentMeteo)
-            // pet.currentMeteo.shift();
-            // Рандомно кладё погоду в массив
-            let randomMeteo;
-            const getRandomMeteo = () => {
-              return (randomMeteo = Math.floor(Math.random() * 100));
-            };
-            getRandomMeteo();
-            if (randomMeteo < 20) {
-              // Получить рандомно температуру
-              const getRandomTemperature = () => {
-                return (pet.meteoCollection[1].temperature =
-                  Math.floor(
-                    Math.random() *
-                      (pet.meteoCollection[1].min_temperature -
-                        pet.meteoCollection[1].max_temperature +
-                        1)
-                  ) + pet.meteoCollection[1].min_temperature);
-              };
-              getRandomTemperature();
-              pet.currentMeteo = pet.currentMeteo.push(pet.meteoCollection[1]);
-            } else if (randomMeteo > 20 && randomMeteo < 80) {
-              // Получить рандомно температуру
-              const getRandomTemperature = () => {
-                return (pet.meteoCollection[0].temperature =
-                  Math.floor(
-                    Math.random() *
-                      (pet.meteoCollection[0].min_temperature -
-                        pet.meteoCollection[0].max_temperature +
-                        1)
-                  ) + pet.meteoCollection[0].min_temperature);
-              };
-              getRandomTemperature();
-              pet.currentMeteo = pet.currentMeteo.push(pet.meteoCollection[0]);
-            } else if (randomMeteo > 80) {
-              // Получить рандомно температуру
-              const getRandomTemperature = () => {
-                return (pet.meteoCollection[2].temperature =
-                  Math.floor(
-                    Math.random() *
-                      (pet.meteoCollection[2].min_temperature -
-                        pet.meteoCollection[2].max_temperature +
-                        1)
-                  ) + pet.meteoCollection[2].min_temperature);
-              };
-              getRandomTemperature();
-              pet.currentMeteo = pet.currentMeteo.push(pet.meteoCollection[2]);
-            }
-          }
-        }
+      const newTime = new Date();
+      const oldTime = new Date(pet.meteoVar);
+      const diff = (newTime.getTime() - oldTime.getTime()) / 10000;
+      // const upDateMeteo = Math.floor(diff / 50);
+      upDateMeteo = Math.floor(diff * 1);
+      console.log("upDateMeteo", upDateMeteo);
+      // if (upDateMeteo < 3) {
+      if (upDateMeteo > 3) {
+        upDateMeteo = 3;
       }
 
-
-
+      for (let i = 0; i < upDateMeteo; i++) {
+        console.log("pet.currentMeteo", pet.currentMeteo);
+        pet.currentMeteo.shift();
+        // Рандомно кладё погоду в массив
+        // pet.currentMeteo = [];
+        getRandomMeteo();
+        pushMeteo();
+        //   if (randomMeteo < 20) {
+        //     //   // Получить рандомно температуру
+        //     const getRandomTemperature = () => {
+        //       return (pet.meteoCollection[1].temperature =
+        //         Math.floor(
+        //           Math.random() *
+        //             (pet.meteoCollection[1].max_temperature -
+        //               pet.meteoCollection[1].min_temperature +
+        //               1)
+        //         ) + pet.meteoCollection[1].min_temperature);
+        //     };
+        //     getRandomTemperature();
+        //     pet.currentMeteo.push(pet.meteoCollection[1]);
+        //   } else if (randomMeteo > 20 && randomMeteo < 80) {
+        //     // Получить рандомно температуру
+        //     const getRandomTemperature = () => {
+        //       return (pet.meteoCollection[0].temperature =
+        //         Math.floor(
+        //           Math.random() *
+        //             (pet.meteoCollection[0].max_temperature -
+        //               pet.meteoCollection[0].min_temperature +
+        //               1)
+        //         ) + pet.meteoCollection[0].min_temperature);
+        //     };
+        //     getRandomTemperature();
+        //     pet.currentMeteo.push(pet.meteoCollection[0]);
+        //   } else if (randomMeteo > 80) {
+        //     // Получить рандомно температуру
+        //     const getRandomTemperature = () => {
+        //       return (pet.meteoCollection[2].temperature =
+        //         Math.floor(
+        //           Math.random() *
+        //             (pet.meteoCollection[2].max_temperature -
+        //               pet.meteoCollection[2].min_temperature +
+        //               1)
+        //         ) + pet.meteoCollection[2].min_temperature);
+        //     };
+        //     getRandomTemperature();
+        //     pet.currentMeteo.push(pet.meteoCollection[2]);
+        //   }
+      }
+      // }
+      pet.meteoVar = newTime;
+      console.log("pet.currentMeteo.length", pet.currentMeteo.length);
+      if (pet.currentMeteo.length < 3) {
+        pushMeteo();
+      }
+      setbackgroundStyleStreet(pet.currentMeteo[0].bg);
+      setMyPets([...myPets], pet.currentMeteo);
+      console.log(">>>>", myPets);
+    };
+    // Погода
+    useEffect(() => {
+      setbackgroundStyleStreet(backgroundStyleStreet);
+    }, [backgroundStyleStreet]);
+    
+    // Погода
+    useEffect(() => {
+      setbackgroundStyleStreet(backgroundStyleStreet);
+    }, [backgroundStyleStreet]);
+    //
     return (
       <>
         <div className="statPanel">
@@ -546,10 +611,15 @@ const HeaderStat = memo(
           )}
         </div>
         <nav className="nav-game">
-          <Link className="link-to-street" to={`/${page}/${pet.id}`}>
-            <img src={imgNav} alt="" />
-            Гулять
-          </Link>
+          {streetBtn ? (
+            <Link className="link-to-street" to={`/${page}/${pet.id}`}>
+              <img src={imgNav} alt="" />
+              Гулять
+            </Link>
+          ) : (
+            <></>
+          )}
+
           <div className="market-container-btn" onClick={showMarket}>
             <img src={market} />
             Магазин
@@ -581,10 +651,7 @@ const HeaderStat = memo(
         )}
         {/* Новости */}
         {visibleNews ? (
-          <News
-            pet={pet}
-            setVisibleNews={setVisibleNews}
-          />
+          <News pet={pet} setVisibleNews={setVisibleNews} />
         ) : (
           <></>
         )}

@@ -5,16 +5,12 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import HeaderStat from "../components/HeaderStat";
 import ModalLog from "../components/ModalLog";
 
-// Импорт изображений
-// import imgFood from "../img/items/food_v2.png";
-// import imgBallGreen from "../img/items/ball_v1.png";
-// import imgCanat from "../img/items/canat.png";
-// import imgShit from "../img/object/shit.png";
 import imgExitStreet from "../img/icon/icon-door.png";
 
 const HomeLocationPage = () => {
   const { id } = useParams();
   const [backgroundStyle, setBackgroundStyle] = useState(null);
+  const [backgroundStyleStreet, setbackgroundStyleStreet] = useState(null);
   const [pet, setPet] = useState(null);
   const [imgPet, setImgPet] = useState(null);
   const [classGameBall, setClassGameBall] = useState("btn-game-green-ball");
@@ -26,6 +22,7 @@ const HomeLocationPage = () => {
   const [message, setMessage] = useState("");
   const [coordsPet, setCoordsPet] = useState(1);
   const ref = useRef();
+  const streetBtn = true
 
   // Получение питомца по id
   useEffect(() => {
@@ -182,6 +179,9 @@ const HomeLocationPage = () => {
             imgNav={imgExitStreet}
             setBackgroundStyle={setBackgroundStyle}
             backgroundStyle={backgroundStyle}
+            streetBtn={streetBtn}
+            setbackgroundStyleStreet={setbackgroundStyleStreet}
+            backgroundStyleStreet={backgroundStyleStreet}
           />
           {/* <Link className="link-to-street" to={`/streetlocation/${pet.id}`}>
             <img src={imgExitStreet} alt="" />

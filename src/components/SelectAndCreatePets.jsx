@@ -33,6 +33,9 @@ import imgPunchingBag from "../img/object/punching_bag.png";
 import imgMeteoNorm from "../img/icon/weather_norm.png";
 import imgMeteRain from "../img/icon/icon-rain.png";
 import imgMeteoHot from "../img/icon/hot-weather.png";
+import imgMeteoBGNorm from "../img/background/street.jpg";
+import imgMeteBgRain from "../img/background/street_rain.png";
+import imgMeteoBgSun from "../img/background/street_sun.png";
 
 const SelectAndCreatePets = memo(
   ({ targetCard, flagCreate, setFlagCreate, myPets, setMyPets }) => {
@@ -139,6 +142,7 @@ const SelectAndCreatePets = memo(
             id: 1,
             meteo: "Ясная погода",
             img: imgMeteoNorm,
+            bg: imgMeteoBGNorm,
             min_temperature: 8,
             max_temperature: 20,
             temperature: 14,
@@ -147,7 +151,8 @@ const SelectAndCreatePets = memo(
             id: 2,
             meteo: "Дождь",
             img: imgMeteRain,
-            min_temperature: 1,
+            bg: imgMeteBgRain,
+            min_temperature: 2,
             max_temperature: 7,
             temperature: 6,
           },
@@ -155,6 +160,7 @@ const SelectAndCreatePets = memo(
             id: 3,
             meteo: "Очень жарко",
             img: imgMeteoHot,
+            bg: imgMeteoBgSun,
             min_temperature: 22,
             max_temperature: 32,
             temperature: 28,
@@ -164,7 +170,7 @@ const SelectAndCreatePets = memo(
 
         freeID.currentMeteo.push(
           freeID.meteoCollection[0],
-          freeID.meteoCollection[1],
+          freeID.meteoCollection[0],
           freeID.meteoCollection[0]
         );
 

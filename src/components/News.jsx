@@ -16,9 +16,10 @@ const News = memo(({ pet,  setVisibleNews }) => {
   const hiddenNews = () => {
     setVisibleNews(false);
   };
+  
   return (
     <div className="market-container">
-      <h1 className="title-market">Свежие новости</h1>
+      <h1 className="title-news">Погода</h1>
       <h1 className="title-market-closed" onClick={hiddenNews}>
         X
       </h1>
@@ -33,6 +34,7 @@ const News = memo(({ pet,  setVisibleNews }) => {
         </div>
           <MeteoCardList pet={pet} />
       </div>
+      <h1 className="title-news">Свежие новости</h1>
     </div>
   );
 });
