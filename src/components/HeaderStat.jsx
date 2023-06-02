@@ -1,6 +1,7 @@
-import React, { memo, useEffect, useMemo, useState } from "react";
+import React, { memo, useEffect, useMemo, useState, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import ItesstatInfo from "./ItesstatInfo";
+import ModalLog from "../components/ModalLog";
 
 import imgMoney from "../img/icon/money.png";
 import imgDelicacy from "../img/icon/delicacy.png";
@@ -23,7 +24,16 @@ const HeaderStat = memo(
     backgroundStyleStreet,
     setbackgroundStyleStreet,
     streetBtn,
+    visibleModal,
+    setVisibleModal,
+    coordsPet,
+    message,
+    setMessage,
+    setCoordsPet,
+    coords,
+    refCoords,
   }) => {
+    // const ref = useRef();
     // магазин
     const [visibleMarket, setVisibleMarket] = useState(false);
     const showMarket = () => {
@@ -54,7 +64,7 @@ const HeaderStat = memo(
       intervalUpdateMeteo = setInterval(() => {
         meteoFuncion();
         console.log("currentMeteo", pet.currentMeteo);
-      }, 10000);
+      }, 3 * (60 * 1000));
       return () => clearInterval(intervalUpdateMeteo);
     }, [pet]);
 
@@ -198,9 +208,28 @@ const HeaderStat = memo(
             }, 2500);
           }
         }
-      } else {
-        return;
+        pet.energy = pet.energy - 5;
+      } else if (pet.energy < 5) {
+        setMessage((m) => (m = "У меня нет сил играть"));
+        coords = refCoords.current.getBoundingClientRect();
+        setCoordsPet(coords);
+        setVisibleModal(true);
+        setTimeout(() => {
+          setVisibleModal(false);
+        }, 3000);
+      } else if (pet.delicacy === 0) {
+        setMessage((m) => (m = "А дашь вкусняшку?"));
+        coords = refCoords.current.getBoundingClientRect();
+        setCoordsPet(coords);
+        setVisibleModal(true);
+        setTimeout(() => {
+          setVisibleModal(false);
+        }, 3000);
       }
+
+      // else {
+      //   return;
+      // }
 
       setMyPets([...myPets], pet.comsndOneStudied);
     };
@@ -239,8 +268,23 @@ const HeaderStat = memo(
             }, 2500);
           }
         }
-      } else {
-        return;
+        pet.energy = pet.energy - 5;
+      } else if (pet.energy < 5) {
+        setMessage((m) => (m = "У меня нет сил играть"));
+        coords = refCoords.current.getBoundingClientRect();
+        setCoordsPet(coords);
+        setVisibleModal(true);
+        setTimeout(() => {
+          setVisibleModal(false);
+        }, 3000);
+      } else if (pet.delicacy === 0) {
+        setMessage((m) => (m = "А дашь вкусняшку?"));
+        coords = refCoords.current.getBoundingClientRect();
+        setCoordsPet(coords);
+        setVisibleModal(true);
+        setTimeout(() => {
+          setVisibleModal(false);
+        }, 3000);
       }
       setMyPets([...myPets], pet.comsndTwoStudied, pet.energy);
     };
@@ -384,11 +428,10 @@ const HeaderStat = memo(
     const meteoFuncion = () => {
       const newTime = new Date();
       const oldTime = new Date(pet.meteoVar);
-      const diff = (newTime.getTime() - oldTime.getTime()) / 10000;
+      const diff = ((newTime.getTime() - oldTime.getTime()) / 3) * (60 * 1000);
       // const upDateMeteo = Math.floor(diff / 50);
       upDateMeteo = Math.floor(diff * 1);
       console.log("upDateMeteo", upDateMeteo);
-      // if (upDateMeteo < 3) {
       if (upDateMeteo > 3) {
         upDateMeteo = 3;
       }
@@ -396,52 +439,10 @@ const HeaderStat = memo(
       for (let i = 0; i < upDateMeteo; i++) {
         console.log("pet.currentMeteo", pet.currentMeteo);
         pet.currentMeteo.shift();
-        // Рандомно кладё погоду в массив
-        // pet.currentMeteo = [];
+        // Рандомно кладёт погоду в массив
         getRandomMeteo();
         pushMeteo();
-        //   if (randomMeteo < 20) {
-        //     //   // Получить рандомно температуру
-        //     const getRandomTemperature = () => {
-        //       return (pet.meteoCollection[1].temperature =
-        //         Math.floor(
-        //           Math.random() *
-        //             (pet.meteoCollection[1].max_temperature -
-        //               pet.meteoCollection[1].min_temperature +
-        //               1)
-        //         ) + pet.meteoCollection[1].min_temperature);
-        //     };
-        //     getRandomTemperature();
-        //     pet.currentMeteo.push(pet.meteoCollection[1]);
-        //   } else if (randomMeteo > 20 && randomMeteo < 80) {
-        //     // Получить рандомно температуру
-        //     const getRandomTemperature = () => {
-        //       return (pet.meteoCollection[0].temperature =
-        //         Math.floor(
-        //           Math.random() *
-        //             (pet.meteoCollection[0].max_temperature -
-        //               pet.meteoCollection[0].min_temperature +
-        //               1)
-        //         ) + pet.meteoCollection[0].min_temperature);
-        //     };
-        //     getRandomTemperature();
-        //     pet.currentMeteo.push(pet.meteoCollection[0]);
-        //   } else if (randomMeteo > 80) {
-        //     // Получить рандомно температуру
-        //     const getRandomTemperature = () => {
-        //       return (pet.meteoCollection[2].temperature =
-        //         Math.floor(
-        //           Math.random() *
-        //             (pet.meteoCollection[2].max_temperature -
-        //               pet.meteoCollection[2].min_temperature +
-        //               1)
-        //         ) + pet.meteoCollection[2].min_temperature);
-        //     };
-        //     getRandomTemperature();
-        //     pet.currentMeteo.push(pet.meteoCollection[2]);
-        //   }
       }
-      // }
       pet.meteoVar = newTime;
       console.log("pet.currentMeteo.length", pet.currentMeteo.length);
       if (pet.currentMeteo.length < 3) {
@@ -455,7 +456,7 @@ const HeaderStat = memo(
     useEffect(() => {
       setbackgroundStyleStreet(backgroundStyleStreet);
     }, [backgroundStyleStreet]);
-    
+
     // Погода
     useEffect(() => {
       setbackgroundStyleStreet(backgroundStyleStreet);
@@ -669,6 +670,14 @@ const HeaderStat = memo(
         ) : (
           <></>
         )}
+        <ModalLog
+          visibleModal={visibleModal}
+          setVisibleModal={setVisibleModal}
+          coordsPet={coordsPet}
+        >
+          {visibleModal ? <p>{message}</p> : <></>}
+        </ModalLog>
+
       </>
     );
   }

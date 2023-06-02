@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import HeaderStat from "../components/HeaderStat";
@@ -30,17 +30,21 @@ const StreetLocation = () => {
           console.log(1);
           setbackgroundStyleStreet(pt.currentMeteo[0].bg);
           console.log("<<<<", pt.currentMeteo[0].bg);
-          setFlagLoadingPet(true)
+          setFlagLoadingPet(true);
         }
       });
     }
-    
   }, []);
 
-  const loadingBg = useMemo (() => {
+  const loadingBg = useMemo(() => {
     return setbackgroundStyleStreet(backgroundStyleStreet);
   }, [backgroundStyleStreet]);
-
+  // Получение координатов
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [coordsPet, setCoordsPet] = useState(1);
+  const [message, setMessage] = useState("");
+  const refCoords = useRef();
+  let coords;
 
   //   Сходить в туалет
   let intervalUpdateLocalStorageMoveToilet;
@@ -89,12 +93,40 @@ const StreetLocation = () => {
             setMyPets={setMyPets}
             myPets={myPets}
             setImgPet={setImgPet}
+            page={"streetlocation"}
+            // imgNav={imgExitStreet}
+            setBackgroundStyle={setBackgroundStyle}
+            backgroundStyle={backgroundStyle}
+            streetBtn={streetBtn}
+            setbackgroundStyleStreet={setbackgroundStyleStreet}
+            backgroundStyleStreet={backgroundStyleStreet}
+            visibleModal={visibleModal}
+            setVisibleModal={setVisibleModal}
+            coordsPet={coordsPet}
+            message={message}
+            setMessage={setMessage}
+            setCoordsPet={setCoordsPet}
+            coords={coords}
+            refCoords={refCoords}
+          />
+          {/* <HeaderStat
+            pet={pet}
+            setMyPets={setMyPets}
+            myPets={myPets}
+            setImgPet={setImgPet}
             setbackgroundStyleStreet={setbackgroundStyleStreet}
             backgroundStyleStreet={backgroundStyleStreet}
             streetBtn={streetBtn}
             setBackgroundStyle ={setBackgroundStyle }
-
-          />
+            visibleModal={visibleModal}
+            setVisibleModal={setVisibleModal}
+            coordsPet={coordsPet}
+            message={message}
+            setMessage={setMessage}
+            setCoordsPet={setCoordsPet}
+            coords={coords}
+            refCoords={refCoords}
+          /> */}
           <Link
             className="link-to-street"
             style={{ color: "green" }}
@@ -107,6 +139,7 @@ const StreetLocation = () => {
             onMouseMove={() => setHover(true)}
             onMouseOut={() => setHover(false)}
             src={imgPet}
+            ref={refCoords}
           />
         </>
       ) : (

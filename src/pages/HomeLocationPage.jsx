@@ -21,20 +21,23 @@ const HomeLocationPage = () => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [message, setMessage] = useState("");
   const [coordsPet, setCoordsPet] = useState(1);
-  const ref = useRef();
-  const streetBtn = true
+  const refCoords = useRef();
+  const streetBtn = true;
 
   // Получение питомца по id
+  // let coords = ref.current.getBoundingClientRect();
   useEffect(() => {
     myPets.forEach((pt) => {
       if (String(pt.id) === { id }.id) {
         setPet(pt);
         setImgPet(pt.img_pet[0]);
         setBackgroundStyle(pt.bgHome[0]);
+        // coords coords = ref.current.getBoundingClientRect();;
       }
     });
   }, []);
   let coords;
+
   // Кормление
   const feed = () => {
     setMessage((m) => (m = "Я не хочу есть"));
@@ -58,7 +61,7 @@ const HomeLocationPage = () => {
           clearInterval(intervalFeed);
         }, 6000);
       } else {
-        coords = ref.current.getBoundingClientRect();
+        coords = refCoords.current.getBoundingClientRect();
         setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
@@ -70,7 +73,6 @@ const HomeLocationPage = () => {
   };
   // Игра
   const gameGreenBall = () => {
-    setMessage((m) => (m = "У меня нет сил играть"));
     if (flagAction) {
       setFlagAction(false);
       if (pet.energy >= 10) {
@@ -92,7 +94,8 @@ const HomeLocationPage = () => {
           }, 2600);
         }, 900);
       } else {
-        coords = ref.current.getBoundingClientRect();
+        setMessage((m) => (m = "У меня нет сил играть"));
+        coords = refCoords.current.getBoundingClientRect();
         setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
@@ -104,7 +107,6 @@ const HomeLocationPage = () => {
     }
   };
   const gameCanat = () => {
-    setMessage((m) => (m = "У меня нет сил играть"));
     if (flagAction) {
       setFlagAction(false);
       if (pet.energy >= 10) {
@@ -126,7 +128,8 @@ const HomeLocationPage = () => {
           }, 3100);
         }, 900);
       } else {
-        coords = ref.current.getBoundingClientRect();
+        setMessage((m) => (m = "У меня нет сил играть"));
+        coords = refCoords.current.getBoundingClientRect();
         setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
@@ -161,6 +164,8 @@ const HomeLocationPage = () => {
     pet.end_toilet = newTime;
     setMyPets([...myPets], pet.shit);
   };
+  // ref img
+
 
 
   return (
@@ -182,26 +187,34 @@ const HomeLocationPage = () => {
             streetBtn={streetBtn}
             setbackgroundStyleStreet={setbackgroundStyleStreet}
             backgroundStyleStreet={backgroundStyleStreet}
+            visibleModal={visibleModal}
+            setVisibleModal={setVisibleModal}
+            coordsPet={coordsPet}
+            message={message}
+            setMessage={setMessage}
+            setCoordsPet={setCoordsPet}
+            coords={coords}
+            refCoords={refCoords}
           />
           {/* <Link className="link-to-street" to={`/streetlocation/${pet.id}`}>
             <img src={imgExitStreet} alt="" />
             Гулять
           </Link> */}
           <div>
-            <ModalLog
+            {/* <ModalLog
               visibleModal={visibleModal}
               setVisibleModal={setVisibleModal}
               coordsPet={coordsPet}
             >
               {visibleModal ? <p>{message}</p> : <></>}
-            </ModalLog>
+            </ModalLog> */}
 
             <img
               className="pet-img"
               onMouseMove={() => setHover(true)}
               onMouseOut={() => setHover(false)}
               src={imgPet}
-              ref={ref}
+              ref={refCoords}
             />
 
             <img className="btn-feed" onClick={feed} src={pet.foodObj} />

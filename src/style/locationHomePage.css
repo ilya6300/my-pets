@@ -29,7 +29,7 @@
   cursor: pointer;
   background: none;
   border: none;
-  width: 60px;
+  height: 60px;
   position: absolute;
   left: 15%;
   bottom: 10%;
@@ -42,9 +42,10 @@
   cursor: pointer;
   background: none;
   border: none;
-  width: 220px;
+  max-height: 60px;
+  max-width: 200px;
   position: absolute;
-  left: 78%;
+  left: 73%;
   bottom: 8%;
   transform: translate(0%, 0%);
 }
@@ -52,9 +53,10 @@
   cursor: pointer;
   background: none;
   border: none;
-  width: 220px;
+  max-height: 60px;
+  max-width: 200px;
   position: absolute;
-  left: 78%;
+  left: 73%;
   bottom: 8%;
   transform: translate(0%, 0%);
   animation: canat_game_active 5s;
@@ -63,7 +65,7 @@
   cursor: pointer;
   background: none;
   border: none;
-  width: 60px;
+  height: 60px;
   position: absolute;
   left: 15%;
   bottom: 10%;
@@ -139,16 +141,16 @@
     z-index: 11;
   }
   30% {
-    transform: rotate(98deg);
+    transform: rotate(198deg);
     /* z-index: 11; */
-    left: 73%;
-    bottom: 41vh;
+    left: 75%;
+    bottom: 40vh;
   }
   80% {
     /* z-index: 11; */
-    transform: rotate(98deg);
-    left: 73%;
-    bottom: 41vh;
+    transform: rotate(198deg);
+    left: 75%;
+    bottom: 40vh;
   }
   100% {
     z-index: 11;
