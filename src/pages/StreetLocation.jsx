@@ -9,6 +9,7 @@ const StreetLocation = () => {
   const [classPet, setClassPet] = useState("pet-img");
   const [imgPet, setImgPet] = useState(null);
   const [backgroundStyle, setBackgroundStyle] = useState(null);
+
   const [backgroundStyleStreet, setbackgroundStyleStreet] = useState(null);
   // const [classGameBall, setClassGameBall] = useState("btn-game-green-ball");
   // const [classGameCanat, setClassGameCanat] = useState("btn-game-canat");
@@ -39,6 +40,7 @@ const StreetLocation = () => {
   const loadingBg = useMemo (() => {
     return setbackgroundStyleStreet(backgroundStyleStreet);
   }, [backgroundStyleStreet]);
+
 
   //   Сходить в туалет
   let intervalUpdateLocalStorageMoveToilet;
@@ -91,6 +93,7 @@ const StreetLocation = () => {
             backgroundStyleStreet={backgroundStyleStreet}
             streetBtn={streetBtn}
             setBackgroundStyle ={setBackgroundStyle }
+
           />
           <Link
             className="link-to-street"
