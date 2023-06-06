@@ -11,8 +11,6 @@ const StreetLocation = () => {
   const [backgroundStyle, setBackgroundStyle] = useState(null);
 
   const [backgroundStyleStreet, setbackgroundStyleStreet] = useState(null);
-  // const [classGameBall, setClassGameBall] = useState("btn-game-green-ball");
-  // const [classGameCanat, setClassGameCanat] = useState("btn-game-canat");
   const [myPets, setMyPets] = useLocalStorage([], "myPets");
   const [hover, setHover] = useState(false);
   const [flagAction, setFlagAction] = useState(true);
@@ -26,10 +24,10 @@ const StreetLocation = () => {
       myPets.forEach((pt) => {
         if (String(pt.id) === { id }.id) {
           setPet((p) => (p = pt));
-          setImgPet(pt.img_pet[0]);
-          console.log(1);
+          setImgPet(pt.img_pet[1]);
+          // console.log(1);
           setbackgroundStyleStreet(pt.currentMeteo[0].bg);
-          console.log("<<<<", pt.currentMeteo[0].bg);
+          // console.log("<<<<", pt.currentMeteo[0].bg);
           setFlagLoadingPet(true);
         }
       });
@@ -59,20 +57,22 @@ const StreetLocation = () => {
   const shitFunc = () => {
     if (flagAction) {
       if (pet.toilet <= 40) {
+        setImgPet(pet.img_pet[6]); // Бег
         setFlagAction(false);
         setClassPet("move-shit");
         setTimeout(() => {
-          console.log(1);
-          setImgPet(pet.img_pet[1]);
+          // console.log(1);
+          setImgPet(pet.img_pet[7]);
 
           setTimeout(() => {
-            console.log(2);
+            // console.log(2);
             pet.toilet = 100;
             setMyPets([...myPets], pet.toilet);
-            setImgPet(pet.img_pet[0]);
+            setImgPet(pet.img_pet[6]); // Бег
             setFlagAction(true);
             setTimeout(() => {
-              console.log(3);
+              // console.log(3);
+              setImgPet(pet.img_pet[1]);
               setClassPet("pet-img");
             }, 1900);
           }, 3900);
@@ -109,24 +109,6 @@ const StreetLocation = () => {
             coords={coords}
             refCoords={refCoords}
           />
-          {/* <HeaderStat
-            pet={pet}
-            setMyPets={setMyPets}
-            myPets={myPets}
-            setImgPet={setImgPet}
-            setbackgroundStyleStreet={setbackgroundStyleStreet}
-            backgroundStyleStreet={backgroundStyleStreet}
-            streetBtn={streetBtn}
-            setBackgroundStyle ={setBackgroundStyle }
-            visibleModal={visibleModal}
-            setVisibleModal={setVisibleModal}
-            coordsPet={coordsPet}
-            message={message}
-            setMessage={setMessage}
-            setCoordsPet={setCoordsPet}
-            coords={coords}
-            refCoords={refCoords}
-          /> */}
           <Link
             className="link-to-street"
             style={{ color: "green" }}

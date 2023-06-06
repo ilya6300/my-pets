@@ -5,10 +5,16 @@
   background-size: cover !important;
   background-position: bottom !important;
 }
+.obj-container {
+  position: relative;
+  width: 70vw;
+  height: 70vh;
+  margin-left: 5%;
+}
 .pet-img {
   z-index: 2;
   position: fixed;
-  left: 62vw;
+  left: 55%;
   bottom: 15.5%;
   transform: translate(-50%, 0%);
   cursor: pointer;

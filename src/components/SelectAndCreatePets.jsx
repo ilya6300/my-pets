@@ -1,24 +1,15 @@
 import React, { memo, useMemo, useState } from "react";
 // Импорт img хаски чёрный
-import huskyPuppyStoitBlack from "../img/pets/husky/husky_puppy_stoit_black.png";
-import puppySitBlack from "../img/pets/husky/husky_puppy_sidit_black.png";
-import huskyPuppyLieBlack from "../img/pets/husky/husky_puppy_lezit_black.png";
-import huskyPuppyUpBlack from "../img/pets/husky/husky_puppy_up_black.png";
-// Импорт img хаски бронзовый
-import huskyPuppyStoitBronz from "../img/pets/husky/husky_puppy_stoit_bronz.png";
-import puppySitBronz from "../img/pets/husky/husky_puppy_sidit_bronz.png";
-import huskyPuppyLieBronz from "../img/pets/husky/husky_puppy_lezit_bronz.png";
-import huskyPuppyUpBronz from "../img/pets/husky/husky_puppy_up_bronz.png";
-// Импорт img трансформер Бамбалби
-import bamblbi from "../img/pets/bamblbi/bamblbi.png";
-import bamblbiAuto from "../img/pets/bamblbi/bamblbi_auto.png";
-import bamblbiDance from "../img/pets/bamblbi/bamblbi-dance.png";
-import bamblbiAttack from "../img/pets/bamblbi/bamblbi-attack.png";
-// Импорт img маленького дракончика
-import litleDragon from "../img/pets/litle_dragon/little_dragon_0.png";
-import litleDragonFireVector from "../img/pets/litle_dragon/little_dragon_1.png";
-import litleDragonFireHand from "../img/pets/litle_dragon/little_dragon_2.png";
-import litleDragonGame from "../img/pets/litle_dragon/little_dragon_3.png";
+
+import huskyBlackAvatar from "../img/pets/husky/husky_black/husky_avatar_black.png";
+import huskyBlack from "../img/pets/husky/husky_black/husky_black.png";
+import huskyBlackSid from "../img/pets/husky/husky_black/husky_sid_black.png";
+import huskyBlackLie from "../img/pets/husky/husky_black/husky_lie_black.png";
+import huskyBlackPaw from "../img/pets/husky/husky_black/husky_paw_black.png";
+import huskyBlackGame from "../img/pets/husky/husky_black/husky_game_black.png";
+import huskyBlackRun from "../img/pets/husky/husky_black/husky_avatar_black.png";
+import huskyBlackToilet from "../img/pets/husky/husky_black/husky_toilet_black.png";
+
 // Фоны
 import imgBackgroundHomeDog from "../img/background/locationHome.png";
 import imgBGHomeSpace from "../img/background/kosmicheskii-korabl.png";
@@ -47,49 +38,36 @@ const SelectAndCreatePets = memo(
       {
         id: 1,
         img: [
-          huskyPuppyStoitBlack,
-          puppySitBlack,
-          huskyPuppyLieBlack,
-          huskyPuppyUpBlack,
+          huskyBlackAvatar,
+          huskyBlack,
+          huskyBlackSid,
+          huskyBlackLie,
+          huskyBlackPaw,
+          huskyBlackGame,
+          huskyBlackRun,
+          huskyBlackToilet,
         ],
         type: "хаски",
-        comsndOneText: "Сидеть!",
-        comsndTwoText: "Лежать!",
         bgHome: [imgBackgroundHomeDog],
+        strong: 35, 
+        obedience: 10
       },
       {
         id: 2,
         img: [
-          huskyPuppyStoitBronz,
-          puppySitBronz,
-          huskyPuppyLieBronz,
-          huskyPuppyUpBronz,
+          huskyBlackAvatar, // 0 - аватар
+          huskyBlack, // 1 - стоит
+          huskyBlackSid, // 2 - сидеть
+          huskyBlackLie, // 3 - лежать
+          huskyBlackPaw, // 4 - лапа
+          huskyBlackGame, // 5 - играть
+          huskyBlackRun, // 6 - бег
+          huskyBlackToilet, // 7 - туалет 
         ],
         type: "хаски",
-        comsndOneText: "Сидеть!",
-        comsndTwoText: "Лежать!",
         bgHome: [imgBackgroundHomeDog],
-      },
-      {
-        id: 3,
-        img: [bamblbi, bamblbiAuto, bamblbiDance, bamblbiAttack],
-        type: "Трансформер",
-        comsndOneText: "Трансформация!",
-        comsndTwoText: "Танец!",
-        bgHome: [imgBGHomeSpace],
-      },
-      {
-        id: 4,
-        img: [
-          litleDragon,
-          litleDragonFireVector,
-          litleDragonFireHand,
-          litleDragonGame,
-        ],
-        type: "Дракон",
-        comsndOneText: "Огонь!",
-        comsndTwoText: "Магия!",
-        bgHome: [imgBGLitleDragon],
+        strong: 35, 
+        obedience: 10
       },
     ];
 
@@ -117,12 +95,30 @@ const SelectAndCreatePets = memo(
         freeID.end_toilet = birthday;
         freeID.type = createPet.type;
         // Команды
-        freeID.comsndOneStudied = false;
-        freeID.comsndOneProgress = 0;
-        freeID.comsndOneText = createPet.comsndOneText;
-        freeID.comsndTwoStudied = false;
-        freeID.comsndTwoProgress = 0;
-        freeID.comsndTwoText = createPet.comsndTwoText;
+        freeID.comands = [
+          {
+            id: "sid",
+            name: "Сидеть",
+            studied: false,
+            progress: 0
+          },
+          {
+            id: "lie",
+            name: "Лежать",
+            studied: false,
+            progress: 0
+          },
+          {
+            id: "paw",
+            name: "Дай лапу",
+            studied: false,
+            progress: 0
+          },          
+        ]
+        // freeID.comsndOneStudied = false;
+        // freeID.comsndOneProgress = 0;
+        //   freeID.comsndTwoStudied = false;
+        // freeID.comsndTwoProgress = 0;
         // Объекты
         freeID.foodObj = imgFood;
         freeID.toyOneObj = imgBallGreen;
@@ -185,7 +181,7 @@ const SelectAndCreatePets = memo(
         setLogError("Выберите вид питомца и введите имя");
       }
 
-      console.log(myPets);
+      // console.log(myPets);
     }
     // Конец создания питомца
 
@@ -210,7 +206,7 @@ const SelectAndCreatePets = memo(
               </ul>
             </div>
             <div className="preview-pet">
-              <img src={targetCard.img_pet[0]} alt="" />
+              <img src={targetCard.img_pet[1]} alt="" />
             </div>
           </>
         ) : (
@@ -231,7 +227,7 @@ const SelectAndCreatePets = memo(
               ))}
             </div>
             {createPet ? (
-              <img className="preview-pet" src={createPet.img[0]} alt="" />
+              <img className="preview-pet" src={createPet.img[1]} alt="" />
             ) : (
               <></>
             )}

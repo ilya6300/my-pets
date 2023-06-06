@@ -10,6 +10,7 @@ import Market from "./Market";
 import ModalLvlUp from "./ModalLvlUp";
 import newsImg from "../img/icon/newspaper.png";
 import News from "./News";
+import EffectStat from "./EffectStat";
 
 const HeaderStat = memo(
   ({
@@ -58,13 +59,14 @@ const HeaderStat = memo(
     //
 
     // Функция погоды
+    const [bafMeteo, setBafMeteo] = useState(pet.currentMeteo);
     let intervalUpdateMeteo;
     useEffect(() => {
       intervalUpdateMeteo = null;
       intervalUpdateMeteo = setInterval(() => {
         meteoFuncion();
         console.log("currentMeteo", pet.currentMeteo);
-      }, 3 * (60 * 1000));
+      }, 10000);
       return () => clearInterval(intervalUpdateMeteo);
     }, [pet]);
 
@@ -174,37 +176,36 @@ const HeaderStat = memo(
     const getObedience = (max) => {
       return (resultObedience = Math.floor(Math.random() * max));
     };
-    // Команда 1
+    // Команда сидеть
     const comandSit = () => {
-      console.log(pet.comsndOneStudied);
       if (pet.delicacy >= 1 && pet.energy >= 5) {
         pet.delicacy--;
         pet.satiety = pet.satiety + 3;
         if (pet.satiety > 100) {
           pet.satiety = 100;
         }
-        if (!pet.comsndOneStudied) {
-          pet.comsndOneStudied = true;
-          pet.comsndOneProgress = 30;
+        if (!pet.comands[0].studied) {
+          pet.comands[0].studied = true;
+          pet.comands[0].progress = 30;
           levelUpFunction();
-          setImgPet(pet.img_pet[1]);
+          setImgPet(pet.img_pet[2]);
           setTimeout(() => {
-            setImgPet(pet.img_pet[0]);
+            setImgPet(pet.img_pet[1]);
           }, 2500);
         } else {
           getObedience(100);
-          console.log("resultObedience", resultObedience);
-          if (pet.comsndOneProgress >= resultObedience) {
-            if (pet.comsndOneProgress >= 100) {
-              pet.comsndOneProgress = 100;
+          // console.log("resultObedience", resultObedience);
+          if (pet.comands[0].progress >= resultObedience) {
+            if (pet.comands[0].progress >= 100) {
+              pet.comands[0].progress = 100;
             } else {
-              pet.comsndOneProgress = pet.comsndOneProgress + 10;
+              pet.comands[0].progress = pet.comands[0].progress + 10;
               levelUpFunction();
             }
 
-            setImgPet(pet.img_pet[1]);
+            setImgPet(pet.img_pet[2]);
             setTimeout(() => {
-              setImgPet(pet.img_pet[0]);
+              setImgPet(pet.img_pet[1]);
             }, 2500);
           }
         }
@@ -231,40 +232,39 @@ const HeaderStat = memo(
       //   return;
       // }
 
-      setMyPets([...myPets], pet.comsndOneStudied);
+      setMyPets([...myPets], pet.comands[0].studied);
     };
-    // Команда 2
+    // Команда лежать
     const comandLie = () => {
-      console.log(pet.comsndTwoStudied);
       if (pet.delicacy >= 1 && pet.energy >= 5) {
         pet.delicacy--;
         pet.satiety = pet.satiety + 3;
         if (pet.satiety > 100) {
           pet.satiety = 100;
         }
-        if (!pet.comsndTwoStudied) {
-          pet.comsndTwoStudied = true;
-          pet.comsndTwoProgress = 30;
+        if (!pet.comands[1].studied) {
+          pet.comands[1].studied = true;
+          pet.comands[1].progress = 30;
           levelUpFunction();
-          setImgPet(pet.img_pet[2]);
+          setImgPet(pet.img_pet[3]);
           setTimeout(() => {
-            setImgPet(pet.img_pet[0]);
+            setImgPet(pet.img_pet[1]);
           }, 2500);
         } else {
           getObedience(100);
-          console.log("resultObedience", resultObedience);
-          if (pet.comsndTwoProgress >= resultObedience) {
+          // console.log("resultObedience", resultObedience);
+          if (pet.comands[1].progress >= resultObedience) {
             pet.energy = pet.energy - 5;
-            if (pet.comsndTwoProgress >= 100) {
-              pet.comsndTwoProgress = 100;
+            if (pet.comands[1].progress >= 100) {
+              pet.comands[1].progress = 100;
             } else {
-              pet.comsndTwoProgress = pet.comsndTwoProgress + 10;
+              pet.comands[1].progress = pet.comands[1].progress + 10;
               levelUpFunction();
             }
 
-            setImgPet(pet.img_pet[2]);
+            setImgPet(pet.img_pet[3]);
             setTimeout(() => {
-              setImgPet(pet.img_pet[0]);
+              setImgPet(pet.img_pet[1]);
             }, 2500);
           }
         }
@@ -286,8 +286,62 @@ const HeaderStat = memo(
           setVisibleModal(false);
         }, 3000);
       }
-      setMyPets([...myPets], pet.comsndTwoStudied, pet.energy);
+      setMyPets([...myPets], pet.comands[1].studied, pet.energy);
     };
+        // Команда "Дай лапу"
+        const comandPaw = () => {
+          if (pet.delicacy >= 1 && pet.energy >= 5) {
+            pet.delicacy--;
+            pet.satiety = pet.satiety + 3;
+            if (pet.satiety > 100) {
+              pet.satiety = 100;
+            }
+            if (!pet.comands[2].studied) {
+              pet.comands[2].studied = true;
+              pet.comands[2].progress = 30;
+              levelUpFunction();
+              setImgPet(pet.img_pet[4]);
+              setTimeout(() => {
+                setImgPet(pet.img_pet[1]);
+              }, 2500);
+            } else {
+              getObedience(100);
+              // console.log("resultObedience", resultObedience);
+              if (pet.comands[2].progress >= resultObedience) {
+                pet.energy = pet.energy - 5;
+                if (pet.comands[2].progress >= 100) {
+                  pet.comands[2].progress = 100;
+                } else {
+                  pet.comands[2].progress = pet.comands[2].progress + 10;
+                  levelUpFunction();
+                }
+    
+                setImgPet(pet.img_pet[4]);
+                setTimeout(() => {
+                  setImgPet(pet.img_pet[1]);
+                }, 2500);
+              }
+            }
+            pet.energy = pet.energy - 5;
+          } else if (pet.energy < 5) {
+            setMessage((m) => (m = "У меня нет сил играть"));
+            coords = refCoords.current.getBoundingClientRect();
+            setCoordsPet(coords);
+            setVisibleModal(true);
+            setTimeout(() => {
+              setVisibleModal(false);
+            }, 3000);
+          } else if (pet.delicacy === 0) {
+            setMessage((m) => (m = "А дашь вкусняшку?"));
+            coords = refCoords.current.getBoundingClientRect();
+            setCoordsPet(coords);
+            setVisibleModal(true);
+            setTimeout(() => {
+              setVisibleModal(false);
+            }, 3000);
+          }
+          setMyPets([...myPets], pet.comands[2].studied, pet.energy);
+        };
 
     // Съесть вкусняшку
     const feedDelicacy = () => {
@@ -368,7 +422,7 @@ const HeaderStat = memo(
       pet.money = pet.money + addMoney;
       setMyPets([...myPets], pet.money);
       setNewBonusFlag(false);
-      console.log(newBonusFlag);
+      // console.log(newBonusFlag);
       setNewBonus(() => "");
       setQuantity(() => 0);
       setAddMoney(() => 0);
@@ -383,6 +437,7 @@ const HeaderStat = memo(
     };
     //
     const pushMeteo = () => {
+      getRandomMeteo();
       if (randomMeteo < 20) {
         //   // Получить рандомно температуру
         const getRandomTemperature = () => {
@@ -428,45 +483,47 @@ const HeaderStat = memo(
     const meteoFuncion = () => {
       const newTime = new Date();
       const oldTime = new Date(pet.meteoVar);
-      const diff = ((newTime.getTime() - oldTime.getTime()) / 3) * (60 * 1000);
+      const diff = (newTime.getTime() - oldTime.getTime()) / 10000;
       // const upDateMeteo = Math.floor(diff / 50);
       upDateMeteo = Math.floor(diff * 1);
-      console.log("upDateMeteo", upDateMeteo);
+      // console.log("upDateMeteo", upDateMeteo);
       if (upDateMeteo > 3) {
         upDateMeteo = 3;
       }
 
       for (let i = 0; i < upDateMeteo; i++) {
-        console.log("pet.currentMeteo", pet.currentMeteo);
+        // console.log("pet.currentMeteo", pet.currentMeteo);
         pet.currentMeteo.shift();
         // Рандомно кладёт погоду в массив
         getRandomMeteo();
         pushMeteo();
       }
       pet.meteoVar = newTime;
-      console.log("pet.currentMeteo.length", pet.currentMeteo.length);
+      // console.log("pet.currentMeteo.length", pet.currentMeteo.length);
       if (pet.currentMeteo.length < 3) {
         pushMeteo();
       }
       setbackgroundStyleStreet(pet.currentMeteo[0].bg);
+      setBafMeteo([...bafMeteo])
+      // console.log("bafMeteo", bafMeteo);
       setMyPets([...myPets], pet.currentMeteo);
-      console.log(">>>>", myPets);
     };
     // Погода
     useEffect(() => {
       setbackgroundStyleStreet(backgroundStyleStreet);
     }, [backgroundStyleStreet]);
 
-    // Погода
-    useEffect(() => {
-      setbackgroundStyleStreet(backgroundStyleStreet);
-    }, [backgroundStyleStreet]);
     //
     return (
       <>
         <div className="statPanel">
           <div className="containerStat">
-            <div className="statPanel-stat">
+            <ItesstatInfo stat={pet.hp} text="Здоровье" />
+            <ItesstatInfo stat={pet.energy} text="Энергия" />
+            <ItesstatInfo stat={pet.satiety} text="Сытость" />
+            <ItesstatInfo stat={pet.mood} text="Настроение" />
+            <ItesstatInfo stat={pet.toilet} text="Туалет" />
+            {/* <div className="statPanel-stat">
               Энергия{" "}
               <div
                 style={{
@@ -486,8 +543,8 @@ const HeaderStat = memo(
                   {Math.round(pet.energy)}
                 </div>
               </div>
-            </div>
-            <div className="statPanel-stat">
+            </div> */}
+            {/* <div className="statPanel-stat">
               Сытость{" "}
               <div style={{ width: "100px", background: "#958e8e" }}>
                 <div
@@ -502,8 +559,8 @@ const HeaderStat = memo(
                   {Math.round(pet.satiety)}
                 </div>
               </div>
-            </div>
-            <div className="statPanel-stat">
+            </div> */}
+            {/* <div className="statPanel-stat">
               Туалет{" "}
               <div style={{ width: "100px", background: "#958e8e" }}>
                 <div
@@ -518,8 +575,8 @@ const HeaderStat = memo(
                   {Math.round(pet.toilet)}
                 </div>
               </div>
-            </div>
-            <div className="statPanel-stat">
+            </div> */}
+            {/* <div className="statPanel-stat">
               Настроение{" "}
               <div style={{ width: "100px", background: "#958e8e" }}>
                 <div
@@ -534,7 +591,7 @@ const HeaderStat = memo(
                   {Math.round(pet.mood)}
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           {/* Профиль справа */}
           <div className="statPanel-name-money">
@@ -557,6 +614,11 @@ const HeaderStat = memo(
                 <span className="statPanel-exp-progress-title">Опыт</span>
               </div>
               <div className="statPanel-type-pet"> {pet.type}</div>
+              <EffectStat
+                pet={pet}
+                setBafMeteo={setBafMeteo}
+                bafMeteo={bafMeteo}
+              />
             </div>
 
             <div className="money-container">
@@ -572,22 +634,35 @@ const HeaderStat = memo(
           {comandShow ? (
             <>
               <ul className="container-comand-dinamic">
+                {/* Команда сидеть */}
                 <li className="comand" onClick={comandSit}>
-                  {pet.comsndOneText}
+                  {pet.comands[0].name}
                 </li>
-                {pet.comsndOneStudied ? (
+                {pet.comands[0].studied ? (
                   <li className="comand-progress">
-                    Изучено {pet.comsndOneProgress}/100
+                    Изучено {pet.comands[0].progress}/100
                   </li>
                 ) : (
                   <></>
                 )}
+                {/* Команда лежать */}
                 <li className="comand" onClick={comandLie}>
-                  {pet.comsndTwoText}
+                  {pet.comands[1].name}
                 </li>
-                {pet.comsndTwoStudied ? (
+                {pet.comands[1].studied ? (
                   <li className="comand-progress">
-                    Изучено {pet.comsndTwoProgress}/100
+                    Изучено {pet.comands[1].progress}/100
+                  </li>
+                ) : (
+                  <></>
+                )}
+                {/* Команда дай лапу */}
+                <li className="comand" onClick={comandPaw}>
+                  {pet.comands[2].name}
+                </li>
+                {pet.comands[2].studied ? (
+                  <li className="comand-progress">
+                    Изучено {pet.comands[2].progress}/100
                   </li>
                 ) : (
                   <></>
@@ -677,7 +752,6 @@ const HeaderStat = memo(
         >
           {visibleModal ? <p>{message}</p> : <></>}
         </ModalLog>
-
       </>
     );
   }

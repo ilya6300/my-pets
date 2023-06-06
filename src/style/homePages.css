@@ -96,9 +96,8 @@
 }
 
 .preview_select_pets-avatar-img {
-  position: sticky;
   max-width: 150px;
-  margin: 15px 0 0 20px;
+  margin-top: 20px;
 }
 .preview_select_pets-avatar-conteiner {
   position: relative;

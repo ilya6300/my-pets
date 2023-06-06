@@ -30,7 +30,7 @@ const HomeLocationPage = () => {
     myPets.forEach((pt) => {
       if (String(pt.id) === { id }.id) {
         setPet(pt);
-        setImgPet(pt.img_pet[0]);
+        setImgPet(pt.img_pet[1]);
         setBackgroundStyle(pt.bgHome[0]);
         // coords coords = ref.current.getBoundingClientRect();;
       }
@@ -78,9 +78,9 @@ const HomeLocationPage = () => {
       if (pet.energy >= 10) {
         setClassGameBall("btn-game-green-ball-active");
         setTimeout(() => {
-          setImgPet(pet.img_pet[3]);
+          setImgPet(pet.img_pet[5]);
           setTimeout(() => {
-            setImgPet(pet.img_pet[0]);
+            setImgPet(pet.img_pet[1]);
             setTimeout(() => {
               setClassGameBall("btn-game-green-ball");
               pet.money = pet.money + 1;
@@ -112,9 +112,9 @@ const HomeLocationPage = () => {
       if (pet.energy >= 10) {
         setClassGameCanat("btn-game-canat-active");
         setTimeout(() => {
-          setImgPet(pet.img_pet[3]);
+          setImgPet(pet.img_pet[5]);
           setTimeout(() => {
-            setImgPet(pet.img_pet[0]);
+            setImgPet(pet.img_pet[1]);
             setTimeout(() => {
               setClassGameCanat("btn-game-canat");
               pet.money = pet.money + 1;
@@ -200,14 +200,7 @@ const HomeLocationPage = () => {
             <img src={imgExitStreet} alt="" />
             Гулять
           </Link> */}
-          <div>
-            {/* <ModalLog
-              visibleModal={visibleModal}
-              setVisibleModal={setVisibleModal}
-              coordsPet={coordsPet}
-            >
-              {visibleModal ? <p>{message}</p> : <></>}
-            </ModalLog> */}
+          <div className="obj-container">
 
             <img
               className="pet-img"
@@ -215,22 +208,26 @@ const HomeLocationPage = () => {
               onMouseOut={() => setHover(false)}
               src={imgPet}
               ref={refCoords}
+              alt=''
             />
 
-            <img className="btn-feed" onClick={feed} src={pet.foodObj} />
+            <img className="btn-feed" onClick={feed} src={pet.foodObj}  alt=''/>
             <img
               className={classGameBall}
               onClick={gameGreenBall}
               src={pet.toyOneObj}
+              alt=''
             />
             <img
               className={classGameCanat}
               onClick={gameCanat}
               src={pet.toyTwoObj}
+              alt=''
             />
             <img className="punching-bag" src={pet.punchingBagObj} alt="" />
             {pet.shit ? (
-              <img className="shit" src={pet.shitObj} onClick={clearShit} />
+              <img className="shit" src={pet.shitObj} onClick={clearShit}  alt=''/>
+             
             ) : (
               <></>
             )}
