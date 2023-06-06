@@ -7,7 +7,7 @@ import huskyBlackSid from "../img/pets/husky/husky_black/husky_sid_black.png";
 import huskyBlackLie from "../img/pets/husky/husky_black/husky_lie_black.png";
 import huskyBlackPaw from "../img/pets/husky/husky_black/husky_paw_black.png";
 import huskyBlackGame from "../img/pets/husky/husky_black/husky_game_black.png";
-import huskyBlackRun from "../img/pets/husky/husky_black/husky_avatar_black.png";
+import huskyBlackRun from "../img/pets/husky/husky_black/husky_run_black.png";
 import huskyBlackToilet from "../img/pets/husky/husky_black/husky_toilet_black.png";
 
 // Фоны
