@@ -256,13 +256,13 @@ const Market = memo(
       return;
     };
 
-    useEffect(() => {
-      setBackgroundStyle(backgroundStyle);
-    }, [backgroundStyle]);
+    // useEffect(() => {
+    //   setBackgroundStyle(backgroundStyle);
+    // }, [backgroundStyle]);
 
-    useEffect(() => {
-      setBackgroundStyle(backgroundStyle);
-    }, [backgroundStyle]);
+    // useEffect(() => {
+    //   setBackgroundStyle(backgroundStyle);
+    // }, [backgroundStyle]);
 
     // Супер чит super
 

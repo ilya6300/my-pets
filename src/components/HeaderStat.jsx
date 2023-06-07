@@ -84,7 +84,7 @@ const HeaderStat = memo(
       intervalUpdateLocalStorageMood = null;
       intervalUpdateLocalStorageMood = setInterval(() => {
         consumptionMood();
-      }, 2100);
+      }, (1000 * 60) * 2);
       return () => clearInterval(intervalUpdateLocalStorageMood);
     }, [pet]);
     // Туалет
@@ -123,7 +123,9 @@ const HeaderStat = memo(
       if (pet.mood > 0) {
         const newTime = new Date();
         const oldTime = new Date(pet.time_game);
-        const diff = (newTime.getTime() - oldTime.getTime()) / 2100;
+        const diff = (newTime.getTime() - oldTime.getTime()) / (1000 * 60) * 2;
+        
+        console.log(diff)
         pet.mood = pet.mood - diff * 1;
         if (pet.mood <= 0) {
           pet.mood = 0;
@@ -509,9 +511,9 @@ const HeaderStat = memo(
       setMyPets([...myPets], pet.currentMeteo);
     };
     // Погода
-    useEffect(() => {
-      setbackgroundStyleStreet(backgroundStyleStreet);
-    }, [backgroundStyleStreet]);
+    // useEffect(() => {
+    //   setbackgroundStyleStreet(backgroundStyleStreet);
+    // }, [backgroundStyleStreet]);
 
     //
     return (
