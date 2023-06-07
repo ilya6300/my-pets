@@ -1,0 +1,15 @@
+.img-effect {
+    width: 32px;
+    border: 2px solid #6e6c6c93;
+    background: whitesmoke;
+    border-radius: 5px;
+    padding: 1px;
+}
+.info-effect {
+    position: absolute;
+    z-index: 11;
+    background: rgba(75, 74, 74, 0.5);
+    font-size: 11px;
+    padding: 3px 5px;
+    color: aliceblue;
+}

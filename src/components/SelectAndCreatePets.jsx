@@ -28,6 +28,14 @@ import imgMeteoBGNorm from "../img/background/street.jpg";
 import imgMeteBgRain from "../img/background/street_rain.png";
 import imgMeteoBgSun from "../img/background/street_sun.png";
 
+// Эффекты
+import imgEffectMite from "../img/icon/mite.png";
+import imgEffectFever from "../img/icon/fever.png";
+import imgEffectEnerguDrink from "../img/icon/energy-drink.png";
+import imgEffectVitamins from "../img/icon/vitamins.png";
+import effectNorm from "../img/icon/meditation.png";
+
+
 const SelectAndCreatePets = memo(
   ({ targetCard, flagCreate, setFlagCreate, myPets, setMyPets }) => {
     const [createPetName, setCreatePetName] = useState("");
@@ -49,8 +57,8 @@ const SelectAndCreatePets = memo(
         ],
         type: "хаски",
         bgHome: [imgBackgroundHomeDog],
-        strong: 35, 
-        obedience: 10
+        strong: 35,
+        obedience: 10,
       },
       {
         id: 2,
@@ -62,12 +70,12 @@ const SelectAndCreatePets = memo(
           huskyBlackPaw, // 4 - лапа
           huskyBlackGame, // 5 - играть
           huskyBlackRun, // 6 - бег
-          huskyBlackToilet, // 7 - туалет 
+          huskyBlackToilet, // 7 - туалет
         ],
         type: "хаски",
         bgHome: [imgBackgroundHomeDog],
-        strong: 35, 
-        obedience: 10
+        strong: 35,
+        obedience: 10,
       },
     ];
 
@@ -100,21 +108,59 @@ const SelectAndCreatePets = memo(
             id: "sid",
             name: "Сидеть",
             studied: false,
-            progress: 0
+            progress: 0,
           },
           {
             id: "lie",
             name: "Лежать",
             studied: false,
-            progress: 0
+            progress: 0,
           },
           {
             id: "paw",
             name: "Дай лапу",
             studied: false,
-            progress: 0
-          },          
-        ]
+            progress: 0,
+          },
+        ];
+        // freeID.health = true
+        freeID.effect = [
+          {
+            name: "norm",
+            flag: true,
+            icon: effectNorm,
+            info: "Хорошее самочувствие",
+            event: false
+          },
+          {
+            name: "mite",
+            flag: false,
+            icon: imgEffectMite,
+            info: "Укус клеща. Настроение, здоровье и силы значительно снижены",
+            event: false
+          },
+          {
+            name: "heat",
+            flag: false,
+            icon: imgEffectFever,
+            info: "Температура повышена. Настроение, здоровье и силы снижены",
+            event: false
+          },
+          {
+            name: "cold",
+            flag: false,
+            icon: imgEffectFever,
+            info: "Температура повышена. Настроение, здоровье и силы снижены",
+            event: false
+          },
+          {
+            name: "energy_drink",
+            flag: false,
+            icon: imgEffectEnerguDrink,
+            info: "Энергия восстанавливается быстрее",
+            event: false
+          },
+        ];
         // freeID.comsndOneStudied = false;
         // freeID.comsndOneProgress = 0;
         //   freeID.comsndTwoStudied = false;
@@ -242,6 +288,7 @@ const SelectAndCreatePets = memo(
             <h1 className="homePageLogError">{logError}</h1>
           </>
         )}
+
       </div>
     );
   }

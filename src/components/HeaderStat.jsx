@@ -11,6 +11,7 @@ import ModalLvlUp from "./ModalLvlUp";
 import newsImg from "../img/icon/newspaper.png";
 import News from "./News";
 import EffectStat from "./EffectStat";
+import GetEffectStreet from "./GetEffectStreet";
 
 const HeaderStat = memo(
   ({
@@ -84,7 +85,7 @@ const HeaderStat = memo(
       intervalUpdateLocalStorageMood = null;
       intervalUpdateLocalStorageMood = setInterval(() => {
         consumptionMood();
-      }, (1000 * 60) * 2);
+      },120000);
       return () => clearInterval(intervalUpdateLocalStorageMood);
     }, [pet]);
     // Туалет
@@ -123,7 +124,7 @@ const HeaderStat = memo(
       if (pet.mood > 0) {
         const newTime = new Date();
         const oldTime = new Date(pet.time_game);
-        const diff = (newTime.getTime() - oldTime.getTime()) / (1000 * 60) * 2;
+        const diff = (newTime.getTime() - oldTime.getTime()) /120000;
         
         console.log(diff)
         pet.mood = pet.mood - diff * 1;
@@ -525,75 +526,7 @@ const HeaderStat = memo(
             <ItesstatInfo stat={pet.satiety} text="Сытость" />
             <ItesstatInfo stat={pet.mood} text="Настроение" />
             <ItesstatInfo stat={pet.toilet} text="Туалет" />
-            {/* <div className="statPanel-stat">
-              Энергия{" "}
-              <div
-                style={{
-                  width: "100px",
-                  background: "#958e8e",
-                }}
-              >
-                <div
-                  style={{
-                    textAlign: "center",
-                    color: "azure",
-                    width: pet.energy + "px",
-                    background: "#67a52e",
-                    borderRadius: "4px",
-                  }}
-                >
-                  {Math.round(pet.energy)}
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="statPanel-stat">
-              Сытость{" "}
-              <div style={{ width: "100px", background: "#958e8e" }}>
-                <div
-                  style={{
-                    textAlign: "center",
-                    color: "azure",
-                    width: pet.satiety + "px",
-                    background: "#67a52e",
-                    borderRadius: "4px",
-                  }}
-                >
-                  {Math.round(pet.satiety)}
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="statPanel-stat">
-              Туалет{" "}
-              <div style={{ width: "100px", background: "#958e8e" }}>
-                <div
-                  style={{
-                    textAlign: "center",
-                    color: "azure",
-                    width: pet.toilet + "px",
-                    background: "#67a52e",
-                    borderRadius: "4px",
-                  }}
-                >
-                  {Math.round(pet.toilet)}
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="statPanel-stat">
-              Настроение{" "}
-              <div style={{ width: "100px", background: "#958e8e" }}>
-                <div
-                  style={{
-                    textAlign: "center",
-                    color: "azure",
-                    width: pet.mood + "px",
-                    background: "#67a52e",
-                    borderRadius: "4px",
-                  }}
-                >
-                  {Math.round(pet.mood)}
-                </div>
-              </div>
-            </div> */}
+            
           </div>
           {/* Профиль справа */}
           <div className="statPanel-name-money">
@@ -617,10 +550,18 @@ const HeaderStat = memo(
               </div>
               <div className="statPanel-type-pet"> {pet.type}</div>
               <EffectStat
+                pet={pet}  
+                setMyPets={setMyPets}
+                myPets={myPets}              
+              />
+              {
+                !streetBtn ? <GetEffectStreet 
                 pet={pet}
                 setBafMeteo={setBafMeteo}
                 bafMeteo={bafMeteo}
-              />
+
+                /> : <></>
+              }
             </div>
 
             <div className="money-container">

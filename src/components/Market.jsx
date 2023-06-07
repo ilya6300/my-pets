@@ -15,6 +15,7 @@ import imgSword from "../img/object/toy/sword.png";
 // Расходникик
 import imgDelicacy from "../img/icon/delicacy.png";
 import imgEnergy from "../img/icon/energy_icon.png";
+import imgTablet from "../img/icon/medicine.png";
 
 //
 import ListBGMarket from "./ListBGMarket";
@@ -179,6 +180,25 @@ const Market = memo(
           console.log("Я купил энергию");
         },
       },
+      {
+        id: 3,
+        title: "Лекарство",
+        img: imgTablet,
+        text: "Вылечить питомца",
+        price: 10,
+        type: "consumables",
+        buy() {
+          if (pet.money >= 10) {
+            pet.money = pet.money - 10;
+            pet.effect.forEach((elEff) => {
+              elEff.flag = false;
+            });
+            pet.effect[0].flag = true;
+            setMyPets([...myPets], pet.energy);
+          }
+          console.log("Я купил энергию");
+        },
+      },
     ]);
 
     const hiddenMarket = () => {
@@ -280,7 +300,7 @@ const Market = memo(
     const superFuncEnergy = () => {
       pet.energy = pet.energy + 50;
       if (pet.energy > 100) {
-        pet.energy = 100
+        pet.energy = 100;
       }
       setMyPets([...myPets], pet.energy);
     };

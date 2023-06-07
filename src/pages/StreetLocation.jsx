@@ -2,6 +2,8 @@ import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import HeaderStat from "../components/HeaderStat";
+// import GetEffectStreet from "../components/GetEffectStreet";
+
 
 const StreetLocation = () => {
   const { id } = useParams();
@@ -123,10 +125,12 @@ const StreetLocation = () => {
             src={imgPet}
             ref={refCoords}
           />
+               {/* <GetEffectStreet pet={pet} myPets={myPets} setMyPets={setMyPets}/> */}
         </>
       ) : (
         <></>
       )}
+
     </div>
   );
 };
