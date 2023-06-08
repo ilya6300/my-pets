@@ -34,7 +34,7 @@ import imgEffectFever from "../img/icon/fever.png";
 import imgEffectEnerguDrink from "../img/icon/energy-drink.png";
 import imgEffectVitamins from "../img/icon/vitamins.png";
 import effectNorm from "../img/icon/meditation.png";
-
+import effectDefendMite from "../img/icon/defends_mite.png";
 
 const SelectAndCreatePets = memo(
   ({ targetCard, flagCreate, setFlagCreate, myPets, setMyPets }) => {
@@ -86,7 +86,9 @@ const SelectAndCreatePets = memo(
         freeID.name = createPetName;
         freeID.hp = 100;
         freeID.satiety = 100;
+        freeID.max_satiety = 100;
         freeID.mood = 100;
+        freeID.max_mood = 100;
         freeID.img_pet = createPet.img;
         freeID.age = "";
         freeID.money = 0;
@@ -94,6 +96,7 @@ const SelectAndCreatePets = memo(
         freeID.toilet = 100;
         freeID.shit = false;
         freeID.energy = 100;
+        freeID.max_energy = 100;
         freeID.create = true;
         const birthday = new Date();
         freeID.data_create = birthday;
@@ -125,40 +128,47 @@ const SelectAndCreatePets = memo(
         ];
         // freeID.health = true
         freeID.effect = [
-          {
+          { // Нормальное состояние - 0
             name: "norm",
             flag: true,
             icon: effectNorm,
             info: "Хорошее самочувствие",
-            event: false
+            event: false,
           },
-          {
+          { // Укус клеща - 1
             name: "mite",
             flag: false,
             icon: imgEffectMite,
             info: "Укус клеща. Настроение, здоровье и силы значительно снижены",
-            event: false
+            event: false,
           },
-          {
+          { // Жар - 2
             name: "heat",
             flag: false,
             icon: imgEffectFever,
             info: "Температура повышена. Настроение, здоровье и силы снижены",
-            event: false
+            event: false,
           },
-          {
+          { // Простуда - 3
             name: "cold",
             flag: false,
             icon: imgEffectFever,
             info: "Температура повышена. Настроение, здоровье и силы снижены",
-            event: false
+            event: false,
           },
-          {
+          { // Повышеное восстановление энергии - 4
             name: "energy_drink",
             flag: false,
             icon: imgEffectEnerguDrink,
             info: "Энергия восстанавливается быстрее",
-            event: false
+            event: false,
+          },
+          { // Защита от клещей - 5
+            name: "defend_mite",
+            flag: false,
+            icon: effectDefendMite,
+            info: "Защита от клещей",
+            event: false,
           },
         ];
         // freeID.comsndOneStudied = false;
@@ -217,7 +227,6 @@ const SelectAndCreatePets = memo(
         );
 
         // freeID.meteoFuncion  = meteoFuncion;
-        //
 
         setFlagCreate(true);
         setMyPets([...myPets]);
@@ -246,9 +255,9 @@ const SelectAndCreatePets = memo(
               <ul className="preview-info-list">
                 <li>Имя: {targetCard.name}</li>
                 {/* <li>Возраст: </li> */}
-                <li>Здоровье: {targetCard.hp}</li>
+                {/* <li>Здоровье: {targetCard.hp}</li>
                 <li>Настроение: {targetCard.mood}</li>
-                <li>Сытость: {targetCard.satiety}</li>
+                <li>Сытость: {targetCard.satiety}</li> */}
               </ul>
             </div>
             <div className="preview-pet">
@@ -288,7 +297,6 @@ const SelectAndCreatePets = memo(
             <h1 className="homePageLogError">{logError}</h1>
           </>
         )}
-
       </div>
     );
   }

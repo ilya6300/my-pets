@@ -23,6 +23,7 @@ const HomeLocationPage = () => {
   const [coordsPet, setCoordsPet] = useState(1);
   const refCoords = useRef();
   const streetBtn = true;
+  // const flagHPages = false;
 
   // Получение питомца по id
   // let coords = ref.current.getBoundingClientRect();
@@ -46,7 +47,7 @@ const HomeLocationPage = () => {
       if (pet.satiety <= 80) {
         let intervalFeed;
         intervalFeed = setInterval(() => {
-          if (pet.satiety < 100) {
+          if (pet.satiety <  pet.max_satiety) {
             pet.satiety = pet.satiety + 1;
             pet.toilet = pet.toilet - 0.3;
             if (pet.toilet <= 0) {
@@ -86,8 +87,8 @@ const HomeLocationPage = () => {
               pet.money = pet.money + 1;
               pet.energy = pet.energy - 10;
               pet.mood = pet.mood + 20;
-              if (pet.mood > 100) {
-                pet.mood = 100;
+              if (pet.mood > pet.max_mood) {
+                pet.mood = pet.max_mood;
               }
               setMyPets([...myPets], pet.mood, pet.energy);
             }, 1300);
@@ -120,8 +121,8 @@ const HomeLocationPage = () => {
               pet.money = pet.money + 1;
               pet.energy = pet.energy - 10;
               pet.mood = pet.mood + 30;
-              if (pet.mood > 100) {
-                pet.mood = 100;
+              if (pet.mood > pet.max_mood) {
+                pet.mood = pet.max_mood;
               }
               setMyPets([...myPets], pet.mood, pet.energy);
             }, 1300);
@@ -148,8 +149,8 @@ const HomeLocationPage = () => {
     if (hover) {
       hoverTaimer = setInterval(() => {
         pet.mood = pet.mood + 1;
-        if (pet.mood > 100) {
-          pet.mood = 100;
+        if (pet.mood > pet.max_mood) {
+          pet.mood = pet.max_mood;
         }
         clearInterval(hoverTaimer);
       }, 1000);
@@ -166,8 +167,6 @@ const HomeLocationPage = () => {
   };
   // ref img
 
-
-
   return (
     <div>
       {pet ? (
@@ -176,6 +175,7 @@ const HomeLocationPage = () => {
           className="location-home-body"
         >
           <HeaderStat
+            // flagHPages={flagHPages}
             pet={pet}
             setMyPets={setMyPets}
             myPets={myPets}
@@ -201,33 +201,36 @@ const HomeLocationPage = () => {
             Гулять
           </Link> */}
           <div className="obj-container">
-
             <img
               className="pet-img"
               onMouseMove={() => setHover(true)}
               onMouseOut={() => setHover(false)}
               src={imgPet}
               ref={refCoords}
-              alt=''
+              alt=""
             />
 
-            <img className="btn-feed" onClick={feed} src={pet.foodObj}  alt=''/>
+            <img className="btn-feed" onClick={feed} src={pet.foodObj} alt="" />
             <img
               className={classGameBall}
               onClick={gameGreenBall}
               src={pet.toyOneObj}
-              alt=''
+              alt=""
             />
             <img
               className={classGameCanat}
               onClick={gameCanat}
               src={pet.toyTwoObj}
-              alt=''
+              alt=""
             />
             <img className="punching-bag" src={pet.punchingBagObj} alt="" />
             {pet.shit ? (
-              <img className="shit" src={pet.shitObj} onClick={clearShit}  alt=''/>
-             
+              <img
+                className="shit"
+                src={pet.shitObj}
+                onClick={clearShit}
+                alt=""
+              />
             ) : (
               <></>
             )}

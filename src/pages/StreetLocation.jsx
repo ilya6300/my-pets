@@ -11,7 +11,7 @@ const StreetLocation = () => {
   const [classPet, setClassPet] = useState("pet-img");
   const [imgPet, setImgPet] = useState(null);
   const [backgroundStyle, setBackgroundStyle] = useState(null);
-
+  // const flagHPages = false
   const [backgroundStyleStreet, setbackgroundStyleStreet] = useState(null);
   const [myPets, setMyPets] = useLocalStorage([], "myPets");
   const [hover, setHover] = useState(false);
@@ -91,6 +91,7 @@ const StreetLocation = () => {
       {pet ? (
         <>
           <HeaderStat
+          // flagHPages={flagHPages}
             pet={pet}
             setMyPets={setMyPets}
             myPets={myPets}

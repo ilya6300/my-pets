@@ -184,7 +184,7 @@ const Market = memo(
         id: 3,
         title: "Лекарство",
         img: imgTablet,
-        text: "Вылечить питомца",
+        text: "Вылечить питомца. Применяется сразу",
         price: 10,
         type: "consumables",
         buy() {
@@ -193,10 +193,13 @@ const Market = memo(
             pet.effect.forEach((elEff) => {
               elEff.flag = false;
             });
+            pet.max_energy = 100
+            pet.mood = 100
+            pet.max_satiety = 100
             pet.effect[0].flag = true;
+            setVisibleMarket(false)
             setMyPets([...myPets], pet.energy);
           }
-          console.log("Я купил энергию");
         },
       },
     ]);
@@ -204,16 +207,18 @@ const Market = memo(
     const hiddenMarket = () => {
       setVisibleMarket(false);
     };
-
+// useEffect (() => {
+//   setViewerContent(viewerContent)
+// }, [viewerContent, setViewerContent])
     // маркет навигация
     const showSkin = () => {
-      setViewerContent(null);
+      setViewerContent((n) => n = null);
       setSkinAll((f) => (f = true));
       setConsumablesFlag((f) => (f = false));
       setSuperM((f) => (f = false));
     };
     const showConsumables = () => {
-      setViewerContent(null);
+      setViewerContent((n) => n = null);
       setSkinAll((f) => (f = false));
       setConsumablesFlag((f) => (f = true));
       setSuperM((f) => (f = false));
@@ -221,6 +226,7 @@ const Market = memo(
     // Показать расходник
     const thisConsumables = (bgmarket) => {
       setTargetSale(consumables.find((c) => c.id === bgmarket.id));
+
     };
     // Купить расходник
     const buyConsumables = () => {
@@ -275,14 +281,6 @@ const Market = memo(
       }
       return;
     };
-
-    // useEffect(() => {
-    //   setBackgroundStyle(backgroundStyle);
-    // }, [backgroundStyle]);
-
-    // useEffect(() => {
-    //   setBackgroundStyle(backgroundStyle);
-    // }, [backgroundStyle]);
 
     // Супер чит super
 

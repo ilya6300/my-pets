@@ -4,8 +4,10 @@ import CardPetList from "../components/CardPetList";
 import SelectAndCreatePets from "../components/SelectAndCreatePets";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import podium from "../img/background/podium.png";
+import Needs from "../components/Needs";
 
 const HomePage = () => {
+// const flagHPages = true
   useEffect(() => {
     window.scrollBy(0, 0);
   });
@@ -14,6 +16,7 @@ const HomePage = () => {
     "background-home-page"
   );
   //   Питомцы
+  const [pet, setPet] = useState(null);
   const [targetCard, setTargetCard] = useState(null);
   const [flagCreate, setFlagCreate] = useState(false);
   const [myPets, setMyPets] =
@@ -109,59 +112,73 @@ const HomePage = () => {
   //   });
   // };
 
-  let intervalUpdateLocalStorageHunger;
-  let intervalUpdateLocalStorageMood;
-  let intervalUpdateLocalStorageToilet;
-  let intervalUpdateLocalStorageEnergy;
+  // let intervalUpdateLocalStorageHunger;
+  // let intervalUpdateLocalStorageMood;
+  // let intervalUpdateLocalStorageToilet;
+  // let intervalUpdateLocalStorageEnergy;
 
+  // // Голод
+  // useEffect(() => {
+  //   intervalUpdateLocalStorageHunger = null;
+  //   intervalUpdateLocalStorageHunger = setInterval(() => {
+  //     consumptionFood();
+  //   }, 1500);
+  //   return () => clearInterval(intervalUpdateLocalStorageHunger);
+  // }, []);
+  // // Настроение
+  // useEffect(() => {
+  //   intervalUpdateLocalStorageMood = null;
+  //   intervalUpdateLocalStorageMood = setInterval(() => {
+  //     consumptionMood();
+  //   }, 2100);
+  //   return () => clearInterval(intervalUpdateLocalStorageMood);
+  // }, []);
+  //   // Восстановление усталости
+  // useEffect(() => {
+  //   intervalUpdateLocalStorageEnergy = null;
+  //   intervalUpdateLocalStorageEnergy = setInterval(() => {
+  //     recoveryEnergy();
+  //   }, 15000);
+  //   return () => clearInterval(intervalUpdateLocalStorageEnergy);
+  // }, []);
   // Голод
-  useEffect(() => {
-    intervalUpdateLocalStorageHunger = null;
-    intervalUpdateLocalStorageHunger = setInterval(() => {
-      consumptionFood();
-    }, 1500);
-    return () => clearInterval(intervalUpdateLocalStorageHunger);
-  }, []);
-  // Настроение
-  useEffect(() => {
-    intervalUpdateLocalStorageMood = null;
-    intervalUpdateLocalStorageMood = setInterval(() => {
-      consumptionMood();
-    }, 2100);
-    return () => clearInterval(intervalUpdateLocalStorageMood);
-  }, []);
-    // Восстановление усталости
-  useEffect(() => {
-    intervalUpdateLocalStorageEnergy = null;
-    intervalUpdateLocalStorageEnergy = setInterval(() => {
-      recoveryEnergy();
-    }, 15000);
-    return () => clearInterval(intervalUpdateLocalStorageEnergy);
-  }, []);
-  // Голод
-  const consumptionFood = () => {
-    myPets.forEach((p) => {
-      if (p.create === true) {
-        const newTime = new Date();
-        const oldTime = new Date(p.end_food);
-        const diff = (newTime.getTime() - oldTime.getTime()) / 1500;
-        p.satiety = p.satiety - diff * 1;
-        if (p.satiety <= 0) {
-          p.satiety = 0;
-        }
-        p.end_food = newTime;
-      }
-      // Расчёт голода конец
-      setMyPets([...myPets], p.end_food, p.satiety);
-    });
-  };
+
+  // const consumptionFood = () => {
+  //   myPets.forEach((p) => {
+  //     // Если от 100 до 40
+
+  //     if (p.create === true && p.satiety > 40) {
+  //       setPet(p);
+  //       const newTime = new Date();
+  //       const oldTime = new Date(p.end_food);
+  //       const diff = (newTime.getTime() - oldTime.getTime()) / 1440000;
+  //       p.satiety = p.satiety - diff * 1;
+  //       if (p.satiety <= 0) {
+  //         p.satiety = 0;
+  //       }
+  //       p.end_food = newTime;
+  //     } else if (p.create === true && p.satiety <= 40) {
+  //       const newTime = new Date();
+  //       const oldTime = new Date(p.end_food);
+  //       const diff = (newTime.getTime() - oldTime.getTime()) / 4320000;
+  //       p.satiety = p.satiety - diff * 1;
+  //       if (p.satiety <= 0) {
+  //         p.satiety = 0;
+  //       }
+  //       p.end_food = newTime;
+  //     }
+  //     // Если от 40 до 0
+  //     setMyPets([...myPets], p.end_food, p.satiety);
+  //   });
+  // };
+  const consumptionFood = () => {}
   // Настроение
   const consumptionMood = () => {
     myPets.forEach((p) => {
       if (p.create === true) {
         const newTime = new Date();
         const oldTime = new Date(p.time_game);
-        const diff = (newTime.getTime() - oldTime.getTime()) / 2100;
+        const diff = (newTime.getTime() - oldTime.getTime()) / 864000;
         p.mood = p.mood - diff * 1;
         if (p.mood <= 0) {
           p.mood = 0;
@@ -178,7 +195,7 @@ const HomePage = () => {
       if (p.create === true) {
         const newTime = new Date();
         const oldTime = new Date(p.end_energy);
-        const diff = (newTime.getTime() - oldTime.getTime()) / 15000;
+        const diff = (newTime.getTime() - oldTime.getTime()) / 432000;
         p.energy = p.energy + diff * 1;
         if (p.energy >= 100) {
           p.energy = 100;
@@ -186,6 +203,24 @@ const HomePage = () => {
         p.end_energy = newTime;
         setMyPets([...myPets], p.energy);
       }
+    });
+  };
+
+  // Туалет
+
+  const consumptionToilet = () => {
+    myPets.forEach((p) => {
+      if (p.create === true) {
+        const newTime = new Date();
+        const oldTime = new Date(p.end_toilet);
+        const diff = (newTime.getTime() - oldTime.getTime()) / 576000;
+        p.toilet = p.toilet - diff * 1;
+        if (p.toilet <= 0) {
+          p.toilet = 0;
+        }
+        p.end_toilet = newTime;
+      }
+      setMyPets([...myPets], p.end_toilet);
     });
   };
 
@@ -198,6 +233,14 @@ const HomePage = () => {
 
   return (
     <div className={backgroundPages}>
+      {/* <Needs
+      // flagHPages={flagHPages}
+        pet={pet}
+        consumptionFood={consumptionFood}
+        consumptionMood={consumptionMood}
+        consumptionToilet={consumptionToilet}
+        recoveryEnergy={recoveryEnergy}
+      /> */}
       <div className="container-preview">
         {/*  */}
         {targetCard ? (
