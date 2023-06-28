@@ -13,8 +13,9 @@
   width: 100px;
 }
 .consultation {
-    position: absolute;
-    bottom: 10%;
+    z-index: 4;
+    position: fixed;
+    bottom: 14%;
     width: 350px;
     height: 130px;
     left: 50%;
