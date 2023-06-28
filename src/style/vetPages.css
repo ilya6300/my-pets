@@ -6,6 +6,7 @@
   background-position: 54% !important;
 }
 .btnCheckHP {
+    z-index: 5;
   position: absolute;
   top: 50%;
   right: 0;
@@ -29,7 +30,8 @@
 }
 .img-vet-table {
     z-index: 3;
-    width: 500px;
+    max-width: 500px;
+    width: 115vw;
     position: fixed;
     left: -50px;
     bottom: 10%;
