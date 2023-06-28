@@ -66,16 +66,21 @@ const VetClinicPage = () => {
         // setMessgaVet(collectionEffectDisease);
       }
     });
-    if (collectionEffectDisease.length === 0) {
-      console.log("здоров");
-      collectionEffectDisease.push(pet.effect[0].consultation);
+    console.log(collectionEffectDisease);
+    if (collectionEffectDisease.length <= 3) {
+      collectionEffectDisease.push(
+        <li> {pet.effect[0].consultation} </li>,
+        <li>
+          <br />
+        </li>
+      );
       // setMessgaVet(collectionEffectDisease);
     }
     collectionEffectDisease.push(
       <li style={{ textAlign: "end" }}> "Доктор: Шиба-инов" </li>
     );
     setMessgaVet(collectionEffectDisease);
-    setConsultation(true)
+    setConsultation(true);
   };
 
   return (
