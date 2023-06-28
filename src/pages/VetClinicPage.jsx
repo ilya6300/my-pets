@@ -2,8 +2,9 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import HeaderStat from "../components/HeaderStat";
-import imgBgVet from "../img/background/vet_bg.png";
+import imgBgVet from "../img/background/vet_bg_2.png";
 import imgExitStreet from "../img/icon/icon-door.png";
+import imgBgVetTable from "../img/object/vet_table.png";
 
 const VetClinicPage = () => {
   const { id } = useParams();
@@ -126,9 +127,10 @@ const VetClinicPage = () => {
       <img
         ref={refCoords}
         className={classPet}
-        style={{ bottom: "29%" }}
+        style={{ bottom: "29%", left: "40%" }}
         src={imgPet}
       />
+      <img className="img-vet-table" src={imgBgVetTable} alt="" />
     </div>
   );
 };

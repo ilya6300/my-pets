@@ -26,3 +26,10 @@
     border-radius: 15px;
     /* text-align: start; */
 }
+.img-vet-table {
+    z-index: 3;
+    width: 500px;
+    position: fixed;
+    left: -50px;
+    bottom: 10%;
+}
