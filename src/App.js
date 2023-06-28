@@ -5,7 +5,7 @@ import { Page404 } from "./pages/Page404";
 import { HomePage } from "./pages/HomePage";
 import { HomeLocationPage } from "./pages/HomeLocationPage";
 import { StreetLocation } from "./pages/StreetLocation";
-
+import { VetClinicPage } from "./pages/VetClinicPage";
 
 function App() {
   return (
@@ -17,6 +17,8 @@ function App() {
           <Route path="homelocation/:id" element={<HomeLocationPage />}></Route>
           <Route path="streetlocation" element={<StreetLocation />}></Route>
           <Route path="streetlocation/:id" element={<StreetLocation />}></Route>
+          <Route path="vetClinicPage" element={<VetClinicPage />}></Route>
+          <Route path="vetClinicPage/:id" element={<VetClinicPage />}></Route>
           <Route path="*" element={<Page404 />}></Route>
         </Routes>
       </HashRouter>

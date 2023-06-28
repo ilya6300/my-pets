@@ -1,49 +1,56 @@
 import React, { memo, useEffect, useState, useMemo } from "react";
-import EffectItemIcon from "./EffectItemIcon";
 import EffecrList from "./EffecrList";
 
-const EffectStat = memo(({ pet, setBafMeteo, bafMeteo, setMyPets, myPets }) => {
+const EffectStat = memo(({ pet, myPets, setMyPets }) => {
   const [effectPanel, setEffectPanel] = useState(pet.effect);
-  // const [effNorm, setEffNorm] = useState(false);
-  // const effNormFncOn = () => {
-  //   console.log("effNormFnc");
-  //   pet.effect[0].event = true;
-  //   // setMyPets([...myPets], pet.effect[0].event);
-  // };
-  // const effColdFncOn = () => {
-  //   console.log("effNormFnc");
-  //   pet.effect[3].event = true;
-  //   // setMyPets([...myPets], pet.effect[3].event);
-  // };
-  // const effHeatFncOn = () => {
-  //   console.log("effNormFnc");
-  //   pet.effect[2].event = true;
-  //   // setMyPets([...myPets], pet.effect[2].event);
-  // };
-  // const effNormFncOff = () => {
-  //   console.log("effNormFnc");
-  //   pet.effect[0].event = false;
-  //   // setMyPets([...myPets], pet.effect[0].event);
-  // };
-  // const effColdFncOff = () => {
-  //   console.log("effNormFnc");
-  //   pet.effect[3].event = false;
-  //   // setMyPets([...myPets], pet.effect[3].event);
-  // };
-  // const effHeatFncOff = () => {
-  //   console.log("effNormFnc");
-  //   pet.effect[2].event = false;
-  //   // setMyPets([...myPets], pet.effect[2].event);
-  // };
-  // let effectPanel = pet;
-  // console.log(effectPanel)
+
   const filterEffect = useMemo(() => {
-    // effectPanel = pet;
     return (pet = [...pet.effect].filter((effect) => effect.flag));
-    //  setEffectPanel(filterEffect)
-    // return effectPanel
-    // return setEffectPanel(effectPanel);
   }, [effectPanel]);
+
+  const thisEffect = (effects) => {
+    const effectInfo = effectPanel.find((eff) => eff.name === effects.name);
+
+    if (!effectInfo.event) {
+      effectInfo.event = true;
+    } else {
+      effectInfo.event = false;
+    }
+    effectPanel.forEach((ep) => {
+      if (effectInfo.name !== ep.name) {
+        ep.event = false;
+      }
+    });
+    setMyPets([...myPets], pet.event);
+  };
+  // Проверка на действие таблетки от клеща
+  let intervalUpdateActiveTabletMite;
+  useEffect(() => {
+    intervalUpdateActiveTabletMite = null;
+    intervalUpdateActiveTabletMite = setInterval(() => {
+      chechActiveTabletMite();
+    }, 10000);
+    return () => clearInterval(intervalUpdateActiveTabletMite);
+  }, [pet]);
+  useEffect(() => {
+    chechActiveTabletMite();
+  }, []);
+
+  const chechActiveTabletMite = () => {
+    const newTime = new Date();
+    pet.forEach((effectBlockMite) => {
+      if (effectBlockMite.name === "defend_mite") {
+        const oldTime = new Date(effectBlockMite.timer);
+        let diff = (newTime.getTime() - oldTime.getTime()) / 1440000;
+        console.log(diff * 1);
+        if (diff > 1) {
+          effectBlockMite.flag = false;
+          diff = null;
+        }
+        setMyPets([...myPets], effectBlockMite.flag);
+      }
+    });
+  };
 
   useEffect(() => {
     setEffectPanel(filterEffect);
@@ -51,7 +58,7 @@ const EffectStat = memo(({ pet, setBafMeteo, bafMeteo, setMyPets, myPets }) => {
 
   return (
     <div>
-      <EffecrList pet={effectPanel} />
+      <EffecrList pet={effectPanel} thiseffect={thisEffect} />
     </div>
   );
 });

@@ -11,7 +11,6 @@ const CardPetItem = memo((props) => {
         <>
           <h1>{props.card.name}</h1>
           <ul>
-            <li>Сытость: {props.card.satiety}</li>
           </ul>
           <img className="img-pet-card" src={props.card.img_pet[0]} />
         </>

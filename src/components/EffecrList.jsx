@@ -1,16 +1,18 @@
-import React from 'react'
-import EffectItemIcon from './EffectItemIcon'
+import React, {memo} from "react";
+import EffectItemIcon from "./EffectItemIcon";
 
-const EffecrList = ({effectPanel, pet}) => {
+const EffecrList = memo(({pet, thiseffect }) => {
   return (
     <div>
-      {pet.map((effect) => (
-        <EffectItemIcon effect={effect} key={effect.name}/>
-      ))
-
-      }
+      {pet.map((effects) => (
+        <EffectItemIcon
+          effects={effects}
+          key={effects.name}
+          thiseffect={thiseffect}
+        />
+      ))}
     </div>
-  )
-}
+  );
+});
 
-export default EffecrList
+export default EffecrList;

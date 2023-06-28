@@ -4,15 +4,6 @@ import MeteoCardList from "./MeteoCardList";
 const News = memo(({ pet,  setVisibleNews }) => {
 //   // Функция погоды
 
-//   let intervalUpdateMeteo;
-//   useEffect(() => {
-//     intervalUpdateMeteo = null;
-//     intervalUpdateMeteo = setInterval(() => {
-//         meteoFuncion();
-//     }, 1500);
-//     return () => clearInterval(intervalUpdateMeteo);
-//   }, [pet]);
-
   const hiddenNews = () => {
     setVisibleNews(false);
   };

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import HeaderStat from "../components/HeaderStat";
-// import GetEffectStreet from "../components/GetEffectStreet";
 
 
 const StreetLocation = () => {
@@ -11,13 +10,14 @@ const StreetLocation = () => {
   const [classPet, setClassPet] = useState("pet-img");
   const [imgPet, setImgPet] = useState(null);
   const [backgroundStyle, setBackgroundStyle] = useState(null);
-  // const flagHPages = false
   const [backgroundStyleStreet, setbackgroundStyleStreet] = useState(null);
   const [myPets, setMyPets] = useLocalStorage([], "myPets");
   const [hover, setHover] = useState(false);
   const [flagAction, setFlagAction] = useState(true);
   const [flagLoadingPet, setFlagLoadingPet] = useState(false);
-  const streetBtn = false;
+  const streetLocation = true;
+  const MNQ = true
+  const vet =false
 
   // Получение питомца по id
 
@@ -27,10 +27,9 @@ const StreetLocation = () => {
         if (String(pt.id) === { id }.id) {
           setPet((p) => (p = pt));
           setImgPet(pt.img_pet[1]);
-          // console.log(1);
           setbackgroundStyleStreet(pt.currentMeteo[0].bg);
-          // console.log("<<<<", pt.currentMeteo[0].bg);
           setFlagLoadingPet(true);
+
         }
       });
     }
@@ -71,9 +70,10 @@ const StreetLocation = () => {
             pet.toilet = 100;
             setMyPets([...myPets], pet.toilet);
             setImgPet(pet.img_pet[6]); // Бег
-            setFlagAction(true);
+
             setTimeout(() => {
-              // console.log(3);
+              console.log("flagAction", flagAction);
+              setFlagAction(true);
               setImgPet(pet.img_pet[1]);
               setClassPet("pet-img");
             }, 1900);
@@ -91,16 +91,14 @@ const StreetLocation = () => {
       {pet ? (
         <>
           <HeaderStat
-          // flagHPages={flagHPages}
             pet={pet}
             setMyPets={setMyPets}
             myPets={myPets}
             setImgPet={setImgPet}
             page={"streetlocation"}
-            // imgNav={imgExitStreet}
             setBackgroundStyle={setBackgroundStyle}
             backgroundStyle={backgroundStyle}
-            streetBtn={streetBtn}
+            streetLocation={streetLocation}
             setbackgroundStyleStreet={setbackgroundStyleStreet}
             backgroundStyleStreet={backgroundStyleStreet}
             visibleModal={visibleModal}
@@ -111,6 +109,8 @@ const StreetLocation = () => {
             setCoordsPet={setCoordsPet}
             coords={coords}
             refCoords={refCoords}
+            MNQ={MNQ}
+            vet={vet}
           />
           <Link
             className="link-to-street"
@@ -119,6 +119,13 @@ const StreetLocation = () => {
           >
             Домой
           </Link>
+          <Link
+            className="link-to-street"
+            style={{ color: "green" }}
+            to={`/vetClinicPage/${pet.id}`}
+          >
+            В вет. клинику
+          </Link>
           <img
             className={classPet}
             onMouseMove={() => setHover(true)}
@@ -126,7 +133,6 @@ const StreetLocation = () => {
             src={imgPet}
             ref={refCoords}
           />
-               {/* <GetEffectStreet pet={pet} myPets={myPets} setMyPets={setMyPets}/> */}
         </>
       ) : (
         <></>

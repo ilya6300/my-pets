@@ -21,29 +21,39 @@ const Needs = memo(
     // Голод
 
     useEffect(() => {
-    //   if (!flagHPages) {
-        intervalUpdateLocalStorageHunger = null;
-        if (pet.satiety > 40) {
-          intervalUpdateLocalStorageHunger = setInterval(() => {
-            consumptionFood();
-          }, 1440000);
-        } else if (pet.satiety <= 40) {
-          intervalUpdateLocalStorageHunger = setInterval(() => {
-            consumptionFood();
-          }, 4320000);
-        }
+      //   if (!flagHPages) {
+      intervalUpdateLocalStorageHunger = null;
+      if (pet.satiety > 40) {
+        intervalUpdateLocalStorageHunger = setInterval(() => {
+          consumptionFood();
+        }, 1440000);
+      } else if (pet.satiety <= 40) {
+        intervalUpdateLocalStorageHunger = setInterval(() => {
+          consumptionFood();
+        }, 4320000);
+      }
 
-        return () => clearInterval(intervalUpdateLocalStorageHunger);
-    //   }
+      return () => clearInterval(intervalUpdateLocalStorageHunger);
+      //   }
     }, [pet]);
+    useEffect(() => {
+      if (pet.satiety > 40) {
+        consumptionFood();
+      } else if (pet.satiety <= 40) {
+        consumptionFood();
+      }
+    }, []);
     // Настроение
     useEffect(() => {
       intervalUpdateLocalStorageMood = null;
       intervalUpdateLocalStorageMood = setInterval(() => {
         consumptionMood();
-      }, 120000);
+      }, 864000);
       return () => clearInterval(intervalUpdateLocalStorageMood);
     }, [pet]);
+    useEffect(() => {
+      consumptionMood();
+    }, []);
     // Туалет
     useEffect(() => {
       intervalUpdateLocalStorageToilet = null;
@@ -52,6 +62,9 @@ const Needs = memo(
       }, 576000);
       return () => clearInterval(intervalUpdateLocalStorageToilet);
     }, [pet]);
+    useEffect(() => {
+      consumptionToilet();
+    }, []);
     // Восстановление усталости
     useEffect(() => {
       intervalUpdateLocalStorageEnergy = null;
@@ -60,8 +73,9 @@ const Needs = memo(
       }, 432000);
       return () => clearInterval(intervalUpdateLocalStorageEnergy);
     }, [pet]);
-
-    return <></>;
+    useEffect(() => {
+      recoveryEnergy();
+    }, []);
   }
 );
 

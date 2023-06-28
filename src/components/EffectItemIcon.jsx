@@ -1,29 +1,20 @@
-import React from "react";
+import React, { memo } from "react";
 
-const EffectItemIcon = (props) => {
-
-//   const effInfoOn = () => {
-//     console.log(props.event);
-//     props.event = true;
-//       };
-
+const EffectItemIcon = memo((props) => {
   return (
     <>
       <img
         className="img-effect"
-        src={props.effect.icon}
-        alt=""
-        // onTouchStart={effInfoOn}
-        // onClick={effInfoOn}
-        // onTouchEnd={effInfoOff}
+        onClick={() => props.thiseffect(props.effects)}
+        src={props.effects.icon}
       />
-      {props.effect.event ? (
-        <p className="info-effect">{props.effect.info}</p>
+      {props.effects.event ? (
+        <p className="info-effect">{props.effects.info}</p>
       ) : (
         <></>
       )}
     </>
   );
-};
+});
 
 export default EffectItemIcon;

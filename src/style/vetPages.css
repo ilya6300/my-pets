@@ -1,0 +1,28 @@
+.location-vet {
+  width: 100vw;
+  height: 100vh;
+  background-repeat: no-repeat !important;
+  background-size: cover, 50% !important;
+  background-position: 54% !important;
+}
+.btnCheckHP {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translate(0, -50%);
+  width: 100px;
+}
+.consultation {
+    position: absolute;
+    bottom: 10%;
+    width: 350px;
+    height: 130px;
+    left: 50%;
+    transform: translate(-50%);
+    background: rgb(255, 252, 252);
+    padding: 3% 2%;
+    overflow-y: auto;
+    border: 5px solid rgb(255 129 136 / 79%);
+    border-radius: 15px;
+    /* text-align: start; */
+}

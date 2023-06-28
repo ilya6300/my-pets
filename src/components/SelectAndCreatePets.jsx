@@ -19,7 +19,6 @@ import imgFood from "../img/items/food_v2.png";
 import imgBallGreen from "../img/items/ball_v1.png";
 import imgCanat from "../img/items/canat.png";
 import imgShit from "../img/object/shit.png";
-import imgPunchingBag from "../img/object/punching_bag.png";
 // Погода
 import imgMeteoNorm from "../img/icon/weather_norm.png";
 import imgMeteRain from "../img/icon/icon-rain.png";
@@ -83,28 +82,39 @@ const SelectAndCreatePets = memo(
     function createNewPet() {
       if (createPetName && createPet) {
         const freeID = myPets.find((t) => t.create === false);
-        freeID.name = createPetName;
-        freeID.hp = 100;
-        freeID.satiety = 100;
-        freeID.max_satiety = 100;
-        freeID.mood = 100;
-        freeID.max_mood = 100;
-        freeID.img_pet = createPet.img;
-        freeID.age = "";
-        freeID.money = 0;
-        freeID.delicacy = 0;
-        freeID.toilet = 100;
-        freeID.shit = false;
-        freeID.energy = 100;
-        freeID.max_energy = 100;
-        freeID.create = true;
-        const birthday = new Date();
-        freeID.data_create = birthday;
-        freeID.end_food = birthday;
-        freeID.end_energy = birthday;
-        freeID.time_game = birthday;
-        freeID.end_toilet = birthday;
-        freeID.type = createPet.type;
+        freeID.name = createPetName; // Имя
+        freeID.hp = 100; // Общее здоровье
+        freeID.satiety = 100; //Сытость
+        freeID.max_satiety = 100; // Максимальная сытость
+        freeID.mood = 100; // Настроение
+        freeID.max_mood = 100; // Максимальное настроение
+        freeID.img_pet = createPet.img; // Изображение
+        freeID.age = ""; // Возраст
+        freeID.money = 0; // Денег
+        freeID.delicacy = 0; // Вкусняшек
+        freeID.toilet = 100; // Туалет
+        freeID.shit = false; // Какашка
+        freeID.energy = 100; // Энергия
+        freeID.max_energy = 100; // Максимальная энергия
+        freeID.strong = createPet.strong; // Сила
+
+        // Функция расчёта иммунитета
+        let resultImmunity;
+        const getRandomImmunity = (min, max) => {
+          return (resultImmunity = Math.floor(
+            Math.random() * (max - min + 1) + min
+          ));
+        };
+        getRandomImmunity(15, 50);
+        freeID.immunity = resultImmunity; // Уровень иммунитета
+        freeID.create = true; // Питомец создан
+        const birthday = new Date(); // Дата
+        freeID.data_create = birthday; //Дата дня рождения
+        freeID.end_food = birthday; //Последенее кормление
+        freeID.end_energy = birthday; // Последняя энергия ++
+        // freeID.time_game = birthday; //
+        freeID.end_toilet = birthday; // Сходил в таулет тогда-то
+        freeID.type = createPet.type; //Тип питомца
         // Команды
         freeID.comands = [
           {
@@ -126,61 +136,76 @@ const SelectAndCreatePets = memo(
             progress: 0,
           },
         ];
-        // freeID.health = true
         freeID.effect = [
-          { // Нормальное состояние - 0
+          {
+            // Нормальное состояние - 0
             name: "norm",
             flag: true,
             icon: effectNorm,
             info: "Хорошее самочувствие",
+            consultation:
+              "Мы провели осмотр, у Вас всё хорошо. Проблем со здоровьем нет",
             event: false,
+            type: "norm effect",
           },
-          { // Укус клеща - 1
+          {
+            // Укус клеща - 1
             name: "mite",
             flag: false,
             icon: imgEffectMite,
             info: "Укус клеща. Настроение, здоровье и силы значительно снижены",
+            consultation:
+              "Клеща мы вытащили, для восстановления здоровья купите в магазине таблетку  'АБ-Пет-1'. И рукомендуем использовать Петовекто, она защитит Вашего питомца на 24 часа от укусов клещей.",
             event: false,
+            type: "disease",
           },
-          { // Жар - 2
+          {
+            // Жар - 2
             name: "heat",
             flag: false,
             icon: imgEffectFever,
             info: "Температура повышена. Настроение, здоровье и силы снижены",
+            consultation:
+            "Ваш питомец получил солнечный удар, не гуляйте долго в жаркую погоду. Для восстановления здоровья купите в магазине таблетку 'АБ-Пет-2'.",
             event: false,
+            type: "disease",
           },
-          { // Простуда - 3
+          {
+            // Простуда - 3
             name: "cold",
             flag: false,
             icon: imgEffectFever,
             info: "Температура повышена. Настроение, здоровье и силы снижены",
+            consultation:
+            "Ваш питомец простудился, не гуляйте долго в дождливую и холодную погоду. Для восстановления здоровья купите в магазине таблетку 'АБ-Пет-3'.",
             event: false,
+            type: "disease",
           },
-          { // Повышеное восстановление энергии - 4
+          {
+            // Повышеное восстановление энергии - 4
             name: "energy_drink",
             flag: false,
             icon: imgEffectEnerguDrink,
             info: "Энергия восстанавливается быстрее",
             event: false,
+            type: "baff",
           },
-          { // Защита от клещей - 5
+          {
+            // Защита от клещей - 5
             name: "defend_mite",
             flag: false,
             icon: effectDefendMite,
             info: "Защита от клещей",
             event: false,
+            timer: null,
+            type: "baff",
           },
         ];
-        // freeID.comsndOneStudied = false;
-        // freeID.comsndOneProgress = 0;
-        //   freeID.comsndTwoStudied = false;
-        // freeID.comsndTwoProgress = 0;
         // Объекты
-        freeID.foodObj = imgFood;
-        freeID.toyOneObj = imgBallGreen;
-        freeID.toyTwoObj = imgCanat;
-        freeID.shitObj = imgShit;
-        freeID.punchingBagObj = imgPunchingBag;
+        freeID.foodObj = imgFood; // Изображение миски
+        freeID.toyOneObj = imgBallGreen; //Изображение левой игрушки
+        freeID.toyTwoObj = imgCanat; // Изображение правой игрушки
+        freeID.shitObj = imgShit; // Изображение какашки
         // Фон
         freeID.bgHome = createPet.bgHome;
         // Level
@@ -226,8 +251,6 @@ const SelectAndCreatePets = memo(
           freeID.meteoCollection[0]
         );
 
-        // freeID.meteoFuncion  = meteoFuncion;
-
         setFlagCreate(true);
         setMyPets([...myPets]);
         setCreatePet("");
@@ -235,8 +258,6 @@ const SelectAndCreatePets = memo(
       } else {
         setLogError("Выберите вид питомца и введите имя");
       }
-
-      // console.log(myPets);
     }
     // Конец создания питомца
 
@@ -254,10 +275,6 @@ const SelectAndCreatePets = memo(
             <div className="preview-info">
               <ul className="preview-info-list">
                 <li>Имя: {targetCard.name}</li>
-                {/* <li>Возраст: </li> */}
-                {/* <li>Здоровье: {targetCard.hp}</li>
-                <li>Настроение: {targetCard.mood}</li>
-                <li>Сытость: {targetCard.satiety}</li> */}
               </ul>
             </div>
             <div className="preview-pet">

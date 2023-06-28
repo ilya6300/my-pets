@@ -7,7 +7,6 @@ import podium from "../img/background/podium.png";
 import Needs from "../components/Needs";
 
 const HomePage = () => {
-// const flagHPages = true
   useEffect(() => {
     window.scrollBy(0, 0);
   });
@@ -20,7 +19,7 @@ const HomePage = () => {
   const [targetCard, setTargetCard] = useState(null);
   const [flagCreate, setFlagCreate] = useState(false);
   const [myPets, setMyPets] =
-    // useState(
+
     useLocalStorage(
       [
         {
@@ -38,7 +37,6 @@ const HomePage = () => {
       ],
       "myPets"
     );
-  // )
   // Таргет item при клике
   const targetID = (card) => {
     setTargetCard(myPets.find((t) => t.id === card.id));
@@ -50,179 +48,7 @@ const HomePage = () => {
     return myPets;
   }, [flagCreate, myPets]);
 
-  // const clearLocal = () => {
-  //   localStorage.clear();
-  // };
-  // const [loadingStatPets, setLoadingStatPets] = useState(false);
-  // // Расход потребностей
-
-  // // Голод
-  // useEffect(() => {
-  //   if (!loadingStatPets) {
-  //     setLoadingStatPets(true);
-  //     consumptionFood();
-  //   }
-  //   intervalUpdateLocalStorageHunger = null;
-  //   intervalUpdateLocalStorageHunger = setInterval(() => {
-  //     consumptionFood();
-  //   }, 1500000);
-  //   return () => clearInterval(intervalUpdateLocalStorageHunger);
-  // }, []);
-  // // Настроение
-  // useEffect(() => {
-  //   if (!loadingStatPets) {
-  //     setLoadingStatPets(true);
-  //     consumptionMood();
-  //   }
-  //   intervalUpdateLocalStorageMood = null;
-  //   intervalUpdateLocalStorageMood = setInterval(() => {
-  //     consumptionMood();
-
-  //   }, 2100000);
-  //   return () => clearInterval(intervalUpdateLocalStorageMood);
-  // }, []);
-  // // Расходы
-  // // Голод
-  // const consumptionMood = () => {
-  //   myPets.forEach((p) => {
-  //     if (p.create === true) {
-  //       const newTime = new Date();
-  //       const oldTime = new Date(p.time_game);
-  //       const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 2100000);
-  //       p.mood = Math.round(p.mood - diff * 1);
-  //       p.time_game = newTime;
-  //       // Расчёт голода конец
-  //       setMyPets([...myPets], p.time_game);
-  //     }
-  //   });
-  // };
-  // // Настроение
-  // const consumptionFood = () => {
-  //   myPets.forEach((p) => {
-  //     if (p.create === true) {
-  //       const newTime = new Date();
-  //       const oldTime = new Date(p.end_food);
-  //       const diff = Math.round((newTime.getTime() - oldTime.getTime()) / 1500000);
-  //       p.satiety = Math.round(p.satiety - diff * 1);
-  //       p.end_food = newTime;
-  //       p.hp = Math.round((p.satiety + p.mood) / 2);
-  //       // Расчёт голода конец
-  //       setMyPets([...myPets], p.end_food);
-  //     }
-  //   });
-  // };
-
-  // let intervalUpdateLocalStorageHunger;
-  // let intervalUpdateLocalStorageMood;
-  // let intervalUpdateLocalStorageToilet;
-  // let intervalUpdateLocalStorageEnergy;
-
-  // // Голод
-  // useEffect(() => {
-  //   intervalUpdateLocalStorageHunger = null;
-  //   intervalUpdateLocalStorageHunger = setInterval(() => {
-  //     consumptionFood();
-  //   }, 1500);
-  //   return () => clearInterval(intervalUpdateLocalStorageHunger);
-  // }, []);
-  // // Настроение
-  // useEffect(() => {
-  //   intervalUpdateLocalStorageMood = null;
-  //   intervalUpdateLocalStorageMood = setInterval(() => {
-  //     consumptionMood();
-  //   }, 2100);
-  //   return () => clearInterval(intervalUpdateLocalStorageMood);
-  // }, []);
-  //   // Восстановление усталости
-  // useEffect(() => {
-  //   intervalUpdateLocalStorageEnergy = null;
-  //   intervalUpdateLocalStorageEnergy = setInterval(() => {
-  //     recoveryEnergy();
-  //   }, 15000);
-  //   return () => clearInterval(intervalUpdateLocalStorageEnergy);
-  // }, []);
-  // Голод
-
-  // const consumptionFood = () => {
-  //   myPets.forEach((p) => {
-  //     // Если от 100 до 40
-
-  //     if (p.create === true && p.satiety > 40) {
-  //       setPet(p);
-  //       const newTime = new Date();
-  //       const oldTime = new Date(p.end_food);
-  //       const diff = (newTime.getTime() - oldTime.getTime()) / 1440000;
-  //       p.satiety = p.satiety - diff * 1;
-  //       if (p.satiety <= 0) {
-  //         p.satiety = 0;
-  //       }
-  //       p.end_food = newTime;
-  //     } else if (p.create === true && p.satiety <= 40) {
-  //       const newTime = new Date();
-  //       const oldTime = new Date(p.end_food);
-  //       const diff = (newTime.getTime() - oldTime.getTime()) / 4320000;
-  //       p.satiety = p.satiety - diff * 1;
-  //       if (p.satiety <= 0) {
-  //         p.satiety = 0;
-  //       }
-  //       p.end_food = newTime;
-  //     }
-  //     // Если от 40 до 0
-  //     setMyPets([...myPets], p.end_food, p.satiety);
-  //   });
-  // };
-  const consumptionFood = () => {}
-  // Настроение
-  const consumptionMood = () => {
-    myPets.forEach((p) => {
-      if (p.create === true) {
-        const newTime = new Date();
-        const oldTime = new Date(p.time_game);
-        const diff = (newTime.getTime() - oldTime.getTime()) / 864000;
-        p.mood = p.mood - diff * 1;
-        if (p.mood <= 0) {
-          p.mood = 0;
-        }
-        p.time_game = newTime;
-      }
-      setMyPets([...myPets], p.time_game, p.mood);
-    });
-  };
-
-  // Восстановленние усталости
-  const recoveryEnergy = () => {
-    myPets.forEach((p) => {
-      if (p.create === true) {
-        const newTime = new Date();
-        const oldTime = new Date(p.end_energy);
-        const diff = (newTime.getTime() - oldTime.getTime()) / 432000;
-        p.energy = p.energy + diff * 1;
-        if (p.energy >= 100) {
-          p.energy = 100;
-        }
-        p.end_energy = newTime;
-        setMyPets([...myPets], p.energy);
-      }
-    });
-  };
-
-  // Туалет
-
-  const consumptionToilet = () => {
-    myPets.forEach((p) => {
-      if (p.create === true) {
-        const newTime = new Date();
-        const oldTime = new Date(p.end_toilet);
-        const diff = (newTime.getTime() - oldTime.getTime()) / 576000;
-        p.toilet = p.toilet - diff * 1;
-        if (p.toilet <= 0) {
-          p.toilet = 0;
-        }
-        p.end_toilet = newTime;
-      }
-      setMyPets([...myPets], p.end_toilet);
-    });
-  };
+ 
 
   // Удалить питомца
 
@@ -233,14 +59,6 @@ const HomePage = () => {
 
   return (
     <div className={backgroundPages}>
-      {/* <Needs
-      // flagHPages={flagHPages}
-        pet={pet}
-        consumptionFood={consumptionFood}
-        consumptionMood={consumptionMood}
-        consumptionToilet={consumptionToilet}
-        recoveryEnergy={recoveryEnergy}
-      /> */}
       <div className="container-preview">
         {/*  */}
         {targetCard ? (
@@ -270,15 +88,12 @@ const HomePage = () => {
           </>
         ) : (
           <>
-            {/* <p>Обновилось</p> */}
             <h1 className="home-title">Выберите питомца</h1>
-            {/* <button onClick={clearLocal}>Очистить хранилище</button> */}
           </>
         )}
 
         <img
           className="preview-podium"
-          // src="./img/background/podium.png"
           src={podium}
           alt=""
         />
@@ -286,7 +101,6 @@ const HomePage = () => {
       <div className="container-select-pets">
         <CardPetList myPets={myPetsCollection} thisid={targetID} />
       </div>
-      {/* HomePage. Go <Link to="/homelocation">You home</Link> */}
     </div>
   );
 };

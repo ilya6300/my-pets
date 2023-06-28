@@ -26,7 +26,7 @@ const HeaderStat = memo(
     backgroundStyle,
     backgroundStyleStreet,
     setbackgroundStyleStreet,
-    streetBtn,
+    streetLocation,
     visibleModal,
     setVisibleModal,
     coordsPet,
@@ -35,6 +35,10 @@ const HeaderStat = memo(
     setCoordsPet,
     coords,
     refCoords,
+    setFlagAction,
+    flagAction,
+    MNQ,
+    vet,
   }) => {
     // const ref = useRef();
     // магазин
@@ -54,57 +58,20 @@ const HeaderStat = memo(
     // Команды
     const [comandShow, setComandShow] = useState(false);
     // // Потребности
-    // let intervalUpdateLocalStorageHunger;
-    // let intervalUpdateLocalStorageMood;
-    // let intervalUpdateLocalStorageToilet;
-    // let intervalUpdateLocalStorageEnergy;
-    // //
 
     // Функция погоды
+
     const [bafMeteo, setBafMeteo] = useState(pet.currentMeteo);
     let intervalUpdateMeteo;
     useEffect(() => {
       intervalUpdateMeteo = null;
       intervalUpdateMeteo = setInterval(() => {
         meteoFuncion();
-        console.log("currentMeteo", pet.currentMeteo);
-      }, 10000);
+      }, 900000);
       return () => clearInterval(intervalUpdateMeteo);
     }, [pet]);
 
     // Функция погоды
-    // // Голод
-    // useEffect(() => {
-    //   intervalUpdateLocalStorageHunger = null;
-    //   intervalUpdateLocalStorageHunger = setInterval(() => {
-    //     consumptionFood();
-    //   }, 1500);
-    //   return () => clearInterval(intervalUpdateLocalStorageHunger);
-    // }, [pet]);
-    // // Настроение
-    // useEffect(() => {
-    //   intervalUpdateLocalStorageMood = null;
-    //   intervalUpdateLocalStorageMood = setInterval(() => {
-    //     consumptionMood();
-    //   },120000);
-    //   return () => clearInterval(intervalUpdateLocalStorageMood);
-    // }, [pet]);
-    // // Туалет
-    // useEffect(() => {
-    //   intervalUpdateLocalStorageToilet = null;
-    //   intervalUpdateLocalStorageToilet = setInterval(() => {
-    //     consumptionToilet();
-    //   }, 1900);
-    //   return () => clearInterval(intervalUpdateLocalStorageToilet);
-    // }, [pet]);
-    // // Восстановление усталости
-    // useEffect(() => {
-    //   intervalUpdateLocalStorageEnergy = null;
-    //   intervalUpdateLocalStorageEnergy = setInterval(() => {
-    //     recoveryEnergy();
-    //   }, 15000);
-    //   return () => clearInterval(intervalUpdateLocalStorageEnergy);
-    // }, [pet]);
     // Голод
     const consumptionFood = () => {
       if (pet.satiety > 40) {
@@ -112,6 +79,7 @@ const HeaderStat = memo(
         const oldTime = new Date(pet.end_food);
         const diff = (newTime.getTime() - oldTime.getTime()) / 1440000;
         pet.satiety = pet.satiety - diff * 1;
+        console.log("diff food", diff * 1);
         if (pet.satiety <= 0) {
           pet.satiety = 0;
         }
@@ -121,6 +89,7 @@ const HeaderStat = memo(
         const oldTime = new Date(pet.end_food);
         const diff = (newTime.getTime() - oldTime.getTime()) / 4320000;
         pet.satiety = pet.satiety - diff * 1;
+        console.log("diff food", diff * 1);
         if (pet.satiety <= 0) {
           pet.satiety = 0;
         }
@@ -138,6 +107,7 @@ const HeaderStat = memo(
 
         console.log(diff);
         pet.mood = pet.mood - diff * 1;
+        console.log("diff mood", diff * 1);
         if (pet.mood <= 0) {
           pet.mood = 0;
         }
@@ -147,17 +117,20 @@ const HeaderStat = memo(
     };
     // Туалет
     const consumptionToilet = () => {
+      console.log("pet.shit", pet.shit);
       const newTime = new Date();
       if (pet.toilet > 0 && !pet.shit) {
         // newTime = new Date();
         const oldTime = new Date(pet.end_toilet);
         const diff = (newTime.getTime() - oldTime.getTime()) / 576000;
         pet.toilet = pet.toilet - diff * 1;
+        console.log("diff toilet", diff * 1);
         if (pet.toilet <= 0) {
           pet.toilet = 0;
         }
         pet.end_toilet = newTime;
       } else if (!pet.shit) {
+        console.log("pet.shit", pet.shit);
         pet.shit = true;
         pet.toilet = 100;
       } else {
@@ -165,12 +138,18 @@ const HeaderStat = memo(
       }
       setMyPets([...myPets], pet.end_toilet, pet.shit);
     };
+    // Расчёт здоровья
+    const consumptionHP = useMemo(() => {
+      pet.hp = (pet.mood + pet.satiety) / 2;
+    }, [pet.mood, pet.satiety]);
+
     // Восстановленние усталости
     const recoveryEnergy = () => {
       const newTime = new Date();
       const oldTime = new Date(pet.end_energy);
       const diff = (newTime.getTime() - oldTime.getTime()) / 432000;
       pet.energy = pet.energy + diff * 1;
+      console.log("diff energy", diff * 1);
       if (pet.energy >= 100) {
         pet.energy = 100;
       }
@@ -191,48 +170,65 @@ const HeaderStat = memo(
     };
     // Команда сидеть
     const comandSit = () => {
-      if (pet.delicacy >= 1 && pet.energy >= 5) {
-        pet.delicacy--;
-        pet.satiety = pet.satiety + 3;
-        if (pet.satiety > 100) {
-          pet.satiety = 100;
-        }
-        if (!pet.comands[0].studied) {
-          pet.comands[0].studied = true;
-          pet.comands[0].progress = 30;
-          levelUpFunction();
-          setImgPet(pet.img_pet[2]);
-          setTimeout(() => {
-            setImgPet(pet.img_pet[1]);
-          }, 2500);
-        } else {
-          getObedience(100);
-          // console.log("resultObedience", resultObedience);
-          if (pet.comands[0].progress >= resultObedience) {
-            if (pet.comands[0].progress >= 100) {
-              pet.comands[0].progress = 100;
-            } else {
-              pet.comands[0].progress = pet.comands[0].progress + 10;
-              levelUpFunction();
-            }
-
+      if (flagAction) {
+        setFlagAction(false);
+        if (pet.delicacy >= 1 && pet.energy >= 5) {
+          pet.delicacy--;
+          pet.satiety = pet.satiety + 3;
+          if (pet.satiety > 100) {
+            pet.satiety = 100;
+          }
+          if (!pet.comands[0].studied) {
+            pet.comands[0].studied = true;
+            pet.comands[0].progress = 30;
+            levelUpFunction();
             setImgPet(pet.img_pet[2]);
             setTimeout(() => {
               setImgPet(pet.img_pet[1]);
+              setFlagAction(true);
+              console.log("flagAction", flagAction);
             }, 2500);
+          } else {
+            getObedience(100);
+            // console.log("resultObedience", resultObedience);
+            if (pet.comands[0].progress >= resultObedience) {
+              if (pet.comands[0].progress >= 100) {
+                pet.comands[0].progress = 100;
+              } else {
+                pet.comands[0].progress = pet.comands[0].progress + 10;
+                levelUpFunction();
+              }
+
+              setImgPet(pet.img_pet[2]);
+              setTimeout(() => {
+                setImgPet(pet.img_pet[1]);
+                setFlagAction(true);
+                console.log("flagAction", flagAction);
+              }, 2500);
+            }
           }
+          pet.energy = pet.energy - 5;
+        } else if (pet.energy < 5) {
+          setMessage((m) => (m = "У меня нет сил играть"));
+          coords = refCoords.current.getBoundingClientRect();
+          setCoordsPet(coords);
+          setVisibleModal(true);
+          setTimeout(() => {
+            setVisibleModal(false);
+          }, 3000);
+        } else if (pet.delicacy === 0) {
+          setMessage((m) => (m = "А дашь вкусняшку?"));
+          coords = refCoords.current.getBoundingClientRect();
+          setCoordsPet(coords);
+          setVisibleModal(true);
+          setTimeout(() => {
+            setVisibleModal(false);
+            setFlagAction(true);
+            console.log("flagAction", flagAction);
+          }, 3000);
         }
-        pet.energy = pet.energy - 5;
-      } else if (pet.energy < 5) {
-        setMessage((m) => (m = "У меня нет сил играть"));
-        coords = refCoords.current.getBoundingClientRect();
-        setCoordsPet(coords);
-        setVisibleModal(true);
-        setTimeout(() => {
-          setVisibleModal(false);
-        }, 3000);
-      } else if (pet.delicacy === 0) {
-        setMessage((m) => (m = "А дашь вкусняшку?"));
+      } else {
+        setMessage("Я занят");
         coords = refCoords.current.getBoundingClientRect();
         setCoordsPet(coords);
         setVisibleModal(true);
@@ -240,58 +236,70 @@ const HeaderStat = memo(
           setVisibleModal(false);
         }, 3000);
       }
-
-      // else {
-      //   return;
-      // }
+      //
 
       setMyPets([...myPets], pet.comands[0].studied);
     };
     // Команда лежать
     const comandLie = () => {
-      if (pet.delicacy >= 1 && pet.energy >= 5) {
-        pet.delicacy--;
-        pet.satiety = pet.satiety + 3;
-        if (pet.satiety > 100) {
-          pet.satiety = 100;
-        }
-        if (!pet.comands[1].studied) {
-          pet.comands[1].studied = true;
-          pet.comands[1].progress = 30;
-          levelUpFunction();
-          setImgPet(pet.img_pet[3]);
-          setTimeout(() => {
-            setImgPet(pet.img_pet[1]);
-          }, 2500);
-        } else {
-          getObedience(100);
-          // console.log("resultObedience", resultObedience);
-          if (pet.comands[1].progress >= resultObedience) {
-            pet.energy = pet.energy - 5;
-            if (pet.comands[1].progress >= 100) {
-              pet.comands[1].progress = 100;
-            } else {
-              pet.comands[1].progress = pet.comands[1].progress + 10;
-              levelUpFunction();
-            }
-
+      if (flagAction) {
+        //
+        if (pet.delicacy >= 1 && pet.energy >= 5) {
+          pet.delicacy--;
+          pet.satiety = pet.satiety + 3;
+          if (pet.satiety > 100) {
+            pet.satiety = 100;
+          }
+          if (!pet.comands[1].studied) {
+            pet.comands[1].studied = true;
+            pet.comands[1].progress = 30;
+            levelUpFunction();
             setImgPet(pet.img_pet[3]);
             setTimeout(() => {
               setImgPet(pet.img_pet[1]);
+              setFlagAction(true);
             }, 2500);
+          } else {
+            getObedience(100);
+            // console.log("resultObedience", resultObedience);
+            if (pet.comands[1].progress >= resultObedience) {
+              pet.energy = pet.energy - 5;
+              if (pet.comands[1].progress >= 100) {
+                pet.comands[1].progress = 100;
+              } else {
+                pet.comands[1].progress = pet.comands[1].progress + 10;
+                levelUpFunction();
+              }
+
+              setImgPet(pet.img_pet[3]);
+              setTimeout(() => {
+                setImgPet(pet.img_pet[1]);
+                setFlagAction(true);
+              }, 2500);
+            }
           }
+          pet.energy = pet.energy - 5;
+        } else if (pet.energy < 5) {
+          setMessage((m) => (m = "У меня нет сил играть"));
+          coords = refCoords.current.getBoundingClientRect();
+          setCoordsPet(coords);
+          setVisibleModal(true);
+          setTimeout(() => {
+            setVisibleModal(false);
+          }, 3000);
+        } else if (pet.delicacy === 0) {
+          setMessage((m) => (m = "А дашь вкусняшку?"));
+          coords = refCoords.current.getBoundingClientRect();
+          setCoordsPet(coords);
+          setVisibleModal(true);
+          setTimeout(() => {
+            setVisibleModal(false);
+            setFlagAction(true);
+          }, 3000);
         }
-        pet.energy = pet.energy - 5;
-      } else if (pet.energy < 5) {
-        setMessage((m) => (m = "У меня нет сил играть"));
-        coords = refCoords.current.getBoundingClientRect();
-        setCoordsPet(coords);
-        setVisibleModal(true);
-        setTimeout(() => {
-          setVisibleModal(false);
-        }, 3000);
-      } else if (pet.delicacy === 0) {
-        setMessage((m) => (m = "А дашь вкусняшку?"));
+        //
+      } else {
+        setMessage("Я занят");
         coords = refCoords.current.getBoundingClientRect();
         setCoordsPet(coords);
         setVisibleModal(true);
@@ -303,49 +311,63 @@ const HeaderStat = memo(
     };
     // Команда "Дай лапу"
     const comandPaw = () => {
-      if (pet.delicacy >= 1 && pet.energy >= 5) {
-        pet.delicacy--;
-        pet.satiety = pet.satiety + 3;
-        if (pet.satiety > 100) {
-          pet.satiety = 100;
-        }
-        if (!pet.comands[2].studied) {
-          pet.comands[2].studied = true;
-          pet.comands[2].progress = 30;
-          levelUpFunction();
-          setImgPet(pet.img_pet[4]);
-          setTimeout(() => {
-            setImgPet(pet.img_pet[1]);
-          }, 2500);
-        } else {
-          getObedience(100);
-          // console.log("resultObedience", resultObedience);
-          if (pet.comands[2].progress >= resultObedience) {
-            pet.energy = pet.energy - 5;
-            if (pet.comands[2].progress >= 100) {
-              pet.comands[2].progress = 100;
-            } else {
-              pet.comands[2].progress = pet.comands[2].progress + 10;
-              levelUpFunction();
-            }
-
+      if (flagAction) {
+        //
+        if (pet.delicacy >= 1 && pet.energy >= 5) {
+          pet.delicacy--;
+          pet.satiety = pet.satiety + 3;
+          if (pet.satiety > 100) {
+            pet.satiety = 100;
+          }
+          if (!pet.comands[2].studied) {
+            pet.comands[2].studied = true;
+            pet.comands[2].progress = 30;
+            levelUpFunction();
             setImgPet(pet.img_pet[4]);
             setTimeout(() => {
               setImgPet(pet.img_pet[1]);
+              setFlagAction(true);
             }, 2500);
+          } else {
+            getObedience(100);
+            if (pet.comands[2].progress >= resultObedience) {
+              pet.energy = pet.energy - 5;
+              if (pet.comands[2].progress >= 100) {
+                pet.comands[2].progress = 100;
+              } else {
+                pet.comands[2].progress = pet.comands[2].progress + 10;
+                levelUpFunction();
+              }
+
+              setImgPet(pet.img_pet[4]);
+              setTimeout(() => {
+                setImgPet(pet.img_pet[1]);
+                setFlagAction(true);
+              }, 2500);
+            }
           }
+          pet.energy = pet.energy - 5;
+        } else if (pet.energy < 5) {
+          setMessage((m) => (m = "У меня нет сил играть"));
+          coords = refCoords.current.getBoundingClientRect();
+          setCoordsPet(coords);
+          setVisibleModal(true);
+          setTimeout(() => {
+            setVisibleModal(false);
+          }, 3000);
+        } else if (pet.delicacy === 0) {
+          setMessage((m) => (m = "А дашь вкусняшку?"));
+          coords = refCoords.current.getBoundingClientRect();
+          setCoordsPet(coords);
+          setVisibleModal(true);
+          setTimeout(() => {
+            setVisibleModal(false);
+            setFlagAction(true);
+          }, 3000);
+          //
         }
-        pet.energy = pet.energy - 5;
-      } else if (pet.energy < 5) {
-        setMessage((m) => (m = "У меня нет сил играть"));
-        coords = refCoords.current.getBoundingClientRect();
-        setCoordsPet(coords);
-        setVisibleModal(true);
-        setTimeout(() => {
-          setVisibleModal(false);
-        }, 3000);
-      } else if (pet.delicacy === 0) {
-        setMessage((m) => (m = "А дашь вкусняшку?"));
+      } else {
+        setMessage("Я занят");
         coords = refCoords.current.getBoundingClientRect();
         setCoordsPet(coords);
         setVisibleModal(true);
@@ -435,7 +457,6 @@ const HeaderStat = memo(
       pet.money = pet.money + addMoney;
       setMyPets([...myPets], pet.money);
       setNewBonusFlag(false);
-      // console.log(newBonusFlag);
       setNewBonus(() => "");
       setQuantity(() => 0);
       setAddMoney(() => 0);
@@ -496,35 +517,25 @@ const HeaderStat = memo(
     const meteoFuncion = () => {
       const newTime = new Date();
       const oldTime = new Date(pet.meteoVar);
-      const diff = (newTime.getTime() - oldTime.getTime()) / 10000;
-      // const upDateMeteo = Math.floor(diff / 50);
+      const diff = (newTime.getTime() - oldTime.getTime()) / 900000;
       upDateMeteo = Math.floor(diff * 1);
-      // console.log("upDateMeteo", upDateMeteo);
       if (upDateMeteo > 3) {
         upDateMeteo = 3;
       }
-
       for (let i = 0; i < upDateMeteo; i++) {
-        // console.log("pet.currentMeteo", pet.currentMeteo);
         pet.currentMeteo.shift();
         // Рандомно кладёт погоду в массив
         getRandomMeteo();
         pushMeteo();
       }
       pet.meteoVar = newTime;
-      // console.log("pet.currentMeteo.length", pet.currentMeteo.length);
       if (pet.currentMeteo.length < 3) {
         pushMeteo();
       }
       setbackgroundStyleStreet(pet.currentMeteo[0].bg);
       setBafMeteo([...bafMeteo]);
-      // console.log("bafMeteo", bafMeteo);
       setMyPets([...myPets], pet.currentMeteo);
     };
-    // Погода
-    // useEffect(() => {
-    //   setbackgroundStyleStreet(backgroundStyleStreet);
-    // }, [backgroundStyleStreet]);
 
     //
     return (
@@ -566,7 +577,7 @@ const HeaderStat = memo(
               </div>
               <div className="statPanel-type-pet"> {pet.type}</div>
               <EffectStat pet={pet} setMyPets={setMyPets} myPets={myPets} />
-              {!streetBtn ? (
+              {!streetLocation ? (
                 <GetEffectStreet
                   pet={pet}
                   setBafMeteo={setBafMeteo}
@@ -643,7 +654,7 @@ const HeaderStat = memo(
           )}
         </div>
         <nav className="nav-game">
-          {streetBtn ? (
+          {!streetLocation && !vet ? (
             <Link className="link-to-street" to={`/${page}/${pet.id}`}>
               <img src={imgNav} alt="" />
               Гулять
@@ -651,15 +662,42 @@ const HeaderStat = memo(
           ) : (
             <></>
           )}
+          {vet ? (
+            <Link
+              className="link-to-street"
+              style={{ color: "black" }}
+              to={`/${page}/${pet.id}`}
+            >
+              <img src={imgNav} alt="" />
+              Выйти из клиники
+            </Link>
+          ) : (
+            <></>
+          )}
+          {!vet ? (
+            <div className="market-container-btn" onClick={showMarket}>
+              <img src={market} />
+              Магазин
+            </div>
+          ) : (
+            <></>
+          )}
+          {!vet ? (
+            <div className="market-container-btn" onClick={showNews}>
+              <img src={newsImg} />
+              Новости
+            </div>
+          ) : (
+            <div
+              className="market-container-btn"
+              style={{ color: "black" }}
+              onClick={showNews}
+            >
+              <img src={newsImg} />
+              Новости
+            </div>
+          )}
 
-          <div className="market-container-btn" onClick={showMarket}>
-            <img src={market} />
-            Магазин
-          </div>
-          <div className="market-container-btn" onClick={showNews}>
-            <img src={newsImg} />
-            Новости
-          </div>
           {!comandShow ? (
             <Link className="exit" to="/">
               Выход
@@ -668,16 +706,29 @@ const HeaderStat = memo(
             <></>
           )}
         </nav>
-        {/* Мгазин */}
-        {visibleMarket ? (
-          <Market
-            pet={pet}
-            myPets={myPets}
-            setMyPets={setMyPets}
-            setVisibleMarket={setVisibleMarket}
-            setBackgroundStyle={setBackgroundStyle}
-            backgroundStyle={backgroundStyle}
-          />
+        {/* Активна или нет кнопка магазина, заданий и новостей */}
+        {MNQ ? (
+          <>
+            {/* Мгазин */}
+            {visibleMarket ? (
+              <Market
+                pet={pet}
+                myPets={myPets}
+                setMyPets={setMyPets}
+                setVisibleMarket={setVisibleMarket}
+                setBackgroundStyle={setBackgroundStyle}
+                backgroundStyle={backgroundStyle}
+              />
+            ) : (
+              <></>
+            )}
+            {/* Новости
+            {visibleNews ? (
+              <News pet={pet} setVisibleNews={setVisibleNews} />
+            ) : (
+              <></>
+            )} */}
+          </>
         ) : (
           <></>
         )}
@@ -687,6 +738,7 @@ const HeaderStat = memo(
         ) : (
           <></>
         )}
+        {/* Активна или нет кнопка магазина, заданий и новостей */}
         {/* Окно бонуса повышения уровня */}
         {blockLevelUp ? (
           <ModalLvlUp

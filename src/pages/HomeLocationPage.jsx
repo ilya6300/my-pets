@@ -16,24 +16,22 @@ const HomeLocationPage = () => {
   const [classGameBall, setClassGameBall] = useState("btn-game-green-ball");
   const [classGameCanat, setClassGameCanat] = useState("btn-game-canat");
   const [myPets, setMyPets] = useLocalStorage([], "myPets");
-  const [hover, setHover] = useState(false);
   const [flagAction, setFlagAction] = useState(true);
   const [visibleModal, setVisibleModal] = useState(false);
   const [message, setMessage] = useState("");
   const [coordsPet, setCoordsPet] = useState(1);
   const refCoords = useRef();
-  const streetBtn = true;
-  // const flagHPages = false;
+  const streetLocation = false;
+  const MNQ = true
+  const vet = false
 
   // Получение питомца по id
-  // let coords = ref.current.getBoundingClientRect();
   useEffect(() => {
     myPets.forEach((pt) => {
       if (String(pt.id) === { id }.id) {
         setPet(pt);
         setImgPet(pt.img_pet[1]);
         setBackgroundStyle(pt.bgHome[0]);
-        // coords coords = ref.current.getBoundingClientRect();;
       }
     });
   }, []);
@@ -47,18 +45,24 @@ const HomeLocationPage = () => {
       if (pet.satiety <= 80) {
         let intervalFeed;
         intervalFeed = setInterval(() => {
-          if (pet.satiety <  pet.max_satiety) {
+          if (pet.satiety < pet.max_satiety) {
             pet.satiety = pet.satiety + 1;
+            if (pet.satiety > 100) {
+              pet.satiety = 100;
+            }
             pet.toilet = pet.toilet - 0.3;
             if (pet.toilet <= 0) {
               pet.toilet = 0;
             }
+
             setMyPets([...myPets], pet.satiety, pet.toilet);
           } else {
             return clearInterval(intervalFeed);
           }
         }, 100);
         setTimeout(() => {
+          console.log("flagAction", flagAction);
+          setFlagAction(true);
           clearInterval(intervalFeed);
         }, 6000);
       } else {
@@ -66,10 +70,18 @@ const HomeLocationPage = () => {
         setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
+          setFlagAction(true);
           setVisibleModal(false);
         }, 3000);
       }
-      setFlagAction(true);
+    } else {
+      setMessage('Я занят')
+      coords = refCoords.current.getBoundingClientRect();
+      setCoordsPet(coords);
+      setVisibleModal(true)
+      setTimeout(() => {
+        setVisibleModal(false)
+      }, 3000);
     }
   };
   // Игра
@@ -90,6 +102,8 @@ const HomeLocationPage = () => {
               if (pet.mood > pet.max_mood) {
                 pet.mood = pet.max_mood;
               }
+              console.log("flagAction", flagAction);
+              setFlagAction(true);
               setMyPets([...myPets], pet.mood, pet.energy);
             }, 1300);
           }, 2600);
@@ -102,9 +116,15 @@ const HomeLocationPage = () => {
         setTimeout(() => {
           setVisibleModal(false);
         }, 3000);
-      }
-
-      setFlagAction(true);
+      } 
+    } else {
+      setMessage('Я занят')
+      coords = refCoords.current.getBoundingClientRect();
+      setCoordsPet(coords);
+      setVisibleModal(true)
+      setTimeout(() => {
+        setVisibleModal(false)
+      }, 3000);
     }
   };
   const gameCanat = () => {
@@ -124,6 +144,8 @@ const HomeLocationPage = () => {
               if (pet.mood > pet.max_mood) {
                 pet.mood = pet.max_mood;
               }
+              console.log("flagAction", flagAction);
+              setFlagAction(true);
               setMyPets([...myPets], pet.mood, pet.energy);
             }, 1300);
           }, 3100);
@@ -137,25 +159,19 @@ const HomeLocationPage = () => {
           setVisibleModal(false);
         }, 3000);
       }
-
-      setFlagAction(true);
+    } else {
+      setMessage('Я занят')
+      coords = refCoords.current.getBoundingClientRect();
+      setCoordsPet(coords);
+      setVisibleModal(true)
+      setTimeout(() => {
+        setVisibleModal(false)
+      }, 3000);
     }
   };
 
   // Наведение на питомца
 
-  const hoverPet = useMemo(() => {
-    let hoverTaimer;
-    if (hover) {
-      hoverTaimer = setInterval(() => {
-        pet.mood = pet.mood + 1;
-        if (pet.mood > pet.max_mood) {
-          pet.mood = pet.max_mood;
-        }
-        clearInterval(hoverTaimer);
-      }, 1000);
-    }
-  }, [hover]);
 
   // Убрать какашку
 
@@ -175,7 +191,6 @@ const HomeLocationPage = () => {
           className="location-home-body"
         >
           <HeaderStat
-            // flagHPages={flagHPages}
             pet={pet}
             setMyPets={setMyPets}
             myPets={myPets}
@@ -184,7 +199,7 @@ const HomeLocationPage = () => {
             imgNav={imgExitStreet}
             setBackgroundStyle={setBackgroundStyle}
             backgroundStyle={backgroundStyle}
-            streetBtn={streetBtn}
+            streetLocation={streetLocation}
             setbackgroundStyleStreet={setbackgroundStyleStreet}
             backgroundStyleStreet={backgroundStyleStreet}
             visibleModal={visibleModal}
@@ -195,16 +210,14 @@ const HomeLocationPage = () => {
             setCoordsPet={setCoordsPet}
             coords={coords}
             refCoords={refCoords}
+            flagAction={flagAction}
+            setFlagAction={setFlagAction}
+            MNQ={MNQ}
+            vet={vet}
           />
-          {/* <Link className="link-to-street" to={`/streetlocation/${pet.id}`}>
-            <img src={imgExitStreet} alt="" />
-            Гулять
-          </Link> */}
           <div className="obj-container">
             <img
               className="pet-img"
-              onMouseMove={() => setHover(true)}
-              onMouseOut={() => setHover(false)}
               src={imgPet}
               ref={refCoords}
               alt=""
@@ -223,7 +236,6 @@ const HomeLocationPage = () => {
               src={pet.toyTwoObj}
               alt=""
             />
-            <img className="punching-bag" src={pet.punchingBagObj} alt="" />
             {pet.shit ? (
               <img
                 className="shit"

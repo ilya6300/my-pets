@@ -16,11 +16,13 @@ import imgSword from "../img/object/toy/sword.png";
 import imgDelicacy from "../img/icon/delicacy.png";
 import imgEnergy from "../img/icon/energy_icon.png";
 import imgTablet from "../img/icon/medicine.png";
+import imgTabletMite from "../img/icon/tablet_block_mite.png";
 
 //
 import ListBGMarket from "./ListBGMarket";
 import ListToyMarket from "./ListToyMarket";
 import ListConsumablesMark from "./ListConsumablesMark";
+import PetInfoStatMarket from "./PetInfoStatMarket";
 
 const Market = memo(
   ({
@@ -169,7 +171,7 @@ const Market = memo(
         price: 5,
         type: "consumables",
         buy() {
-          if (pet.money >= 5) {
+          if (pet.money >= 5 && pet.energy < 100) {
             pet.money = pet.money - 5;
             pet.energy = pet.energy + 50;
             if (pet.energy > 100) {
@@ -182,23 +184,116 @@ const Market = memo(
       },
       {
         id: 3,
-        title: "Лекарство",
+        title: "Таблетка АБ-Пет-1",
         img: imgTablet,
-        text: "Вылечить питомца. Применяется сразу",
+        text: "Устраняет определённое плохое состояние, уточняйте у ветеринара",
         price: 10,
         type: "consumables",
         buy() {
           if (pet.money >= 10) {
             pet.money = pet.money - 10;
+            pet.effect[1].flag = false;
+            const collectionEffectDisease = [];
             pet.effect.forEach((elEff) => {
-              elEff.flag = false;
+              if (elEff.type === "disease") {
+                collectionEffectDisease.push(elEff.flag);
+              }
             });
-            pet.max_energy = 100
-            pet.mood = 100
-            pet.max_satiety = 100
-            pet.effect[0].flag = true;
-            setVisibleMarket(false)
-            setMyPets([...myPets], pet.energy);
+            if (collectionEffectDisease.includes(true)) {
+              setVisibleMarket(false);
+              setMyPets([...myPets], pet.energy);
+              return;
+            } else {
+              setVisibleMarket(false);
+              setMyPets([...myPets], pet.energy);
+              pet.effect[0].flag = true;
+              pet.max_energy = 100;
+              pet.mood = 100;
+              pet.max_satiety = 100;
+            }
+          }
+        },
+      },
+      {
+        id: 4,
+        title: "Таблетка АБ-Пет-2",
+        img: imgTablet,
+        text: "Устраняет определённое плохое состояние, уточняйте у ветеринара",
+        price: 10,
+        type: "consumables",
+        buy() {
+          if (pet.money >= 10) {
+            pet.money = pet.money - 10;
+            pet.effect[2].flag = false;
+            const collectionEffectDisease = [];
+            pet.effect.forEach((elEff) => {
+              if (elEff.type === "disease") {
+                collectionEffectDisease.push(elEff.flag);
+              }
+            });
+            if (collectionEffectDisease.includes(true)) {
+              setVisibleMarket(false);
+              setMyPets([...myPets], pet.energy);
+              return;
+            } else {
+              setVisibleMarket(false);
+              setMyPets([...myPets], pet.energy);
+              pet.effect[0].flag = true;
+              pet.max_energy = 100;
+              pet.mood = 100;
+              pet.max_satiety = 100;
+            }
+          }
+        },
+      },
+      {
+        id: 5,
+        title: "Таблетка АБ-Пет-3",
+        img: imgTablet,
+        text: "Устраняет определённое плохое состояние, уточняйте у ветеринара",
+        price: 15,
+        type: "consumables",
+        buy() {
+          if (pet.money >= 10) {
+            pet.money = pet.money - 10;
+            pet.effect[3].flag = false;
+            const collectionEffectDisease = [];
+            pet.effect.forEach((elEff) => {
+              if (elEff.type === "disease") {
+                collectionEffectDisease.push(elEff.flag);
+              }
+            });
+            if (collectionEffectDisease.includes(true)) {
+              setVisibleMarket(false);
+              setMyPets([...myPets], pet.energy);
+              return;
+            } else {
+              setVisibleMarket(false);
+              setMyPets([...myPets], pet.energy);
+              pet.effect[0].flag = true;
+              pet.max_energy = 100;
+              pet.mood = 100;
+              pet.max_satiety = 100;
+            }
+          }
+        },
+      },
+      {
+        id: 6,
+        title: "Петовекто",
+        img: imgTabletMite,
+        text: "Защищает вашего питомца от укусов клещей н 24 часа",
+        price: 15,
+        type: "consumables",
+        buy() {
+          if (pet.money >= 15) {
+            pet.money = pet.money - 15;
+            pet.effect[5].flag = true;
+            const newTime = new Date();
+            pet.effect[5].timer = newTime;
+            //
+            setVisibleMarket(false);
+            setMyPets([...myPets], pet.effect[5].flag);
           }
         },
       },
@@ -207,26 +302,28 @@ const Market = memo(
     const hiddenMarket = () => {
       setVisibleMarket(false);
     };
-// useEffect (() => {
-//   setViewerContent(viewerContent)
-// }, [viewerContent, setViewerContent])
+    useEffect(() => {
+      setViewerContent(viewerContent);
+    }, [viewerContent]);
     // маркет навигация
     const showSkin = () => {
-      setViewerContent((n) => n = null);
+      setViewerContent(null);
+      console.log("viewerContent", viewerContent);
       setSkinAll((f) => (f = true));
       setConsumablesFlag((f) => (f = false));
       setSuperM((f) => (f = false));
     };
     const showConsumables = () => {
-      setViewerContent((n) => n = null);
+      setViewerContent(null);
+      console.log("viewerContent", viewerContent);
       setSkinAll((f) => (f = false));
       setConsumablesFlag((f) => (f = true));
       setSuperM((f) => (f = false));
     };
     // Показать расходник
     const thisConsumables = (bgmarket) => {
+      // setViewerContent(null);
       setTargetSale(consumables.find((c) => c.id === bgmarket.id));
-
     };
     // Купить расходник
     const buyConsumables = () => {
@@ -243,9 +340,11 @@ const Market = memo(
     }, [targetSale]);
 
     const thisBG = (bgmarket) => {
+      // setViewerContent(null);
       setTargetSale(bg.find((b) => b.id === bgmarket.id));
     };
     const thisToy = (bgmarket) => {
+      // setViewerContent(null);
       setTargetSale(toy.find((t) => t.id === bgmarket.id));
     };
     // Купить новый фон
@@ -263,7 +362,6 @@ const Market = memo(
     const saleToyOne = () => {
       if (pet.money >= targetSale.price) {
         pet.toyOneObj = viewerContent;
-        // setBackgroundStyle(pet.bgHome[0]);
         pet.money = pet.money - targetSale.price;
         setVisibleMarket(false);
         setMyPets([...myPets], pet.toyOneObj, pet.money);
@@ -274,7 +372,6 @@ const Market = memo(
     const saleToyTwo = () => {
       if (pet.money >= targetSale.price) {
         pet.toyTwoObj = viewerContent;
-        // setBackgroundStyle(pet.bgHome[0]);
         pet.money = pet.money - targetSale.price;
         setVisibleMarket(false);
         setMyPets([...myPets], pet.toyTwoObj, pet.money);
@@ -301,6 +398,19 @@ const Market = memo(
         pet.energy = 100;
       }
       setMyPets([...myPets], pet.energy);
+    };
+    const superFuncFood = () => {
+      pet.satiety = pet.satiety - 50;
+      if (pet.satiety < 0) {
+        pet.satiety = 0;
+      }
+      setMyPets([...myPets], pet.satiety);
+    };
+    const superFuncBadEffect = () => {
+      pet.effect[0].flag = false;
+      pet.effect[1].flag = true;
+      pet.effect[2].flag = true;
+      setMyPets([...myPets], pet.effect);
     };
 
     return (
@@ -329,7 +439,6 @@ const Market = memo(
                   <li>Монет {pet.money}</li>
                 </ul>
                 <ListBGMarket bg={bg} thisbg={thisBG} salebg={saleBG} />
-                {/* <ListBGMarket toy={toy} thisbg={thisBG} salebg={saleBG} /> */}
                 <ListToyMarket toy={toy} thistoy={thisToy} />
               </div>
             ) : (
@@ -338,11 +447,11 @@ const Market = memo(
             {/* Расходники */}
             {consumablesFlag ? (
               <div className="product-container">
-                <ul style={{ color: "azure" }}>
-                  <li>Монет {pet.money}</li>
-                  <li>Энергии {pet.energy}</li>
-                  <li>Лакомсва {pet.delicacy}</li>
-                </ul>
+                <PetInfoStatMarket
+                  money={pet.money}
+                  energy={pet.energy}
+                  delicacy={pet.delicacy}
+                />
                 <ListConsumablesMark
                   thisconsumables={thisConsumables}
                   consumables={consumables}
@@ -380,16 +489,22 @@ const Market = memo(
             )}
             {superM ? (
               <>
-                <ul style={{ color: "azure" }}>
-                  <li>Монет {pet.money}</li>
-                  <li>Энергии {pet.energy}</li>
-                  <li>Лакомсва {pet.delicacy}</li>
-                </ul>
+                <PetInfoStatMarket
+                  money={pet.money}
+                  energy={pet.energy}
+                  delicacy={pet.delicacy}
+                />
                 <button className="btn-market" onClick={superFuncMoney}>
                   Получить 5 монет
                 </button>
                 <button className="btn-market" onClick={superFuncEnergy}>
                   Получить энергию
+                </button>
+                <button className="btn-market" onClick={superFuncFood}>
+                  Минус сытость
+                </button>
+                <button className="btn-market" onClick={superFuncBadEffect}>
+                  Плохие эффекты
                 </button>
               </>
             ) : (
