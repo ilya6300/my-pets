@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
 
 const GetEffectStreet = memo(({ pet, setBafMeteo, bafMeteo }) => {
   // Получить эффект через
@@ -72,7 +72,7 @@ const GetEffectStreet = memo(({ pet, setBafMeteo, bafMeteo }) => {
     }
   }, [bafMeteo]);
 
-  return <div></div>;
+  return 
 });
 
 export default GetEffectStreet;

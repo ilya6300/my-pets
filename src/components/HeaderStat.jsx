@@ -67,9 +67,12 @@ const HeaderStat = memo(
       intervalUpdateMeteo = null;
       intervalUpdateMeteo = setInterval(() => {
         meteoFuncion();
-      }, 900000);
+      }, 450000);
       return () => clearInterval(intervalUpdateMeteo);
     }, [pet]);
+    useEffect(() => {
+      meteoFuncion()
+    }, [])
 
     // Функция погоды
     // Голод
@@ -79,7 +82,7 @@ const HeaderStat = memo(
         const oldTime = new Date(pet.end_food);
         const diff = (newTime.getTime() - oldTime.getTime()) / 1440000;
         pet.satiety = pet.satiety - diff * 1;
-        console.log("diff food", diff * 1);
+        // console.log("diff food", diff * 1);
         if (pet.satiety <= 0) {
           pet.satiety = 0;
         }
@@ -89,7 +92,7 @@ const HeaderStat = memo(
         const oldTime = new Date(pet.end_food);
         const diff = (newTime.getTime() - oldTime.getTime()) / 4320000;
         pet.satiety = pet.satiety - diff * 1;
-        console.log("diff food", diff * 1);
+        // console.log("diff food", diff * 1);
         if (pet.satiety <= 0) {
           pet.satiety = 0;
         }
@@ -105,9 +108,9 @@ const HeaderStat = memo(
         const oldTime = new Date(pet.time_game);
         const diff = (newTime.getTime() - oldTime.getTime()) / 864000;
 
-        console.log(diff);
+        // console.log(diff);
         pet.mood = pet.mood - diff * 1;
-        console.log("diff mood", diff * 1);
+        // console.log("diff mood", diff * 1);
         if (pet.mood <= 0) {
           pet.mood = 0;
         }
@@ -117,20 +120,20 @@ const HeaderStat = memo(
     };
     // Туалет
     const consumptionToilet = () => {
-      console.log("pet.shit", pet.shit);
+      // console.log("pet.shit", pet.shit);
       const newTime = new Date();
       if (pet.toilet > 0 && !pet.shit) {
         // newTime = new Date();
         const oldTime = new Date(pet.end_toilet);
         const diff = (newTime.getTime() - oldTime.getTime()) / 576000;
         pet.toilet = pet.toilet - diff * 1;
-        console.log("diff toilet", diff * 1);
+        // console.log("diff toilet", diff * 1);
         if (pet.toilet <= 0) {
           pet.toilet = 0;
         }
         pet.end_toilet = newTime;
       } else if (!pet.shit) {
-        console.log("pet.shit", pet.shit);
+        // console.log("pet.shit", pet.shit);
         pet.shit = true;
         pet.toilet = 100;
       } else {
@@ -149,7 +152,7 @@ const HeaderStat = memo(
       const oldTime = new Date(pet.end_energy);
       const diff = (newTime.getTime() - oldTime.getTime()) / 432000;
       pet.energy = pet.energy + diff * 1;
-      console.log("diff energy", diff * 1);
+      // console.log("diff energy", diff * 1);
       if (pet.energy >= 100) {
         pet.energy = 100;
       }
@@ -186,7 +189,7 @@ const HeaderStat = memo(
             setTimeout(() => {
               setImgPet(pet.img_pet[1]);
               setFlagAction(true);
-              console.log("flagAction", flagAction);
+              // console.log("flagAction", flagAction);
             }, 2500);
           } else {
             getObedience(100);
@@ -203,7 +206,7 @@ const HeaderStat = memo(
               setTimeout(() => {
                 setImgPet(pet.img_pet[1]);
                 setFlagAction(true);
-                console.log("flagAction", flagAction);
+                // console.log("flagAction", flagAction);
               }, 2500);
             }
           }
@@ -224,7 +227,7 @@ const HeaderStat = memo(
           setTimeout(() => {
             setVisibleModal(false);
             setFlagAction(true);
-            console.log("flagAction", flagAction);
+            // console.log("flagAction", flagAction);
           }, 3000);
         }
       } else {
@@ -517,7 +520,7 @@ const HeaderStat = memo(
     const meteoFuncion = () => {
       const newTime = new Date();
       const oldTime = new Date(pet.meteoVar);
-      const diff = (newTime.getTime() - oldTime.getTime()) / 900000;
+      const diff = (newTime.getTime() - oldTime.getTime()) / 450000;
       upDateMeteo = Math.floor(diff * 1);
       if (upDateMeteo > 3) {
         upDateMeteo = 3;
@@ -577,7 +580,7 @@ const HeaderStat = memo(
               </div>
               <div className="statPanel-type-pet"> {pet.type}</div>
               <EffectStat pet={pet} setMyPets={setMyPets} myPets={myPets} />
-              {!streetLocation ? (
+              {streetLocation ? (
                 <GetEffectStreet
                   pet={pet}
                   setBafMeteo={setBafMeteo}

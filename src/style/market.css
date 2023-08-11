@@ -45,7 +45,7 @@
   cursor: pointer;
   display: inline-block;
   width: 150px;
-  height: 195px;
+  height: 215px;
   background: whitesmoke;
   border-radius: 8px;
   margin: 5px 5px;
@@ -105,5 +105,5 @@
   white-space: normal;
   padding: 0 5px;
   margin: -5px 0;
-  font-size: smaller;
+  font-size: small;
 }

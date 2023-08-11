@@ -41,13 +41,22 @@ const Market = memo(
     const [targetSale, setTargetSale] = useState(null);
     let classSkinBtn = ["btn-market"];
     let classConsumablesBtn = ["btn-market"];
+    let classSuperBtn = ["btn-market"];
+
 
     if (skinAll) {
       classSkinBtn = ["btn-market btn-market-active"];
       classConsumablesBtn = ["btn-market"];
+      classSuperBtn = ["btn-market"]
     } else if (consumablesFlag) {
       classConsumablesBtn = ["btn-market btn-market-active"];
       classSkinBtn = ["btn-market"];
+      classSuperBtn = ["btn-market"]
+    } else if (superM) {
+      classConsumablesBtn = ["btn-market"];
+      classSkinBtn = ["btn-market"];
+      classSuperBtn = ["btn-market btn-market-active"]
+
     }
 
     const [bg, setBg] = useState([
@@ -318,7 +327,7 @@ const Market = memo(
       console.log("viewerContent", viewerContent);
       setSkinAll((f) => (f = false));
       setConsumablesFlag((f) => (f = true));
-      setSuperM((f) => (f = false));
+      setSuperM(false);
     };
     // Показать расходник
     const thisConsumables = (bgmarket) => {
@@ -427,7 +436,7 @@ const Market = memo(
             <button className={classSkinBtn} onClick={showSkin}>
               Скины
             </button>
-            <button className={classSkinBtn} onClick={showSuper}>
+            <button className={classSuperBtn} onClick={showSuper}>
               Читы
             </button>
           </div>

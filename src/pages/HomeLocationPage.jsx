@@ -80,6 +80,7 @@ const HomeLocationPage = () => {
       setCoordsPet(coords);
       setVisibleModal(true)
       setTimeout(() => {
+        setFlagAction(true)
         setVisibleModal(false)
       }, 3000);
     }
@@ -114,6 +115,7 @@ const HomeLocationPage = () => {
         setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
+          setFlagAction(true)
           setVisibleModal(false);
         }, 3000);
       } 
@@ -123,6 +125,7 @@ const HomeLocationPage = () => {
       setCoordsPet(coords);
       setVisibleModal(true)
       setTimeout(() => {
+        setFlagAction(true)
         setVisibleModal(false)
       }, 3000);
     }
@@ -156,6 +159,7 @@ const HomeLocationPage = () => {
         setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
+          setFlagAction(true)
           setVisibleModal(false);
         }, 3000);
       }
@@ -165,6 +169,7 @@ const HomeLocationPage = () => {
       setCoordsPet(coords);
       setVisibleModal(true)
       setTimeout(() => {
+        setFlagAction(true)
         setVisibleModal(false)
       }, 3000);
     }
