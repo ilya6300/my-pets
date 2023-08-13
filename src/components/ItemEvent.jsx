@@ -14,7 +14,6 @@ const ItemEvent = (props) => {
         <button className="card-event-btn" onClick={() => props.no(props.event)}>
           {props.event.no_text}
         </button>
-        <button className="card-event-btn" onClick={() => props.ignor(props.event)}>Игнорировать</button>
       </div>
     </div>
   );

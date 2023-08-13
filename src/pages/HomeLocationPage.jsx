@@ -198,7 +198,6 @@ const HomeLocationPage = () => {
       setFlagAction(false);
       setTimeout(() => {
         let clearPetInterval = setInterval(() => {
-          console.log(pet.clear);
           pet.clear = pet.clear + 1;
           setMyPets([...myPets], pet.clear);
           if (pet.clear >= 100) {
@@ -209,7 +208,7 @@ const HomeLocationPage = () => {
               return clearInterval(clearPetInterval);
             }, 2000);
           }
-        }, 500);
+        }, 300);
       }, 2000);
     }
   };
