@@ -56,7 +56,6 @@
   right: 2%;
   bottom: 8%;
   transform: translate(0%, 0%);
-
 }
 .btn-game-canat:hover {
   animation: canat_game_nover 2s infinite;
@@ -110,7 +109,30 @@
   right: -90px;
   bottom: 30%;
 }
+.clear-btn {
+  position: fixed;
+  right: 200px;
+  top: 185px;
+}
+.clear-img-active {
+  z-index: 12;
+  bottom: 13.5%;
+  left: 200%;
+  animation: active_clear_pet 1s forwards;
+}
 
+@media screen and (max-width: 750px) {
+  .clear-btn {
+    position: absolute !important;
+    top: -70px !important;
+    right: 70px !important;
+  }
+}
+@keyframes active_clear_pet {
+100% {
+  left: 55%
+}
+}
 @keyframes ball_green_active {
   0% {
     z-index: 11;

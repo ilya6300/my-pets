@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo, useRef } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import HeaderStat from "../components/HeaderStat";
+import EventSrteet from "../components/EventSrteet";
 
 
 const StreetLocation = () => {
@@ -64,7 +65,10 @@ const StreetLocation = () => {
         setTimeout(() => {
           // console.log(1);
           setImgPet(pet.img_pet[7]);
-
+          pet.clear = pet.clear - 10
+          if (pet.clear < 0) {
+            pet.clear = 0
+          }
           setTimeout(() => {
             // console.log(2);
             pet.toilet = 100;
@@ -90,7 +94,7 @@ const StreetLocation = () => {
     >
       {pet ? (
         <>
-          <HeaderStat
+            <HeaderStat
             pet={pet}
             setMyPets={setMyPets}
             myPets={myPets}
@@ -112,6 +116,7 @@ const StreetLocation = () => {
             MNQ={MNQ}
             vet={vet}
           />
+          <EventSrteet pet={pet} setMyPets={setMyPets} myPets={myPets}/>
           <Link
             className="link-to-street"
             style={{ color: "green" }}

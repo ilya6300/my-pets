@@ -97,7 +97,8 @@ const SelectAndCreatePets = memo(
         freeID.energy = 100; // Энергия
         freeID.max_energy = 100; // Максимальная энергия
         freeID.strong = createPet.strong; // Сила
-
+        freeID.clear = 100; // Чистый
+        
         // Функция расчёта иммунитета
         let resultImmunity;
         const getRandomImmunity = (min, max) => {

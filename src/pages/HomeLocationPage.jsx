@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import imgClear from "../img/object/clear.png";
 
 import HeaderStat from "../components/HeaderStat";
 import ModalLog from "../components/ModalLog";
@@ -22,8 +23,9 @@ const HomeLocationPage = () => {
   const [coordsPet, setCoordsPet] = useState(1);
   const refCoords = useRef();
   const streetLocation = false;
-  const MNQ = true
-  const vet = false
+  const MNQ = true;
+  const vet = false;
+  const [clearFlag, setClearFlag] = useState(false);
 
   // Получение питомца по id
   useEffect(() => {
@@ -75,13 +77,13 @@ const HomeLocationPage = () => {
         }, 3000);
       }
     } else {
-      setMessage('Я занят')
+      setMessage("Я занят");
       coords = refCoords.current.getBoundingClientRect();
       setCoordsPet(coords);
-      setVisibleModal(true)
+      setVisibleModal(true);
       setTimeout(() => {
-        setFlagAction(true)
-        setVisibleModal(false)
+        setFlagAction(true);
+        setVisibleModal(false);
       }, 3000);
     }
   };
@@ -115,18 +117,18 @@ const HomeLocationPage = () => {
         setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
-          setFlagAction(true)
+          setFlagAction(true);
           setVisibleModal(false);
         }, 3000);
-      } 
+      }
     } else {
-      setMessage('Я занят')
+      setMessage("Я занят");
       coords = refCoords.current.getBoundingClientRect();
       setCoordsPet(coords);
-      setVisibleModal(true)
+      setVisibleModal(true);
       setTimeout(() => {
-        setFlagAction(true)
-        setVisibleModal(false)
+        setFlagAction(true);
+        setVisibleModal(false);
       }, 3000);
     }
   };
@@ -159,34 +161,58 @@ const HomeLocationPage = () => {
         setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
-          setFlagAction(true)
+          setFlagAction(true);
           setVisibleModal(false);
         }, 3000);
       }
     } else {
-      setMessage('Я занят')
+      setMessage("Я занят");
       coords = refCoords.current.getBoundingClientRect();
       setCoordsPet(coords);
-      setVisibleModal(true)
+      setVisibleModal(true);
       setTimeout(() => {
-        setFlagAction(true)
-        setVisibleModal(false)
+        setFlagAction(true);
+        setVisibleModal(false);
       }, 3000);
     }
   };
 
   // Наведение на питомца
 
-
   // Убрать какашку
-
   const clearShit = () => {
     pet.shit = false;
     const newTime = new Date();
     pet.end_toilet = newTime;
-    setMyPets([...myPets], pet.shit);
+    pet.clear = pet.clear - 15;
+    if (pet.clear < 0) {
+      pet.clear = 0;
+    }
+    setMyPets([...myPets], pet.shit, pet.clear);
   };
-  // ref img
+
+  // Помыть питомца
+  const clearPet = () => {
+    setClearFlag(true);
+    if (flagAction) {
+      setFlagAction(false);
+      setTimeout(() => {
+        let clearPetInterval = setInterval(() => {
+          console.log(pet.clear);
+          pet.clear = pet.clear + 1;
+          setMyPets([...myPets], pet.clear);
+          if (pet.clear >= 100) {
+            pet.clear = 100;
+            setTimeout(() => {
+              setFlagAction(true);
+              setClearFlag(false);
+              return clearInterval(clearPetInterval);
+            }, 2000);
+          }
+        }, 500);
+      }, 2000);
+    }
+  };
 
   return (
     <div>
@@ -220,13 +246,17 @@ const HomeLocationPage = () => {
             MNQ={MNQ}
             vet={vet}
           />
+
           <div className="obj-container">
-            <img
-              className="pet-img"
-              src={imgPet}
-              ref={refCoords}
-              alt=""
-            />
+            {clearFlag ? (
+              <img className="pet-img clear-img-active" src={imgClear} alt="" />
+            ) : (
+              <></>
+            )}
+            <div onClick={clearPet} className="market-container-btn clear-btn">
+              <img src={imgClear} alt="" /> Помыть
+            </div>
+            <img className="pet-img" src={imgPet} ref={refCoords} alt="" />
 
             <img className="btn-feed" onClick={feed} src={pet.foodObj} alt="" />
             <img

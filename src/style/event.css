@@ -1,0 +1,89 @@
+.card-event-btn-show-card {
+  cursor: pointer;
+  position: fixed;
+  top: 20%;
+  right: 20%;
+  padding-top: 12px;
+  display: flex;
+  max-width: 100px;
+  width: 20vw;
+  min-width: 80px;
+  max-height: 145px;
+  height: 32vw;
+  min-height: 115px;
+  background: whitesmoke;
+  border-radius: 8px;
+  box-shadow: 0 0 10px 1px #00000054;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.event-title-btn {
+  color: #ff0000db;
+  font-size: 18px;
+  font-weight: 700;
+  transform: rotate(346deg);
+  padding-top: 10px;
+}
+.event-icon-btn {
+  color: #ff0000db;
+  margin-top: -5px;
+  font-size: 65px;
+  font-weight: 700;
+}
+.list-event-container {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: #4140407d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-event-container {
+  position: relative;
+  background: azure;
+  width: 90vw;
+  max-width: 400px;
+  height: 28vh;
+  max-height: 240px;
+  border-radius: 10px;
+  padding: 30px 10px;
+  box-shadow: 0 0 10px 1px #000000c4;
+}
+.card-event-title {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+.card-event-container-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+}
+.card-event-btn {
+  margin: 0 5px;
+  padding: 3px 2px;
+}
+.history-modal-event {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px 0 0 0;
+}
+.history-event-btn {
+    position: absolute;
+    bottom: 20px;
+    left: 70px;
+    width: 100px;
+    padding: 5px 8px;
+    font-size: 18px;
+    font-weight: 200;
+}
+.event-history-text {
+    font-size: 15px;
+}

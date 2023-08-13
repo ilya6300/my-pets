@@ -41,6 +41,19 @@ const HeaderStat = memo(
     vet,
   }) => {
     // const ref = useRef();
+
+    // Контроль за статами
+    // useEffect(() => {
+    //   if (!pet.effect[0]) {
+    //     if (pet.mood > 40) {
+    //       console.log(" Плохой pet.mood")
+    //       pet.mood = 40
+    //     }
+    //     if (pet.energy > 40) {
+    //       pet.energy = 40
+    //     }
+    //   }
+    // }, [pet]);
     // магазин
     const [visibleMarket, setVisibleMarket] = useState(false);
     const showMarket = () => {
@@ -71,8 +84,8 @@ const HeaderStat = memo(
       return () => clearInterval(intervalUpdateMeteo);
     }, [pet]);
     useEffect(() => {
-      meteoFuncion()
-    }, [])
+      meteoFuncion();
+    }, []);
 
     // Функция погоды
     // Голод
@@ -556,6 +569,7 @@ const HeaderStat = memo(
             <ItesstatInfo stat={pet.energy} text="Энергия" />
             <ItesstatInfo stat={pet.satiety} text="Сытость" />
             <ItesstatInfo stat={pet.mood} text="Настроение" />
+            <ItesstatInfo stat={pet.clear} text="Чистота" />
             <ItesstatInfo stat={pet.toilet} text="Туалет" />
           </div>
           {/* Профиль справа */}
