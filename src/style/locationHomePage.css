@@ -123,9 +123,9 @@
 
 @media screen and (max-width: 750px) {
   .clear-btn {
-    position: absolute !important;
-    top: -70px !important;
-    right: 70px !important;
+    position: absolute;
+    top: -70px;
+    right: 60px;
   }
 }
 @keyframes active_clear_pet {

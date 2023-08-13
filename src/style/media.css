@@ -95,6 +95,9 @@
     bottom: 9%;
     transform: translate(50%, 50%);
   }
+  .link-to-street {
+    margin: 5px 0px 5px 2px;
+  }
 }
   /* Мобильная версия */
 @media screen and (max-width: 500px) {
