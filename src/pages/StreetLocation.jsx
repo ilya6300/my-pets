@@ -4,7 +4,6 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import HeaderStat from "../components/HeaderStat";
 import EventSrteet from "../components/EventSrteet";
 
-
 const StreetLocation = () => {
   const { id } = useParams();
   const [pet, setPet] = useState(null);
@@ -17,8 +16,8 @@ const StreetLocation = () => {
   const [flagAction, setFlagAction] = useState(true);
   const [flagLoadingPet, setFlagLoadingPet] = useState(false);
   const streetLocation = true;
-  const MNQ = true
-  const vet =false
+  const MNQ = true;
+  const vet = false;
 
   // Получение питомца по id
 
@@ -30,7 +29,6 @@ const StreetLocation = () => {
           setImgPet(pt.img_pet[1]);
           setbackgroundStyleStreet(pt.currentMeteo[0].bg);
           setFlagLoadingPet(true);
-
         }
       });
     }
@@ -65,9 +63,9 @@ const StreetLocation = () => {
         setTimeout(() => {
           // console.log(1);
           setImgPet(pet.img_pet[7]);
-          pet.clear = pet.clear - 10
+          pet.clear = pet.clear - 10;
           if (pet.clear < 0) {
-            pet.clear = 0
+            pet.clear = 0;
           }
           setTimeout(() => {
             // console.log(2);
@@ -94,7 +92,7 @@ const StreetLocation = () => {
     >
       {pet ? (
         <>
-            <HeaderStat
+          <HeaderStat
             pet={pet}
             setMyPets={setMyPets}
             myPets={myPets}
@@ -116,7 +114,7 @@ const StreetLocation = () => {
             MNQ={MNQ}
             vet={vet}
           />
-          <EventSrteet pet={pet} setMyPets={setMyPets} myPets={myPets}/>
+
           <Link
             className="link-to-street"
             style={{ color: "green" }}
@@ -138,11 +136,11 @@ const StreetLocation = () => {
             src={imgPet}
             ref={refCoords}
           />
+          <EventSrteet pet={pet} setMyPets={setMyPets} myPets={myPets} />
         </>
       ) : (
         <></>
       )}
-
     </div>
   );
 };
