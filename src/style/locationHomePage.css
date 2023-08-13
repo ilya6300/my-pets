@@ -115,8 +115,9 @@
   top: 185px;
 }
 .clear-img-active {
+  min-width: 350px !important;
   z-index: 12;
-  bottom: 13.5%;
+  bottom: 12.5% !important;
   left: 200%;
   animation: active_clear_pet 1s forwards;
 }
@@ -124,8 +125,8 @@
 @media screen and (max-width: 750px) {
   .clear-btn {
     position: absolute;
-    top: -70px;
-    right: 60px;
+    top: 0;
+    right: -20px;
   }
 }
 @keyframes active_clear_pet {
