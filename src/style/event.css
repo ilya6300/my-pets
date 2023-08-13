@@ -69,7 +69,7 @@
   padding: 3px 2px;
 }
 .history-modal-event {
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
