@@ -9,7 +9,7 @@ const ModalLog = memo(({ children, visibleModal, coordsPet }) => {
     <div className={classModal.join(" ")} 
     style={{ left: coordsPet.left + 70 + 'px', bottom: coordsPet.height + 100 + 'px'}}       
     >
-      {children}
+      <p className="modal-log-message">{children}</p>
     </div>
   );
 });

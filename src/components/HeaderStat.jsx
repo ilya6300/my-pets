@@ -13,6 +13,7 @@ import News from "./News";
 import EffectStat from "./EffectStat";
 import GetEffectStreet from "./GetEffectStreet";
 import Needs from "./Needs";
+import PetInfo from "./PetInfo";
 
 const HeaderStat = memo(
   ({
@@ -40,24 +41,18 @@ const HeaderStat = memo(
     MNQ,
     vet,
   }) => {
-    // const ref = useRef();
-
-    // Контроль за статами
-    // useEffect(() => {
-    //   if (!pet.effect[0]) {
-    //     if (pet.mood > 40) {
-    //       console.log(" Плохой pet.mood")
-    //       pet.mood = 40
-    //     }
-    //     if (pet.energy > 40) {
-    //       pet.energy = 40
-    //     }
-    //   }
-    // }, [pet]);
     // магазин
     const [visibleMarket, setVisibleMarket] = useState(false);
     const showMarket = () => {
       setVisibleMarket(true);
+    };
+    // Инфо о питомце
+    const [flagInfo, setFlagInfo] = useState(false);
+
+    const showInfo = () => {
+      {
+        !flagInfo ? setFlagInfo(true) : setFlagInfo(false);
+      }
     };
 
     // Новости
@@ -172,6 +167,7 @@ const HeaderStat = memo(
       pet.end_energy = newTime;
       setMyPets([...myPets], pet.energy);
     };
+
     //   Команды
 
     const showComandF = () => {
@@ -179,13 +175,14 @@ const HeaderStat = memo(
         !comandShow ? setComandShow(true) : setComandShow(false);
       }
     };
+
     // Рандомная функция до 100
     let resultObedience;
     const getObedience = (max) => {
       return (resultObedience = Math.floor(Math.random() * max));
     };
-    // Команда сидеть
-    const comandSit = () => {
+    // Функция команды
+    const comand = (index_comand, index_img) => {
       if (flagAction) {
         setFlagAction(false);
         if (pet.delicacy >= 1 && pet.energy >= 5) {
@@ -194,11 +191,11 @@ const HeaderStat = memo(
           if (pet.satiety > 100) {
             pet.satiety = 100;
           }
-          if (!pet.comands[0].studied) {
-            pet.comands[0].studied = true;
-            pet.comands[0].progress = 30;
+          if (!pet.comands[index_comand].studied) {
+            pet.comands[index_comand].studied = true;
+            pet.comands[index_comand].progress = 30;
             levelUpFunction();
-            setImgPet(pet.img_pet[2]);
+            setImgPet(pet.img_pet[index_img]);
             setTimeout(() => {
               setImgPet(pet.img_pet[1]);
               setFlagAction(true);
@@ -207,15 +204,16 @@ const HeaderStat = memo(
           } else {
             getObedience(100);
             // console.log("resultObedience", resultObedience);
-            if (pet.comands[0].progress >= resultObedience) {
-              if (pet.comands[0].progress >= 100) {
-                pet.comands[0].progress = 100;
+            if (pet.comands[index_comand].progress >= resultObedience) {
+              if (pet.comands[index_comand].progress >= 100) {
+                pet.comands[index_comand].progress = 100;
               } else {
-                pet.comands[0].progress = pet.comands[0].progress + 10;
+                pet.comands[index_comand].progress =
+                  pet.comands[index_comand].progress + 10;
                 levelUpFunction();
               }
 
-              setImgPet(pet.img_pet[2]);
+              setImgPet(pet.img_pet[index_img]);
               setTimeout(() => {
                 setImgPet(pet.img_pet[1]);
                 setFlagAction(true);
@@ -244,167 +242,30 @@ const HeaderStat = memo(
           }, 3000);
         }
       } else {
-        setMessage("Я занят");
+        setMessage((m) => "Я занят");
         coords = refCoords.current.getBoundingClientRect();
         setCoordsPet(coords);
         setVisibleModal(true);
         setTimeout(() => {
           setVisibleModal(false);
         }, 3000);
+        console.log(message);
       }
       //
 
-      setMyPets([...myPets], pet.comands[0].studied);
+      setMyPets([...myPets], pet.comands[index_comand].studied);
+    };
+    // Команда сидеть
+    const comandSit = () => {
+      comand(0, 2);
     };
     // Команда лежать
     const comandLie = () => {
-      if (flagAction) {
-        //
-        if (pet.delicacy >= 1 && pet.energy >= 5) {
-          pet.delicacy--;
-          pet.satiety = pet.satiety + 3;
-          if (pet.satiety > 100) {
-            pet.satiety = 100;
-          }
-          if (!pet.comands[1].studied) {
-            pet.comands[1].studied = true;
-            pet.comands[1].progress = 30;
-            levelUpFunction();
-            setImgPet(pet.img_pet[3]);
-            setTimeout(() => {
-              setImgPet(pet.img_pet[1]);
-              setFlagAction(true);
-            }, 2500);
-          } else {
-            getObedience(100);
-            // console.log("resultObedience", resultObedience);
-            if (pet.comands[1].progress >= resultObedience) {
-              pet.energy = pet.energy - 5;
-              if (pet.comands[1].progress >= 100) {
-                pet.comands[1].progress = 100;
-              } else {
-                pet.comands[1].progress = pet.comands[1].progress + 10;
-                levelUpFunction();
-              }
-
-              setImgPet(pet.img_pet[3]);
-              setTimeout(() => {
-                setImgPet(pet.img_pet[1]);
-                setFlagAction(true);
-              }, 2500);
-            }
-          }
-          pet.energy = pet.energy - 5;
-        } else if (pet.energy < 5) {
-          setMessage((m) => (m = "У меня нет сил играть"));
-          coords = refCoords.current.getBoundingClientRect();
-          setCoordsPet(coords);
-          setVisibleModal(true);
-          setTimeout(() => {
-            setVisibleModal(false);
-          }, 3000);
-        } else if (pet.delicacy === 0) {
-          setMessage((m) => (m = "А дашь вкусняшку?"));
-          coords = refCoords.current.getBoundingClientRect();
-          setCoordsPet(coords);
-          setVisibleModal(true);
-          setTimeout(() => {
-            setVisibleModal(false);
-            setFlagAction(true);
-          }, 3000);
-        }
-        //
-      } else {
-        setMessage("Я занят");
-        coords = refCoords.current.getBoundingClientRect();
-        setCoordsPet(coords);
-        setVisibleModal(true);
-        setTimeout(() => {
-          setVisibleModal(false);
-        }, 3000);
-      }
-      setMyPets([...myPets], pet.comands[1].studied, pet.energy);
+      comand(1, 3);
     };
     // Команда "Дай лапу"
     const comandPaw = () => {
-      if (flagAction) {
-        //
-        if (pet.delicacy >= 1 && pet.energy >= 5) {
-          pet.delicacy--;
-          pet.satiety = pet.satiety + 3;
-          if (pet.satiety > 100) {
-            pet.satiety = 100;
-          }
-          if (!pet.comands[2].studied) {
-            pet.comands[2].studied = true;
-            pet.comands[2].progress = 30;
-            levelUpFunction();
-            setImgPet(pet.img_pet[4]);
-            setTimeout(() => {
-              setImgPet(pet.img_pet[1]);
-              setFlagAction(true);
-            }, 2500);
-          } else {
-            getObedience(100);
-            if (pet.comands[2].progress >= resultObedience) {
-              pet.energy = pet.energy - 5;
-              if (pet.comands[2].progress >= 100) {
-                pet.comands[2].progress = 100;
-              } else {
-                pet.comands[2].progress = pet.comands[2].progress + 10;
-                levelUpFunction();
-              }
-
-              setImgPet(pet.img_pet[4]);
-              setTimeout(() => {
-                setImgPet(pet.img_pet[1]);
-                setFlagAction(true);
-              }, 2500);
-            }
-          }
-          pet.energy = pet.energy - 5;
-        } else if (pet.energy < 5) {
-          setMessage((m) => (m = "У меня нет сил играть"));
-          coords = refCoords.current.getBoundingClientRect();
-          setCoordsPet(coords);
-          setVisibleModal(true);
-          setTimeout(() => {
-            setVisibleModal(false);
-          }, 3000);
-        } else if (pet.delicacy === 0) {
-          setMessage((m) => (m = "А дашь вкусняшку?"));
-          coords = refCoords.current.getBoundingClientRect();
-          setCoordsPet(coords);
-          setVisibleModal(true);
-          setTimeout(() => {
-            setVisibleModal(false);
-            setFlagAction(true);
-          }, 3000);
-          //
-        }
-      } else {
-        setMessage("Я занят");
-        coords = refCoords.current.getBoundingClientRect();
-        setCoordsPet(coords);
-        setVisibleModal(true);
-        setTimeout(() => {
-          setVisibleModal(false);
-        }, 3000);
-      }
-      setMyPets([...myPets], pet.comands[2].studied, pet.energy);
-    };
-
-    // Съесть вкусняшку
-    const feedDelicacy = () => {
-      if (pet.delicacy > 0) {
-        pet.delicacy--;
-        pet.satiety = pet.satiety + 3;
-        pet.energy = pet.energy + 3;
-        if (pet.satiety > pet.max_satiety) {
-          pet.satiety = pet.max_satiety;
-        }
-      }
-      setMyPets([...myPets], pet.delicacy, pet.energy, pet.satiety);
+      comand(2, 4);
     };
 
     // Повышение уровня питомца
@@ -575,7 +436,12 @@ const HeaderStat = memo(
           {/* Профиль справа */}
           <div className="statPanel-name-money">
             <div className="statPanel-title">
-              <div className="statPanel-name">{pet.name}</div>
+              <div className="statPanel-name">
+                {pet.name}{" "}
+                <span className="statPanel-pet-info" onClick={showInfo}>
+                  i
+                </span>
+              </div>
               <div className="statPanel-name">
                 Ур. <span className="statPanel-lvl">{pet.level}</span>
               </div>
@@ -777,6 +643,11 @@ const HeaderStat = memo(
         >
           {visibleModal ? <p>{message}</p> : <></>}
         </ModalLog>
+        {
+          flagInfo
+          ? <PetInfo setFlagInfo={setFlagInfo} pet={pet}/> : <></>
+        }
+        
       </>
     );
   }

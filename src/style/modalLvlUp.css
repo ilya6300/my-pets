@@ -14,13 +14,13 @@
 }
 .modal-lvl-up-title {
   margin-top: 10%;
-  font-size: revert;
+  font-size: 28px;
 }
 .modal-lvl-up-body {
   padding: 10%;
 }
 .modal-lvl-up-bonus {
-  padding: 10%;
+  padding-left: 10%;
   text-align: start;
 }
 .modal-lvl-up-img-container {
@@ -33,4 +33,7 @@
 .modal-lvl-up-img {
     min-height: 140px;
   height: 100%;
+}
+.modal-vlv-get-bonus {
+  padding: 2% 4%;
 }

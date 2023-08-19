@@ -6,33 +6,30 @@
   background-position: 54% !important;
 }
 .btnCheckHP {
-    z-index: 5;
+  z-index: 5;
   position: absolute;
   top: 50%;
-  right: 0;
-  transform: translate(0, -50%);
+  right: 20%;
+  transform: translate(-20%, 50%);
   width: 100px;
 }
 .consultation {
-    z-index: 4;
-    position: fixed;
-    bottom: 14%;
-    width: 350px;
-    height: 130px;
-    left: 50%;
-    transform: translate(-50%);
-    background: rgb(255, 252, 252);
-    padding: 3% 2%;
-    overflow-y: auto;
-    border: 5px solid rgb(255 129 136 / 79%);
-    border-radius: 15px;
-    /* text-align: start; */
+  z-index: 4;
+  position: fixed;
+  min-height: 150px;
+  right: 10%;
+  left: 10%;
+  background: rgb(255, 252, 252);
+  padding: 3% 2%;
+  overflow-y: auto;
+  border: 5px solid rgb(255 129 136 / 79%);
+  border-radius: 15px;
 }
 .img-vet-table {
-    z-index: 3;
-    max-width: 500px;
-    width: 115vw;
-    position: fixed;
-    left: -50px;
-    bottom: 10%;
+  z-index: 3;
+  max-width: 500px;
+  width: 115vw;
+  position: absolute;
+  left: -50px;
+  bottom: 8%;
 }

@@ -5,7 +5,7 @@ const ListEvent = ({ eventCollection }) => {
   return (
     <div className="list-event-container">
       {eventCollection.map((event) => (
-        <ItemEvent key={event.id} event={event} no={event.no} yes={event.yes} ignor={event.ignor}/>
+        <ItemEvent key={event.id} event={event} no={event.no} yes={event.yes}/>
       ))}
     </div>
   );

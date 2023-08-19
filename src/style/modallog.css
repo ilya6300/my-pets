@@ -15,3 +15,7 @@
 .hidden {
     display: none;
 }
+.modal-log-message {
+    font-size: 18px;
+    padding-bottom: 10%;
+}

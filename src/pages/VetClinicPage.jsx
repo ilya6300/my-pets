@@ -118,19 +118,20 @@ const VetClinicPage = () => {
       ) : (
         <></>
       )}
+      <div className="obj-container">
+        <button className="btnCheckHP" onClick={chechHP}>
+          Проверить самочувствие питомца
+        </button>
+        {consultation ? <ul className="consultation">{messageVet}</ul> : <></>}
 
-      <button className="btnCheckHP" onClick={chechHP}>
-        Проверить самочувствие питомца
-      </button>
-      {consultation ? <ul className="consultation">{messageVet}</ul> : <></>}
-
-      <img
-        ref={refCoords}
-        className={classPet}
-        style={{ bottom: "29%", left: "40%" }}
-        src={imgPet}
-      />
-      <img className="img-vet-table" src={imgBgVetTable} alt="" />
+        <img
+          ref={refCoords}
+          className={classPet}
+          style={{ bottom: "29%", left: "40%" }}
+          src={imgPet}
+        />
+        <img className="img-vet-table" src={imgBgVetTable} alt="" />
+      </div>
     </div>
   );
 };

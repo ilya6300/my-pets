@@ -13,11 +13,30 @@
   font-weight: 600;
 }
 .statPanel-name {
+  display: flex;
   font-size: 21px;
+  gap: 15px;
+  align-items: center;
+  justify-content: flex-start;
 }
 .statPanel-stat {
   font-size: 17px;
   font-weight: 600;
+}
+.statPanel-pet-info {
+  cursor: pointer;
+  color: azure;
+  border-radius: 50%;
+  border: 1px solid azure;
+  width: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease-in;
+}
+.statPanel-pet-info:hover {
+background-color: azure;
+color: #958e8e;
 }
 .containerStat {
   width: 72vw;

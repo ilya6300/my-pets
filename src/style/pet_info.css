@@ -1,0 +1,56 @@
+.pet-info-back {
+  z-index: 15;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.603);
+}
+.pet-info-container {
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, 0%);
+  background: azure;
+  min-width: 350px;
+  min-height: 500px;
+  width: 70vw;
+  height: 68vh;
+  max-width: 500px;
+  max-height: 720px;
+  border-radius: 15px;
+  box-shadow: 0 0 13px 0px #000000e6;
+  padding: 50px 25px;
+}
+.modal-pet-info-closed {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  cursor: pointer;
+  color: azure;
+  border-radius: 50%;
+  border: 1px solid azure;
+  width: 55px;
+  height: 55px;
+  font-size: 30px;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-pet-info-title {
+    display: inline-block;
+  font-size: 18px;
+  margin-bottom: 35px;
+}
+.item-text-info-container {
+    text-align: start;
+    width: 100%;
+    padding: 1px 20px;
+    
+}
+.item-text-info-name {
+    display: inline-block;
+    width: 60%;
+}

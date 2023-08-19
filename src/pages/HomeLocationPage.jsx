@@ -56,7 +56,12 @@ const HomeLocationPage = () => {
             if (pet.toilet <= 0) {
               pet.toilet = 0;
             }
-
+            pet.energy = pet.energy + 0.3;
+            if (pet.energy > 100 && pet.effect[0]) {
+              pet.energy = 100;
+            } else if (pet.energy > 40 && !pet.effect[0]) {
+              pet.energy = 40;
+            }
             setMyPets([...myPets], pet.satiety, pet.toilet);
           } else {
             return clearInterval(intervalFeed);
@@ -88,17 +93,18 @@ const HomeLocationPage = () => {
     }
   };
   // Игра
-  const gameGreenBall = () => {
+
+  const gameFunc = (funcClass, classActiv, classNoActiv) => {
     if (flagAction) {
       setFlagAction(false);
       if (pet.energy >= 10) {
-        setClassGameBall("btn-game-green-ball-active");
+        funcClass(classActiv);
         setTimeout(() => {
           setImgPet(pet.img_pet[5]);
           setTimeout(() => {
             setImgPet(pet.img_pet[1]);
             setTimeout(() => {
-              setClassGameBall("btn-game-green-ball");
+              funcClass(classNoActiv);
               pet.money = pet.money + 1;
               pet.energy = pet.energy - 10;
               pet.mood = pet.mood + 20;
@@ -132,51 +138,13 @@ const HomeLocationPage = () => {
       }, 3000);
     }
   };
-  const gameCanat = () => {
-    if (flagAction) {
-      setFlagAction(false);
-      if (pet.energy >= 10) {
-        setClassGameCanat("btn-game-canat-active");
-        setTimeout(() => {
-          setImgPet(pet.img_pet[5]);
-          setTimeout(() => {
-            setImgPet(pet.img_pet[1]);
-            setTimeout(() => {
-              setClassGameCanat("btn-game-canat");
-              pet.money = pet.money + 1;
-              pet.energy = pet.energy - 10;
-              pet.mood = pet.mood + 30;
-              if (pet.mood > pet.max_mood) {
-                pet.mood = pet.max_mood;
-              }
-              console.log("flagAction", flagAction);
-              setFlagAction(true);
-              setMyPets([...myPets], pet.mood, pet.energy);
-            }, 1300);
-          }, 3100);
-        }, 900);
-      } else {
-        setMessage((m) => (m = "У меня нет сил играть"));
-        coords = refCoords.current.getBoundingClientRect();
-        setCoordsPet(coords);
-        setVisibleModal(true);
-        setTimeout(() => {
-          setFlagAction(true);
-          setVisibleModal(false);
-        }, 3000);
-      }
-    } else {
-      setMessage("Я занят");
-      coords = refCoords.current.getBoundingClientRect();
-      setCoordsPet(coords);
-      setVisibleModal(true);
-      setTimeout(() => {
-        setFlagAction(true);
-        setVisibleModal(false);
-      }, 3000);
-    }
-  };
 
+  const gameGreenBall = () => {
+   gameFunc(setClassGameBall, "btn-game-green-ball-active", "btn-game-green-ball")
+  };
+  const gameCanat = () => {
+    gameFunc(setClassGameCanat, "btn-game-canat-active","btn-game-canat")
+  };
   // Наведение на питомца
 
   // Убрать какашку
