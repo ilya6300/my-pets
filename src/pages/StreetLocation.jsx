@@ -4,6 +4,8 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 import HeaderStat from "../components/HeaderStat";
 import EventSrteet from "../components/EventSrteet";
 
+import Training from "../components/Training";
+
 const StreetLocation = () => {
   const { id } = useParams();
   const [pet, setPet] = useState(null);
@@ -18,6 +20,7 @@ const StreetLocation = () => {
   const streetLocation = true;
   const MNQ = true;
   const vet = false;
+  const [flagTraining, setFlagTraining] = useState(false);
 
   // Получение питомца по id
 
@@ -129,14 +132,43 @@ const StreetLocation = () => {
           >
             В вет. клинику
           </Link>
-          <img
-            className={classPet}
-            onMouseMove={() => setHover(true)}
-            onMouseOut={() => setHover(false)}
-            src={imgPet}
-            ref={refCoords}
-          />
-          <EventSrteet pet={pet} setMyPets={setMyPets} myPets={myPets} />
+          <span
+            className="link-to-street"
+            style={{ color: "green" }}
+            onClick={() => setFlagTraining(true)}
+          >
+            Тренироваться
+          </span>
+          <div className="obj-container">
+            <img
+              className={classPet}
+              onMouseMove={() => setHover(true)}
+              onMouseOut={() => setHover(false)}
+              src={imgPet}
+              ref={refCoords}
+            />
+
+            <EventSrteet
+              pet={pet}
+              setMyPets={setMyPets}
+              myPets={myPets}
+              setVisibleModal={setVisibleModal}
+              setMessage={setMessage}
+              setCoordsPet={setCoordsPet}
+              coords={coords}
+              refCoords={refCoords}
+            />
+            {flagTraining ? (
+              <Training
+                setFlagTraining={setFlagTraining}
+                myPets={myPets}
+                pet={pet}
+                setMyPets={setMyPets}
+              />
+            ) : (
+              <></>
+            )}
+          </div>
         </>
       ) : (
         <></>

@@ -18,6 +18,28 @@
     max-height: 430px;
     max-width: 416px;
 }
+.training-card-title {
+    display: inline-block;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.training-img {
+    width: 95px;
+}
+.training-item {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.training-item-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.training-item-text {
+    margin-right: 10px;
+}
 @keyframes animation_toilet {
     15% {
         bottom: 18%;

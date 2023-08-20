@@ -57,6 +57,8 @@ const SelectAndCreatePets = memo(
         type: "хаски",
         bgHome: [imgBackgroundHomeDog],
         strong: 35,
+        min_strong: 35,
+        max_strong: 45,
         obedience: 10,
       },
       {
@@ -74,6 +76,8 @@ const SelectAndCreatePets = memo(
         type: "хаски",
         bgHome: [imgBackgroundHomeDog],
         strong: 35,
+        min_strong: 35,
+        max_strong: 45,
         obedience: 10,
       },
     ];
@@ -96,9 +100,8 @@ const SelectAndCreatePets = memo(
         freeID.shit = false; // Какашка
         freeID.energy = 100; // Энергия
         freeID.max_energy = 100; // Максимальная энергия
-        freeID.strong = createPet.strong; // Сила
         freeID.clear = 100; // Чистый
-        
+
         // Функция расчёта иммунитета
         let resultImmunity;
         const getRandomImmunity = (min, max) => {
@@ -108,6 +111,14 @@ const SelectAndCreatePets = memo(
         };
         getRandomImmunity(15, 50);
         freeID.immunity = resultImmunity; // Уровень иммунитета
+        let resultStrong;
+        const getRandomStrong = (min, max) => {
+          return (resultStrong = Math.floor(
+            Math.random() * (max - min + 1) + min
+          ));
+        };
+        getRandomStrong(createPet.min_strong, createPet.max_strong);
+        freeID.strong = resultStrong; // Сила
         freeID.create = true; // Питомец создан
         const birthday = new Date(); // Дата
         freeID.data_create = birthday; //Дата дня рождения
@@ -156,7 +167,7 @@ const SelectAndCreatePets = memo(
             icon: imgEffectMite,
             info: "Укус клеща. Настроение, здоровье и силы значительно снижены",
             consultation:
-              "Клеща мы вытащили, для восстановления здоровья купите в магазине таблетку  'АБ-Пет-1'. И рукомендуем использовать Петовекто, она защитит Вашего питомца на 24 часа от укусов клещей.",
+              "Клеща мы вытащили, для восстановления здоровья купите в магазине таблетку  'АБ-Пет-1'. И рекомендуем использовать Петовекто, она защитит Вашего питомца на 24 часа от укусов клещей.",
             event: false,
             type: "disease",
           },
@@ -167,7 +178,7 @@ const SelectAndCreatePets = memo(
             icon: imgEffectFever,
             info: "Температура повышена. Настроение, здоровье и силы снижены",
             consultation:
-            "Ваш питомец получил солнечный удар, не гуляйте долго в жаркую погоду. Для восстановления здоровья купите в магазине таблетку 'АБ-Пет-2'.",
+              "Ваш питомец получил солнечный удар, не гуляйте долго в жаркую погоду. Для восстановления здоровья купите в магазине таблетку 'АБ-Пет-2'.",
             event: false,
             type: "disease",
           },
@@ -178,7 +189,7 @@ const SelectAndCreatePets = memo(
             icon: imgEffectFever,
             info: "Температура повышена. Настроение, здоровье и силы снижены",
             consultation:
-            "Ваш питомец простудился, не гуляйте долго в дождливую и холодную погоду. Для восстановления здоровья купите в магазине таблетку 'АБ-Пет-3'.",
+              "Ваш питомец простудился, не гуляйте долго в дождливую и холодную погоду. Для восстановления здоровья купите в магазине таблетку 'АБ-Пет-3'.",
             event: false,
             type: "disease",
           },

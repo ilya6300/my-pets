@@ -5,6 +5,8 @@ const ItemEvent = (props) => {
     <div className="card-event-container">
       <h1 className="card-event-title">{props.event.title}</h1>
       <p>{props.event.body}</p>
+      <p>{props.event.strong_message}</p>
+
       <p>Как ответить?</p>
       <div className="card-event-container-btn">
         <button className="card-event-btn" onClick={() => props.yes(props.event)}>

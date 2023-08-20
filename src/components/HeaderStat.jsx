@@ -44,7 +44,17 @@ const HeaderStat = memo(
     // магазин
     const [visibleMarket, setVisibleMarket] = useState(false);
     const showMarket = () => {
-      setVisibleMarket(true);
+      if (pet.clear > 10) {
+        setVisibleMarket(true);
+      } else {
+        setMessage("Я слишком грязный(я), в магазин не пустят");
+        coords = refCoords.current.getBoundingClientRect();
+        setCoordsPet(coords);
+        setVisibleModal(true);
+        setTimeout(() => {
+          setVisibleModal(false);
+        }, 3000);
+      }
     };
     // Инфо о питомце
     const [flagInfo, setFlagInfo] = useState(false);
@@ -208,6 +218,7 @@ const HeaderStat = memo(
               if (pet.comands[index_comand].progress >= 100) {
                 pet.comands[index_comand].progress = 100;
               } else {
+                // setFlagAction(true)
                 pet.comands[index_comand].progress =
                   pet.comands[index_comand].progress + 10;
                 levelUpFunction();
@@ -219,8 +230,11 @@ const HeaderStat = memo(
                 setFlagAction(true);
                 // console.log("flagAction", flagAction);
               }, 2500);
+            } else {
+              setFlagAction(true)
             }
           }
+          // setFlagAction(false)
           pet.energy = pet.energy - 5;
         } else if (pet.energy < 5) {
           setMessage((m) => (m = "У меня нет сил играть"));
@@ -325,6 +339,10 @@ const HeaderStat = memo(
     const getBonus = () => {
       setBlockLevelUp(false);
       setNewBonusFlag(true);
+      pet.energy = 100
+      pet.strong = pet.strong + 2
+      pet.immunity = pet.immunity + 3
+      setMyPets([...myPets], pet.money, pet.energy);
     };
 
     useEffect(() => {
@@ -332,7 +350,6 @@ const HeaderStat = memo(
       setAddMoney(() => addMoney);
       setQuantity(() => quantity);
       pet.money = pet.money + addMoney;
-      setMyPets([...myPets], pet.money);
       setNewBonusFlag(false);
       setNewBonus(() => "");
       setQuantity(() => 0);

@@ -95,6 +95,10 @@
     bottom: 9%;
     transform: translate(50%, 50%);
   }
+  .statPanel-pet-info {
+    width: 22px;
+    height: 22px;
+  }
 }
   /* Мобильная версия */
 @media screen and (max-width: 500px) {

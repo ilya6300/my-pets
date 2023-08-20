@@ -27,8 +27,10 @@
   cursor: pointer;
   color: azure;
   border-radius: 50%;
-  border: 1px solid azure;
+  border: 2px solid azure;
+  font-weight: 500;
   width: 28px;
+  height: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -132,6 +134,7 @@ color: #958e8e;
   display: flex;
 }
 .link-to-street {
+  cursor: pointer;
   color: azure;
   font-size: 17px;
   font-weight: 600;
